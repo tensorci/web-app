@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import Home from './components/home/Home';
+import OAuthRedirect from './components/redirects/OAuthRedirect';
 import Session from './utils/Session';
 
 class Main extends Component {
@@ -14,6 +15,11 @@ class Main extends Component {
       {
         path: '/',
         comp: Home,
+        exact: true
+      },
+      {
+        path: '/oauth_redirect',
+        comp: OAuthRedirect,
         exact: true
       }
     ];
