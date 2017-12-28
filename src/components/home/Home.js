@@ -3,7 +3,7 @@ import Session from '../../utils/Session';
 
 class Home extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     console.log('AUTHED: ', Session.authed())
   }
 
