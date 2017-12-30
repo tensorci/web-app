@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Session from '../../utils/Session';
 
 import Ajax from '../../utils/Ajax';
 
@@ -6,17 +7,18 @@ import Ajax from '../../utils/Ajax';
 class Home extends Component {
 
   componentDidMount() {
-    Ajax.get('/repos/dashboard')
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log(data);
-      });
+    console.log(Session.authed());
+    // Ajax.get('/repos/dashboard')
+    //   .then((resp) => resp.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //   });
   }
 
   render() {
     return (
       <div id="home">
-        <div>Main Content</div>
+        <div>Web app</div>
       </div>
     );
   }
