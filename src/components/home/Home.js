@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import Session from '../../utils/Session';
+
+import Ajax from '../../utils/Ajax';
+
 
 class Home extends Component {
 
   componentDidMount() {
-    console.log('AUTHED: ', Session.authed())
+    Ajax.get('/repos/dashboard')
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data);
+      });
   }
 
   render() {
