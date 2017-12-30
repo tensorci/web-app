@@ -12,6 +12,7 @@
  */
 
 import $ from 'jquery';
+import Session from './Session';
 
 var Ajax;
 
@@ -38,17 +39,28 @@ class AjaxClass {
       url += ('?' + $.param(params));
     }
 
-    return fetch(url, { method: method });
+    return fetch(url, { method: method, headers: this.defaultHeaders() });
   }
 
   jsonRequst(url, params, method) {
+    var headers = this.defaultHeaders();
+    headers['Content-Type'] = 'application/json';
+
     return fetch(url, {
       method: method,
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: headers,
       body: JSON.stringify(params || {})
     });
+  }
+
+  defaultHeaders() {
+    var headers = {};
+
+    if (Session.authed()) {
+      headers = Session.addAuthHeader(headers);
+    }
+
+    return headers;
   }
 }
 

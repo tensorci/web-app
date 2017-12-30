@@ -6,6 +6,7 @@ class Sess {
 
   constructor() {
     this.cookieName = 'tensorci-user';
+    this.authHeader = 'TensorCI-Api-Token';
     this.cookies = new Cookies();
   }
 
@@ -68,6 +69,12 @@ class Sess {
 
   deleteFromStorage (key) {
     localStorage.removeItem(key);
+  }
+
+  addAuthHeader(headers) {
+    headers = headers || {};
+    headers[this.authHeader] = this.getCookie(this.cookieName);
+    return headers;
   }
 }
 
