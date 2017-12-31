@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-import Home from './components/home/Home';
+import Dashboard from './components/dashboard/Dashboard';
 import OAuthRedirect from './components/redirects/OAuthRedirect';
 import Session from './utils/Session';
 
@@ -14,7 +14,7 @@ class Main extends Component {
     this.baseRoutes = [
       {
         path: '/',
-        comp: Home,
+        comp: Dashboard,
         exact: true
       },
       {
