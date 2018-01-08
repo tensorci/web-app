@@ -5,6 +5,8 @@ class Dropdown extends Component {
 
   constructor(props) {
     super(props);
+    this.setContainerRef = this.setContainerRef.bind(this);
+    this.handleDocClick = this.handleDocClick.bind(this);
     this.toggle = this.toggle.bind(this);
     this.getClasses = this.getClasses.bind(this);
     this.getDropdownMenuClasses = this.getDropdownMenuClasses.bind(this);
@@ -13,6 +15,26 @@ class Dropdown extends Component {
 
     this.items = [];
     this.state = { open: false };
+  }
+
+  componentWillMount() {
+    document.addEventListener('click', this.handleDocClick, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleDocClick, false);
+  }
+
+  handleDocClick(e) {
+    if (this.container.contains(e.target)) {
+      return;
+    }
+
+    this.setState({ open: false });
+  }
+
+  setContainerRef(ref) {
+    this.container = ref;
   }
 
   toggle() {
@@ -52,7 +74,7 @@ class Dropdown extends Component {
 
   render() {
     return (
-      <li className={this.getClasses()}>
+      <li className={this.getClasses()} ref={this.setContainerRef}>
         <button data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded={this.state.open ? 'true' : 'false'}
