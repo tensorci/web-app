@@ -38,6 +38,19 @@ strong {
   animation-timing-function: ease-out;
 }
 
+@keyframes slideInDown{
+  from {
+    transform: translate3d(0, -5%, 0);
+    visibility: visible;
+    opacity: 0
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity:1
+  }
+}
+
 .slideInDown {
   animation-name: slideInDown;
 }
@@ -51,6 +64,16 @@ strong {
   color: #898989;
   margin-left: 1ex;
   vertical-align: middle;
+}
+
+.dropdown-menu > li > a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.5;
+  color: #333;
+  white-space: nowrap;
 }
 
 button {

@@ -65,6 +65,24 @@
       border: none;
       border-radius: 0;
       min-width: 260px;
+
+      .nav-item {
+        padding: 10px 20px;
+        white-space: normal;
+        color: #212121;
+        transition: none;
+
+        .heading {
+          font-family: Avenir-Next-DemiBold;
+          padding: 2px 0;
+        }
+      }
+    }
+  }
+
+  &.open {
+    .dropdown-menu {
+      display: block;
     }
   }
 }
