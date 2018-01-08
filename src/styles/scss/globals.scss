@@ -16,6 +16,8 @@ body .row {
 ul {
   list-style-type: none;
   padding-left: 0;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 a, a:hover {
@@ -28,6 +30,36 @@ strong {
 
 .mdash {
   font-family: Lato;
+}
+
+.animated {
+  animation-duration: .2s;
+  animation-fill-mode: both;
+  animation-timing-function: ease-out;
+}
+
+.slideInDown {
+  animation-name: slideInDown;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+.material-icons {
+  font-size: 18px;
+  color: #898989;
+  margin-left: 1ex;
+  vertical-align: middle;
+}
+
+button {
+  -webkit-appearance: button;
+  cursor: pointer;
+  text-transform: none;
+  overflow: visible;
+  font: inherit;
+  margin: 0;
 }
 
 $header-height: 80px;

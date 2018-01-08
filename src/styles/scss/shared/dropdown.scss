@@ -1,0 +1,71 @@
+.dropdown {
+  position: relative;
+  display: -webkit-box;
+  display: box;
+  display: -webkit-flex;
+  display: flex;
+
+  .dropdown-toggle {
+    border: none;
+    background: none;
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 60px;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+    padding: 0 20px;
+    -webkit-transition: all .1s ease-in;
+    -o-transition: all .1s ease-in;
+    transition: all .1s ease-in;
+
+    .material-icons {
+      color: #fff;
+      -webkit-transition: all .1s ease-in;
+      -o-transition: all .1s ease-in;
+      transition: all .1s ease-in;
+      margin-top: -2px;
+    }
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    list-style: none;
+    font-size: 14px;
+    text-align: left;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,0.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.175);
+    background-clip: padding-box;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.pull-right {
+      right: 0;
+      left: auto;
+    }
+
+    &:not(.team-dropdown-menu) {
+      margin-top: 0;
+      margin-right: 0;
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      min-width: 260px;
+    }
+  }
+}
+

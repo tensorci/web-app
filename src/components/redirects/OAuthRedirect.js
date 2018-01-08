@@ -11,14 +11,12 @@ class OAuthRedirect extends Component {
       const search = props.location.search.substring(1);
       const searchParams = Helper.parseQueryString(search);
 
-      console.log(searchParams.auth);
-
       if (searchParams.auth) {
         // Create new user session
         Session.create(searchParams.auth);
 
         // Redirect to dashboard
-        // window.location = '/';
+        window.location = '/';
       }
     }
   }
