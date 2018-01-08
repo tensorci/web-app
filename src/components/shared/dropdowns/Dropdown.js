@@ -5,15 +5,14 @@ class Dropdown extends Component {
 
   constructor(props) {
     super(props);
-    this.getItems = this.getItems.bind(this);
     this.toggle = this.toggle.bind(this);
     this.getClasses = this.getClasses.bind(this);
+    this.getDropdownMenuClasses = this.getDropdownMenuClasses.bind(this);
+    this.getButtonContents = this.getButtonContents.bind(this);
+    this.getItems = this.getItems.bind(this);
 
     this.items = [];
-
-    this.state = {
-      open: false
-    };
+    this.state = { open: false };
   }
 
   toggle() {
@@ -21,13 +20,28 @@ class Dropdown extends Component {
   }
 
   getClasses() {
-    var classes = ['dropdown'];
+    var classes = (this.props.classes || []).map((c) => { return c; });
+    classes.unshift('dropdown');
 
     if (this.state.open) {
       classes.push('open');
     }
 
     return classes.join(' ');
+  }
+
+  getDropdownMenuClasses() {
+    var classes = 'dropdown-menu pull-right animated slideInDown';
+
+    if (this.props.dropdownMenuClasses) {
+      classes += (' ' + this.props.dropdownMenuClasses.join(' '));
+    }
+
+    return classes;
+  }
+
+  getButtonContents() {
+    return [this.props.title, <i key={1} className="material-icons">keyboard_arrow_down</i>];
   }
 
   getItems() {
@@ -44,10 +58,9 @@ class Dropdown extends Component {
           aria-expanded={this.state.open ? 'true' : 'false'}
           className="dropdown-toggle"
           onClick={this.toggle}>
-          {this.props.title}
-          <i className="material-icons">keyboard_arrow_down</i>
+          {this.getButtonContents()}
         </button>
-        <ul className="dropdown-menu pull-right animated slideInDown">{this.getItems()}</ul>
+        <ul className={this.getDropdownMenuClasses()}>{this.getItems()}</ul>
       </li>
     );
   }
