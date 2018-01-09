@@ -16,10 +16,14 @@ class ProfileDropdown extends Dropdown {
         'href': '#'
       }
     ];
+
+    this.state = {
+      user: this.props.user || {}
+    };
   }
 
   getButtonContents() {
-    return <img src="https://avatars3.githubusercontent.com/u/6496306?s=60&v=4" alt="" className="user-profile-icon"/>;
+    return <img src={this.state.user.icon} alt="" className="user-profile-icon"/>;
   }
 }
 

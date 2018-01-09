@@ -7,27 +7,9 @@ class TeamDropdown extends Dropdown {
   constructor(props) {
     super(props);
 
-    // Hardcoding for now
-    this.items = [
-      {
-        name: 'PulseSoftwareInc',
-        slug: 'pulsesoftwareinc',
-        icon: 'https://avatars3.githubusercontent.com/u/6098534?s=40&v=4',
-        provider: 'github'
-      },
-      {
-        name: 'whittlbc',
-        slug: 'whittlbc',
-        icon: 'https://avatars3.githubusercontent.com/u/6496306?s=40&v=4',
-        provider: 'github'
-      },
-      {
-        name: 'gmaher',
-        slug: 'gmaher',
-        icon: 'https://avatars3.githubusercontent.com/u/11987969?s=40&v=4',
-        provider: 'github'
-      },
-    ];
+    this.state = {
+      teams: this.props.teams || []
+    };
   }
 
   getButtonContents() {
@@ -47,7 +29,7 @@ class TeamDropdown extends Dropdown {
       <li key={0} className="team-dropdown-menu-item switch-team-text">Switch Team</li>
     ];
 
-    this.items.forEach((item, i) => {
+    this.state.teams.forEach((item, i) => {
       // TODO: set selected based on which one's actually selected...
       items.push(<TeamDropdownItem key={i + 1} team={item} selected={i === 0} />);
     });

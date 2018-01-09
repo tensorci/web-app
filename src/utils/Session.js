@@ -26,6 +26,10 @@ class Sess {
     return this.getFromStorage('user');
   }
 
+  teams() {
+    return this.getFromStorage('teams');
+  }
+
   isAdmin() {
     return !!(this.user() || {}).isAdmin;
   }
