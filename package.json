@@ -4,11 +4,12 @@
   "private": true,
   "dependencies": {
     "jquery": "^3.2.1",
+    "path-to-regexp": "^2.1.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.1.1",
-    "whatwg-fetch": "2.0.3",
-    "universal-cookie": "^2.1.0"
+    "universal-cookie": "^2.1.0",
+    "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
     "enzyme": "2.9.1",

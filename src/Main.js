@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-
 import Dashboard from './components/dashboard/Dashboard';
 import OAuthRedirect from './components/redirects/OAuthRedirect';
-import Session from './utils/Session';
+import History from './utils/History';
+import pathToRegexp from 'path-to-regexp';
 
 class Main extends Component {
 
   constructor(props) {
     super(props);
 
-    // public routes
-    this.baseRoutes = [
+    this.setDashboardRef = this.setDashboardRef.bind(this);
+
+    this.routes = [
       {
         path: '/',
         comp: Dashboard,
-        exact: true
+        exact: true,
+        appSection: 'deployments'
       },
       {
         path: '/oauth_redirect',
@@ -23,31 +25,108 @@ class Main extends Component {
         exact: true
       },
       {
-        path: '/:teamSlug',
-        comp: Dashboard
+        path: '/projects/:team',
+        comp: Dashboard,
+        exact: true,
+        appSection: 'projects'
+      },
+      {
+        path: '/projects/:team/:repo',
+        comp: Dashboard,
+        exact: true,
+        appSection: 'projects'
+      },
+      {
+        path: '/datasets/:team',
+        comp: Dashboard,
+        exact: true,
+        appSection: 'datasets'
+      },
+      {
+        path: '/datasets/:team/:repo',
+        comp: Dashboard,
+        exact: true,
+        appSection: 'datasets'
+      },
+      {
+        path: '/settings/:team',
+        comp: Dashboard,
+        exact: true,
+        appSection: 'settings'
+      },
+      {
+        path: '/settings/:team/:repo',
+        comp: Dashboard,
+        exact: true,
+        appSection: 'settings'
+      },
+      {
+        path: '/:team',
+        comp: Dashboard,
+        exact: true,
+        appSection: 'deployments'
+      },
+      {
+        path: '/:team/:repo',
+        comp: Dashboard,
+        exact: true,
+        appSection: 'deployments'
       }
     ];
 
-    // routes for signed-in users only (same format as baseRoutes)
-    this.authedRoutes = [];
+    this.routes.forEach((r) => {
+      var keys = [];
+      var regex = pathToRegexp(r.path, keys);
+      r.regex = regex;
+      r.keys = keys;
+    });
+  }
 
-    this.getRoutes = this.getRoutes.bind(this);
+  setDashboardRef(ref) {
+    this.dashboard = ref;
+  }
+
+  componentDidMount() {
+    History.listen((loc) => {
+      this.reRoute(loc);
+    });
+  }
+
+  reRoute(loc) {
+    var route, match;
+    const path = loc.pathname;
+
+    for (var i = 0; i < this.routes.length; i++) {
+      route = this.routes[i];
+
+      if (!route.appSection) {
+        continue;
+      }
+
+      match = route.regex.exec(path);
+
+      if (match) {
+        this.dashboard.setState({
+          appSection: route.appSection,
+          team: match[1],
+          repo: match[2]
+        });
+
+        break;
+      }
+    }
   }
 
   getRoutes() {
-    var routes = this.baseRoutes;
-
-    if (Session.authed()) {
-      this.authedRoutes.forEach((route) => {
-        routes.push(route);
-      });
-    }
-
-    return routes.map((route, i) => {
-      if (route.exact) {
-        return <Route key={i} exact path={route.path} component={route.comp} />;
+    return this.routes.map((route, i) => {
+      if (route.appSection) {
+        return <Route key={i} exact path={route.path} render={props => <Dashboard appSection={route.appSection} ref={this.setDashboardRef} {...props}/>} />;
       } else {
-        return <Route key={i} path={route.path} component={route.comp} />;
+        if (route.exact) {
+          return <Route key={i} exact path={route.path} component={route.comp} />;
+        } else {
+          return <Route key={i} path={route.path} component={route.comp} />;
+        }
       }
     });
   }

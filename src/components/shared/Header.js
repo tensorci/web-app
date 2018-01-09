@@ -36,7 +36,7 @@ class Header extends Component {
           Session.setToStorage('user', data.user);
           Session.setToStorage('teams', data.teams);
 
-          if (!this.props.teamSlug && data.user && data.user.username) {
+          if (!this.props.team && data.user && data.user.username) {
             window.location = '/' + data.user.username;
           }
 
@@ -47,12 +47,14 @@ class Header extends Component {
   }
 
   render() {
+    const team = this.props.team;
+
     return (
       <div className="header">
         <div className="nav-container">
           <div className="nav">
             <ul className="nav-options collapsing-nav">
-              <TeamDropdown classes={['team-dropdown']} dropdownMenuClasses={['team-menu']} selectedTeam={this.props.teamSlug} ref={this.setTeamDropdownRef}/>
+              <TeamDropdown classes={['team-dropdown']} dropdownMenuClasses={['team-menu']} selectedTeam={team} ref={this.setTeamDropdownRef}/>
             </ul>
             <a href="/" className="logoLink">
               <i className="ico">
