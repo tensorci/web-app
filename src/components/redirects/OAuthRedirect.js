@@ -15,6 +15,7 @@ class OAuthRedirect extends Component {
         // Create new user session
         Session.create(searchParams.auth);
 
+        // setTimeout()
         var url = '/';
 
         if (searchParams.username) {

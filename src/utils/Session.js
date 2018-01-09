@@ -80,6 +80,12 @@ class Sess {
     headers[this.authHeader] = this.getCookie(this.cookieName);
     return headers;
   }
+
+  logout() {
+    this.destroy();
+    this.deleteFromStorage('user');
+    this.deleteFromStorage('teams');
+  }
 }
 
 function getInstance() {

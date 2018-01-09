@@ -36,7 +36,7 @@ class Header extends Component {
           Session.setToStorage('user', data.user);
           Session.setToStorage('teams', data.teams);
 
-          if (!this.props.teamSlug && data.user.username) {
+          if (!this.props.teamSlug && data.user && data.user.username) {
             window.location = '/' + data.user.username;
           }
 
