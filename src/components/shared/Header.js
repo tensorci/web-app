@@ -35,6 +35,11 @@ class Header extends Component {
         .then((data) => {
           Session.setToStorage('user', data.user);
           Session.setToStorage('teams', data.teams);
+
+          if (!this.props.teamSlug && data.user.username) {
+            window.location = '/' + data.user.username;
+          }
+
           this.profileDropdown.setState({ user: data.user });
           this.teamDropdown.setState({ teams: data.teams });
         });
@@ -47,7 +52,7 @@ class Header extends Component {
         <div className="nav-container">
           <div className="nav">
             <ul className="nav-options collapsing-nav">
-              <TeamDropdown classes={['team-dropdown']} dropdownMenuClasses={['team-menu']} ref={this.setTeamDropdownRef}/>
+              <TeamDropdown classes={['team-dropdown']} dropdownMenuClasses={['team-menu']} selectedTeam={this.props.teamSlug} ref={this.setTeamDropdownRef}/>
             </ul>
             <a href="/" className="logoLink">
               <i className="ico">

@@ -15,8 +15,14 @@ class OAuthRedirect extends Component {
         // Create new user session
         Session.create(searchParams.auth);
 
+        var url = '/';
+
+        if (searchParams.username) {
+          url += searchParams.username;
+        }
+
         // Redirect to dashboard
-        window.location = '/';
+        window.location = url;
       }
     }
   }

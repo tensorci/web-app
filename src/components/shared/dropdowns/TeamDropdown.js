@@ -13,12 +13,30 @@ class TeamDropdown extends Dropdown {
   }
 
   getButtonContents() {
+    if (this.state.teams.length === 0 || !this.props.selectedTeam) {
+      return;
+    }
+
+    var selectedTeam, team;
+    for (var i = 0; i < this.state.teams.length; i++) {
+      team = this.state.teams[i];
+
+      if (team.slug === this.props.selectedTeam) {
+        selectedTeam = team;
+        break;
+      }
+    }
+
+    if (!selectedTeam) {
+      return;
+    }
+
     return [
       <div key={0} className="team-icon">
-        <img src="https://avatars3.githubusercontent.com/u/6098534?s=60&v=4" alt="" className="selected-team-icon"/>
+        <img src={selectedTeam.icon} alt="" className="selected-team-icon"/>
       </div>,
       <div key={1} className="team-name">
-        <span className="selected-team-name">PulseSoftwareInc</span>
+        <span className="selected-team-name">{selectedTeam.name}</span>
         <i className="material-icons team-picker-arrow">keyboard_arrow_down</i>
       </div>
     ];
@@ -29,9 +47,10 @@ class TeamDropdown extends Dropdown {
       <li key={0} className="team-dropdown-menu-item switch-team-text">Switch Team</li>
     ];
 
+    var selected = false;
     this.state.teams.forEach((item, i) => {
-      // TODO: set selected based on which one's actually selected...
-      items.push(<TeamDropdownItem key={i + 1} team={item} selected={i === 0} />);
+      selected = item.slug === this.props.selectedTeam;
+      items.push(<TeamDropdownItem key={i + 1} team={item} selected={selected} />);
     });
 
     return items;

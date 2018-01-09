@@ -21,6 +21,10 @@ class Main extends Component {
         path: '/oauth_redirect',
         comp: OAuthRedirect,
         exact: true
+      },
+      {
+        path: '/:teamSlug',
+        comp: Dashboard
       }
     ];
 
