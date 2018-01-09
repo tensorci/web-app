@@ -1,6 +1,7 @@
 import React from 'react';
 import Dropdown from './Dropdown';
 import TeamDropdownItem from './TeamDropdownItem';
+import Session from '../../../utils/Session';
 
 class TeamDropdown extends Dropdown {
 
@@ -30,6 +31,8 @@ class TeamDropdown extends Dropdown {
     if (!selectedTeam) {
       return;
     }
+
+    Session.setToStorage('currTeam', selectedTeam);
 
     return [
       <div key={0} className="team-icon">
