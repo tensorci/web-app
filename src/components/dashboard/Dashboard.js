@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../shared/Header';
 import Session from '../../utils/Session';
+import SideNav from '../shared/SideNav';
 
 class Dashboard extends Component {
 
@@ -21,6 +22,9 @@ class Dashboard extends Component {
     return (
       <div id="dashboard">
         <Header teamSlug={this.teamSlug}/>
+        <div className="below-header">
+          <SideNav match={this.props.match} />
+        </div>
       </div>
     );
   }

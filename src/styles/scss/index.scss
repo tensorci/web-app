@@ -6,13 +6,14 @@
 // Shared
 @import 'shared/header';
 @import 'shared/dropdown';
+@import 'shared/side-nav';
 @import 'shared/footers/footer';
 @import 'shared/form/form-input';
 @import 'shared/form/form-select';
 @import 'shared/form/email-input';
 
 // Home
-@import 'home/home';
+@import 'dashboard/dashboard';
 
 // Widgets
 @import 'widgets/spinners/horiz-spinner';

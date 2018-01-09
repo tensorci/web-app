@@ -1,0 +1,15 @@
+#dashboard {
+
+  .below-header {
+    display: -webkit-box;
+    display: box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+    height: 0;
+    z-index: 0;
+  }
+}
