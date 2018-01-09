@@ -17,6 +17,11 @@ class SideNav extends Component {
         name: 'Projects',
         hash: '#projects',
         icon: 'book'
+      },
+      {
+        name: 'Settings',
+        hash: '#settings',
+        icon: 'settings'
       }
     ];
   }

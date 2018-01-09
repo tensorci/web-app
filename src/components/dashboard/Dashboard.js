@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from '../shared/Header';
 import Session from '../../utils/Session';
 import SideNav from '../shared/SideNav';
+import DashContent from './DashContent';
 
 class Dashboard extends Component {
 
@@ -23,7 +24,8 @@ class Dashboard extends Component {
       <div id="dashboard">
         <Header teamSlug={this.teamSlug}/>
         <div className="below-header">
-          <SideNav match={this.props.match} />
+          <SideNav match={this.props.match}/>
+          <DashContent/>
         </div>
       </div>
     );

@@ -9,7 +9,45 @@
     box-flex: 1;
     -webkit-flex: 1 1 auto;
     flex: 1 1 auto;
-    height: 0;
+    height: calc(100vh - 60px);
     z-index: 0;
+  }
+
+  #dashContent {
+    display: -webkit-box;
+    display: box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    transition: margin 200ms;
+    transition-timing-function: cubic-bezier(.5, -0.25, .5, 1.25);
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+    width: 0;
+    height: 100%;
+
+    .sub-header {
+      -webkit-box-flex: 0;
+      box-flex: 0;
+      -webkit-flex: 0 0 auto;
+      flex: 0 0 auto;
+    }
+
+    .app-dominant {
+      display: -webkit-box;
+      display: box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-flex: 1;
+      box-flex: 1;
+      -webkit-flex: 1 1 auto;
+      flex: 1 1 auto;
+      overflow: hidden;
+    }
   }
 }
