@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import History from '../../utils/History';
+import Link from '../../utils/Link';
 
 class SideNav extends Component {
 
@@ -33,7 +33,7 @@ class SideNav extends Component {
   }
 
   getLinks(appSection, team) {
-    var classes, newLink, icon;
+    var classes, href, icon;
 
     return this.links.map((link, i) => {
       classes = 'aside-item';
@@ -42,10 +42,11 @@ class SideNav extends Component {
         classes += ' current';
       }
 
-      var onClick = () => {
-        newLink = link.slug === 'deployments' ? ('/' + team) : ('/' + link.slug + '/' + team);
-        History.push(newLink);
-      };
+      if (link.slug === 'deployments') {
+        href = '/' + team;
+      } else {
+        href = '/' + link.slug + '/' + team;
+      }
 
       if (link.icon.startsWith('fa-')) {
         icon = <i className={'fa ' + link.icon}></i>;
@@ -54,10 +55,10 @@ class SideNav extends Component {
       }
 
       return (
-        <a key={i} href="javascript:void(0)" className={classes} onClick={onClick}>
+        <Link key={i} href={href} className={classes}>
           {icon}
           <div className="nav-label">{link.name}</div>
-        </a>
+        </Link>
       );
     });
   }

@@ -1,24 +1,13 @@
 import React, { Component } from 'react';
-import History from '../../utils/History';
+import Link from '../../utils/Link';
 
 class BreadCrumbs extends Component {
 
-  constructor(props) {
-    super(props);
-    this.formatCrumbs = this.formatCrumbs.bind(this);
-  }
-
   formatCrumbs(path) {
-    var onClick;
-
     return (path || []).map((comp, i) => {
-      onClick = () => {
-        History.push(comp.link);
-      };
-
       return (
         <li key={i} className="crumb-node">
-          <a href="javascript:void(0)" className="crumb-text" onClick={onClick}>{comp.title}</a>
+          <Link href={comp.link} className="crumb-text">{comp.title}</Link>
         </li>
       );
     });
@@ -26,7 +15,7 @@ class BreadCrumbs extends Component {
 
   getActionBtns(btns) {
     return (btns || []).map((info, i) => {
-      return <a key={i} href="javascript:void(0)" className="button primary small" onClick={() => { History.push(info.link); }}>{info.text}</a>;
+      return <Link key={i} href={info.link} className="button primary small">{info.text}</Link>;
     });
   }
 

@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
-import History from '../../utils/History';
+import Link from '../../utils/Link';
 
 class RepoSearchResult extends Component {
 
-  constructor(props) {
-    super(props);
-    this.formatName = this.formatName.bind(this);
-    this.getSetupCol = this.getSetupCol.bind(this);
-  }
-
   formatName(repo, team) {
     if (repo.exists) {
-      const link = '/projects/' + team + '/' + repo.slug;
-      return <a href="javascript:void(0)" onClick={() => { History.push(link); }}>{repo.name}</a>;
+      return <Link href={'/projects/' + team + '/' + repo.slug}>{repo.name}</Link>;
     } else {
       return <span>{repo.name}</span>;
     }
@@ -23,21 +16,21 @@ class RepoSearchResult extends Component {
       return <div className="notice"><i className="material-icons">lock</i>Contact repo admin</div>;
     }
 
-    var text, link;
+    var text, href;
     var classes = 'button primary';
 
     if (repo.exists) {
       text = 'View project';
       classes += ' exists';
-      link = '/projects/' + team + '/' + repo.slug;
+      href = '/projects/' + team + '/' + repo.slug;
     } else {
       text = 'Setup project';
-      link = '/setup-project/' + team + '/' + repo.slug;
+      href = '/setup-project/' + team + '/' + repo.slug;
     }
 
     return (
       <div className="setup-column">
-        <a href="javascript:void(0)" className={classes} onClick={() => { History.push(link); }}>{text}</a>
+        <Link href={href} className={classes}>{text}</Link>
       </div>
     );
   }
