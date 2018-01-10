@@ -48,6 +48,28 @@
       -webkit-flex: 1 1 auto;
       flex: 1 1 auto;
       overflow: hidden;
+
+      .main-body {
+        -webkit-box-flex: auto;
+        box-flex: auto;
+        -webkit-flex: auto;
+        flex: auto;
+        overflow-x: auto;
+        overflow-y: scroll;
+        padding: 0 15px 100px;
+
+        .main-content {
+          display: -webkit-box;
+          display: box;
+          display: -webkit-flex;
+          display: flex;
+          margin-top: 15px;
+
+          .main {
+            flex-grow: 1;
+          }
+        }
+      }
     }
   }
 }

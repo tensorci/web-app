@@ -1,0 +1,45 @@
+.card {
+  background: #fff;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.15);
+
+  .card-header {
+    display: -webkit-box;
+    display: box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+
+    .title {
+      font-size: 18px;
+      line-height: 24px;
+      display: -webkit-box;
+      display: box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-align: center;
+      box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+
+      .provider-icon {
+        width: 1em;
+        margin-right: 10px;
+        position: relative;
+        top: 1px;
+      }
+    }
+  }
+
+  .card-body {
+    padding: 15px;
+  }
+}

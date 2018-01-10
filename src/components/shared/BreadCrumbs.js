@@ -24,12 +24,20 @@ class BreadCrumbs extends Component {
     });
   }
 
+  getActionBtns(btns) {
+    return (btns || []).map((info, i) => {
+      return <a key={i} href={info.link} className="button primary small">{info.text}</a>;
+    });
+  }
+
   render() {
     const path = this.props.path;
+    const actions = this.props.actionBtns;
 
     return (
       <div className="breadcrumb-container">
         <ol className="breadcrumbs">{this.formatCrumbs(path)}</ol>
+        <div className="actions">{this.getActionBtns(actions)}</div>
       </div>
     );
   }

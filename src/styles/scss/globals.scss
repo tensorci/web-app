@@ -104,4 +104,41 @@ img {
   display: none;
 }
 
+a.button {
+  display: -ms-inline-flexbox;
+  display: -webkit-inline-box;
+  -webkit-box-align: center;
+  box-align: center;
+  -webkit-align-items: center;
+  -webkit-box-pack: center;
+  box-pack: center;
+  -webkit-justify-content: center;
+  font-size: 14px;
+  height: 36px;
+  padding: 4px 1em;
+  line-height: 1;
+  outline: none;
+  cursor: pointer;
+  white-space: nowrap;
+  color: #333;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background-color: #eee;
+  font-weight: 500;
+  transition: all .2s cubic-bezier(.4, 0, .2, 1);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  &.primary {
+    color: #fff;
+    background-color: #3dc1d9;
+  }
+
+  &.small {
+    height: 30px;
+    font-size: 12px;
+  }
+}
+
 $header-height: 80px;

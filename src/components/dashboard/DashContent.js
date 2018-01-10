@@ -67,6 +67,19 @@ class DashContent extends Component {
     return comps;
   }
 
+  getActionBtns(appSection, team) {
+    var btns = [];
+
+    if (appSection === 'projects') {
+      btns.push({
+        link: '/add-projects/' + team,
+        text: 'Add Project'
+      });
+    }
+
+    return btns;
+  }
+
   render() {
     const appSection = this.props.appSection;
     const team = this.props.team;
@@ -82,7 +95,7 @@ class DashContent extends Component {
     return (
       <div id="dashContent">
         <div className="sub-header">
-          <BreadCrumbs path={breadCrumbPath}/>
+          <BreadCrumbs path={breadCrumbPath} actionBtns={this.getActionBtns(appSection, team)}/>
         </div>
         <div className="app-dominant">{content.comp(team, repo)}</div>
       </div>

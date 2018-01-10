@@ -1,11 +1,55 @@
 import React, { Component } from 'react';
-
+import Ajax from '../../utils/Ajax';
+import ProjectsList from './ProjectsList';
+import NoProjectsForTeam from './NoProjectsForTeam';
 
 class Projects extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      // team: this.props.team,
+      // repo: this.props.repo,
+      projects: [],
+      loading: true
+    };
+  }
+
+  componentDidMount() {
+    Ajax.get('/api/repos')
+      .then((resp) => resp.json())
+      .then((data) => {
+        this.setState({
+          projects: data.repos || [],
+          loading: false
+        });
+      });
+  }
+
+  getMainComp(team, repo) {
+    // The existing projects are being fetched
+    if (this.state.loading) {
+      return <div className="dash-loading-spinner"></div>;
+    }
+
+    // No projects have been created for this team yet
+    if (this.state.projects.length === 0) {
+      return <NoProjectsForTeam team={team}/>;
+    }
+
+    return <ProjectsList projects={this.state.projects}/>;
+  }
+
   render() {
+    const team = this.props.team;
+    const repo = this.props.repo;
+
     return (
-      <div id="projects">
+      <div id="projects" className="main-body">
+        <div className="main-content">
+          <div className="main">{this.getMainComp(team, repo)}</div>
+        </div>
       </div>
     );
   }

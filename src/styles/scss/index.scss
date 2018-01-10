@@ -3,18 +3,24 @@
 @import 'fonts';
 @import 'globals';
 
+// Dashboard
+@import 'dashboard/dashboard';
+
+// Projects
+@import 'projects/projects';
+@import 'projects/projects-list';
+@import 'projects/no-projects-for-team';
+
 // Shared
 @import 'shared/header';
 @import 'shared/dropdown';
 @import 'shared/side-nav';
 @import 'shared/breadcrumbs';
+@import 'shared/card';
 @import 'shared/footers/footer';
 @import 'shared/form/form-input';
 @import 'shared/form/form-select';
 @import 'shared/form/email-input';
-
-// Home
-@import 'dashboard/dashboard';
 
 // Widgets
 @import 'widgets/spinners/horiz-spinner';
