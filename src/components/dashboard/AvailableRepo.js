@@ -8,7 +8,7 @@ class AvailableRepo extends Component {
 
     return (
       <div className="available-repo">
-        <div>{repo.full_name}</div>
+        <div>{repo.name}</div>
       </div>
     );
   }

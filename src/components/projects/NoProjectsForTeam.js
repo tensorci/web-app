@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import History from '../../utils/History';
 
 class NoProjectsForTeam extends Component {
 
@@ -23,7 +24,7 @@ class NoProjectsForTeam extends Component {
             </div>
             <div className="secondary-msg">Let's fix that by adding a new project.</div>
             <div className="action-btn-center-container">
-              <a href={'/add-projects/' + team} className="button primary small">Add Project</a>
+              <a href="javascript:void(0)" className="button primary small" onClick={() => { History.push('/add-projects/' + team); }}>Add Project</a>
             </div>
           </div>
         </div>

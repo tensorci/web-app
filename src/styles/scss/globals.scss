@@ -141,4 +141,33 @@ a.button {
   }
 }
 
+input {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+input[type=search] {
+  -webkit-appearance: none;
+}
+
+.main-body {
+  input[type=search] {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+    height: calc(3em + 2px);
+    width: 100%;
+    margin: 0 0 1em;
+    padding: 1em;
+    border: 1px solid #ccc;
+    background: #fff;
+    border-radius: 1.5em;
+    resize: none;
+    box-shadow: none !important;
+  }
+}
+
 $header-height: 80px;

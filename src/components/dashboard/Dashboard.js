@@ -12,7 +12,8 @@ class Dashboard extends Component {
     this.state = {
       appSection: this.props.appSection,
       team: this.props.match.params.team,
-      repo: this.props.match.params.repo
+      repo: this.props.match.params.repo,
+      meta: this.props.meta || {}
     };
 
     // if no team specified, redirect to /<username-as-team>
@@ -31,7 +32,7 @@ class Dashboard extends Component {
         <Header team={this.state.team}/>
         <div className="below-header">
           <SideNav appSection={this.state.appSection} team={this.state.team}/>
-          <DashContent appSection={this.state.appSection} team={this.state.team} repo={this.state.repo}/>
+          <DashContent appSection={this.state.appSection} team={this.state.team} repo={this.state.repo} meta={this.state.meta}/>
         </div>
       </div>
     );

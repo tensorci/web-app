@@ -9,8 +9,6 @@ class Projects extends Component {
     super(props);
 
     this.state = {
-      // team: this.props.team,
-      // repo: this.props.repo,
       projects: [],
       loading: true
     };
@@ -38,6 +36,7 @@ class Projects extends Component {
       return <NoProjectsForTeam team={team}/>;
     }
 
+    // Projects exist
     return <ProjectsList projects={this.state.projects}/>;
   }
 

@@ -26,7 +26,7 @@ class BreadCrumbs extends Component {
 
   getActionBtns(btns) {
     return (btns || []).map((info, i) => {
-      return <a key={i} href={info.link} className="button primary small">{info.text}</a>;
+      return <a key={i} href="javascript:void(0)" className="button primary small" onClick={() => { History.push(info.link); }}>{info.text}</a>;
     });
   }
 

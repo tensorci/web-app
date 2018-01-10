@@ -37,6 +37,15 @@ class Main extends Component {
         appSection: 'projects'
       },
       {
+        path: '/add-projects/:team',
+        comp: Dashboard,
+        exact: true,
+        appSection: 'projects',
+        meta: {
+          addProjects: true
+        }
+      },
+      {
         path: '/datasets/:team',
         comp: Dashboard,
         exact: true,
@@ -109,7 +118,8 @@ class Main extends Component {
         this.dashboard.setState({
           appSection: route.appSection,
           team: match[1],
-          repo: match[2]
+          repo: match[2],
+          meta: route.meta || {}
         });
 
         break;
@@ -120,7 +130,7 @@ class Main extends Component {
   getRoutes() {
     return this.routes.map((route, i) => {
       if (route.appSection) {
-        return <Route key={i} exact path={route.path} render={props => <Dashboard appSection={route.appSection} ref={this.setDashboardRef} {...props}/>} />;
+        return <Route key={i} exact path={route.path} render={props => <Dashboard appSection={route.appSection} meta={route.meta || {}} ref={this.setDashboardRef} {...props}/>} />;
       } else {
         if (route.exact) {
           return <Route key={i} exact path={route.path} component={route.comp} />;
