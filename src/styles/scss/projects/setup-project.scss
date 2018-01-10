@@ -80,6 +80,23 @@
     border-color: transparent;
     border-image: initial;
     border-radius: 3px;
+    box-shadow: none;
+    outline: none;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &.primary {
+      background-color: #3dc1d9;
+    }
+
+    &.launched {
+      color: rgb(39, 154, 241);
+      border-color: rgb(39, 154, 241);
+      background-color: #fff;
+      pointer-events: none;
+    }
   }
 
   .build-config-string pre {

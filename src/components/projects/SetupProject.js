@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
+import Ajax from '../../utils/Ajax';
+import Link from '../../utils/Link';
 
 class SetupProject extends Component {
 
@@ -16,9 +18,27 @@ train: module1.module2:function
 test: module1.module2:function
 predict: module1.module2:function
 reload_model: module1.module2:function`;
+
+    this.launchProject = this.launchProject.bind(this);
+  }
+
+  launchProject() {
+    const gitUrl = 'https://github.com/' + this.props.team + '/' + this.props.repo + '.git';
+
+    Ajax.post('/api/repo/register', { git_url: gitUrl })
+      .then((resp) => {
+        if (resp.status === 201) {
+          $(this.launchBtn).addClass('launched').html('Launched!');
+        } else {
+          console.error('Couldn\'t launch project -- Invalid permissions.');
+        }
+      });
   }
 
   render() {
+    const team = this.props.team;
+    const repo = this.props.repo;
+
     return (
       <div className="main-body">
         <div id="setupProject">
@@ -90,16 +110,29 @@ reload_model: module1.module2:function`;
                           <tr>
                             <td>5.</td>
                             <td>
+                              <p>Officially launch project.</p>
+                            </td>
+                            <td>
+                              <button className="checklist-btn primary" onClick={this.launchProject} ref={(ref) => { this.launchBtn = ref; }}>Launch project</button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>5.</td>
+                            <td>
                               <p>Create a dataset for your project.</p>
                             </td>
-                            <td></td>
+                            <td>
+                              <Link href={'/datasets/' + team} className="button checklist-btn">View datasets</Link>
+                            </td>
                           </tr>
                           <tr>
                             <td>6.</td>
                             <td>
                               <p>Start training! You can use either the CLI or the dashboard to kick off a new training build.</p>
                             </td>
-                            <td></td>
+                            <td>
+                              <Link href={'/' + team + '/' + repo} className="button checklist-btn">Start training</Link>
+                            </td>
                           </tr>
                         </tbody>
                       </table>
