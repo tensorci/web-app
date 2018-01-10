@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 
 class SetupProject extends Component {
 
-  render() {
-    const team = this.props.team;
-    const repo = this.props.repo;
+  constructor(props) {
+    super(props);
 
+    this.yaml = `# Python TensorCI configuration file
+#
+# Check https://www.tensorci.com/docs for more details
+#
+model: path/to/model/file
+prepro_data: module1.module2:function
+train: module1.module2:function
+test: module1.module2:function
+predict: module1.module2:function
+reload_model: module1.module2:function`;
+  }
+
+  render() {
     return (
       <div className="main-body">
         <div id="setupProject">
@@ -23,13 +36,83 @@ class SetupProject extends Component {
                     <div className="language-list">
                       <ul>
                         <li className="radio">
-                          <input type="radio" id="Python" checked/>
+                          <input type="radio" id="Python" defaultChecked={true}/>
                           <label htmlFor="Python">
                             <i className="material-icons">settings</i>
                             Python
                           </label>
                         </li>
                       </ul>
+                    </div>
+                  </div>
+                  <div>
+                    <h2>Next Steps</h2>
+                    <p>We're going to walk you through setting up a configuration file, committing it, and making your first train deploy.</p>
+                    <p>Want to skip ahead? Jump right <a href="#">into our documentation</a>.</p>
+                    <div className="checklist">
+                      <table className="table">
+                        <thead>
+                          <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1.</td>
+                            <td>
+                              <p>Add a file named <code>.tensorci.yml</code> to the root of your project.</p>
+                            </td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>2.</td>
+                            <td>
+                              <p>Populate <code>.tensorci.yml</code> with the contents of the sample .yml (shown below).</p>
+                            </td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>3.</td>
+                            <td>
+                              <p>Update the sample .yml to reflect your project's configuration.</p>
+                            </td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>4.</td>
+                            <td>
+                              <p>Push this change up to GitHub.</p>
+                            </td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>5.</td>
+                            <td>
+                              <p>Create a dataset for your project.</p>
+                            </td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>6.</td>
+                            <td>
+                              <p>Start training! You can use either the CLI or the dashboard to kick off a new training build.</p>
+                            </td>
+                            <td></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div>
+                      <h2>Sample .yml File</h2>
+                      <div>
+                        <div className="build-config-string">
+                          <pre className="line-numbers language-yaml">
+                            <code className="config-yml language-yaml">{this.yaml}</code>
+                          </pre>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

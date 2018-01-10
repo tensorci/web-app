@@ -48,4 +48,45 @@
       }
     }
   }
+
+  a:not(.button) {
+    color: #27a0b6;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .checklist p {
+    margin: 0;
+    line-height: 36px;
+  }
+
+  .checklist-btn {
+    box-sizing: border-box;
+    line-height: 1;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    color: rgb(255, 255, 255);
+    background-color: rgb(39, 154, 241);
+    height: 36px;
+    font-size: 14px;
+    width: 155px;
+    padding: 4px 1em;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    border-image: initial;
+    border-radius: 3px;
+  }
+
+  .build-config-string pre {
+    word-wrap: normal;
+
+    code {
+      white-space: pre;
+    }
+  }
 }
