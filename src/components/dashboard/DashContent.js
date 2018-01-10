@@ -10,51 +10,64 @@ class DashContent extends Component {
     super(props);
 
     this.contentOptions = {
-      '#deployments': {
+      deployments: {
         name: 'Deployments',
-        comp: <Deployments/>
+        comp: this.getDeploymentsComp
       },
-      '#projects': {
+      projects: {
         name: 'Projects',
-        comp: <Projects/>
+        comp: this.getProjectsComp
       }
     };
   }
 
-  getBreadCrumbPath(lead) {
-    var comps = [lead];
-    const currTeam = Session.currTeam();
+  getDeploymentsComp(team, repo) {
+    return <Deployments team={team} repo={repo}/>;
+  }
 
-    if (currTeam) {
-      comps.push(currTeam.name);
+  getProjectsComp(team, repo) {
+    return <Projects team={team} repo={repo}/>;
+  }
+
+  createBreadCrumbPath(appSection, appSectionName, team, repo) {
+    var comps = [{
+      title: appSectionName,
+      link: appSection === 'deployments' ? ('/' + team) : ('/' + appSection + '/' + team)
+    }];
+
+    comps.push({
+      title: team,
+      link: comps[0].link
+    });
+
+    if (repo) {
+      comps.push({
+        title: repo,
+        link: comps[1].link + '/' + repo
+      });
     }
 
     return comps;
   }
 
   render() {
-    const currHash = window.location.hash;
-    var currContent;
+    const appSection = this.props.appSection;
+    const team = this.props.team;
+    const repo = this.props.repo;
+    const content = this.contentOptions[appSection];
 
-    // Get current content from location hash
-    if (currHash) {
-      currContent = this.contentOptions[window.location.hash] || {};
-    } else {
-      currContent = this.contentOptions['#deployments'];
+    if (!content) {
+      return <div></div>;
     }
 
-    var breadCrumbPath = [];
-
-    if (currContent.name) {
-      breadCrumbPath = this.getBreadCrumbPath(currContent.name);
-    }
+    const breadCrumbPath = this.createBreadCrumbPath(appSection, content.name, team, repo);
 
     return (
       <div id="dashContent">
         <div className="sub-header">
           <BreadCrumbs path={breadCrumbPath}/>
         </div>
-        <div className="app-dominant">{currContent.comp}</div>
+        <div className="app-dominant">{content.comp(team, repo)}</div>
       </div>
     );
   }

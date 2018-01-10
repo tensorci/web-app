@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DashContent from './DashContent';
 import Header from '../shared/Header';
+import History from '../../utils/History';
 import Session from '../../utils/Session';
 import SideNav from '../shared/SideNav';
 
@@ -20,7 +21,7 @@ class Dashboard extends Component {
       const user = Session.user();
 
       if (user && user.username) {
-        History.push('/' + user.username);
+        window.location = '/' + user.username;
       }
     }
   }
@@ -30,7 +31,7 @@ class Dashboard extends Component {
       <div id="dashboard">
         <Header team={this.state.team}/>
         <div className="below-header">
-          <SideNav selected={this.state.appSection}/>
+          <SideNav appSection={this.state.appSection} team={this.state.team}/>
           <DashContent appSection={this.state.appSection} team={this.state.team} repo={this.state.repo}/>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import History from '../../utils/History';
 
 class SideNav extends Component {
 
@@ -10,45 +11,57 @@ class SideNav extends Component {
     this.links = [
       {
         name: 'Deployments',
-        hash: '#deployments',
+        slug: 'deployments',
         icon: 'storage'
       },
       {
         name: 'Projects',
-        hash: '#projects',
+        slug: 'projects',
+        icon: 'book'
+      },
+      {
+        name: 'Datasets',
+        slug: 'datasets',
         icon: 'book'
       },
       {
         name: 'Settings',
-        hash: '#settings',
+        slug: 'settings',
         icon: 'settings'
       }
     ];
   }
 
-  getLinks() {
-    const currHash = window.location.hash;
-    var classes;
+  getLinks(appSection, team) {
+    var classes, newLink;
 
-    return this.links.map((l, i) => {
+    return this.links.map((link, i) => {
       classes = 'aside-item';
 
-      if ((!currHash && i === 0) || l.hash === currHash) {
+      if (link.slug === appSection) {
         classes += ' current';
       }
 
+      var onClick = () => {
+        newLink = link.slug === 'deployments' ? ('/' + team) : ('/' + link.slug + '/' + team);
+        History.push(newLink);
+      };
+
       return (
-        <a key={i} href={l.hash} className={classes}>
-          <i className="material-icons">{l.icon}</i>
-          <div className="nav-label">{l.name}</div>
+        <a key={i} href="javascript:void(0)" className={classes} onClick={onClick}>
+          <i className="material-icons">{link.icon}</i>
+          <div className="nav-label">{link.name}</div>
         </a>
       );
     });
   }
 
   render() {
+    const appSection = this.props.appSection;
+    const team = this.props.team;
+
     return (
-      <nav className="aside-left-nav">{this.getLinks()}</nav>
+      <nav className="aside-left-nav">{this.getLinks(appSection, team)}</nav>
     );
   }
 }
