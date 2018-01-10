@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import BreadCrumbs from '../shared/BreadCrumbs';
+import Datasets from '../datasets/Datasets';
 import Deployments from '../deployments/Deployments';
 import Projects from '../projects/Projects';
-import Session from '../../utils/Session';
+import Settings from '../settings/Settings';
 
 class DashContent extends Component {
 
@@ -17,7 +18,15 @@ class DashContent extends Component {
       projects: {
         name: 'Projects',
         comp: this.getProjectsComp
-      }
+      },
+      datasets: {
+        name: 'Datasets',
+        comp: this.getDatasetsComp
+      },
+      settings: {
+        name: 'Settings',
+        comp: this.getSettingsComp
+      },
     };
   }
 
@@ -27,6 +36,14 @@ class DashContent extends Component {
 
   getProjectsComp(team, repo) {
     return <Projects team={team} repo={repo}/>;
+  }
+
+  getDatasetsComp(team, repo) {
+    return <Datasets team={team} repo={repo}/>;
+  }
+
+  getSettingsComp(team, repo) {
+    return <Settings team={team} repo={repo}/>;
   }
 
   createBreadCrumbPath(appSection, appSectionName, team, repo) {

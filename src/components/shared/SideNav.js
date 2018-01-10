@@ -22,7 +22,7 @@ class SideNav extends Component {
       {
         name: 'Datasets',
         slug: 'datasets',
-        icon: 'book'
+        icon: 'fa-table'
       },
       {
         name: 'Settings',
@@ -33,7 +33,7 @@ class SideNav extends Component {
   }
 
   getLinks(appSection, team) {
-    var classes, newLink;
+    var classes, newLink, icon;
 
     return this.links.map((link, i) => {
       classes = 'aside-item';
@@ -47,9 +47,15 @@ class SideNav extends Component {
         History.push(newLink);
       };
 
+      if (link.icon.startsWith('fa-')) {
+        icon = <i className={'fa ' + link.icon}></i>;
+      } else {
+        icon = <i className="material-icons">{link.icon}</i>;
+      }
+
       return (
         <a key={i} href="javascript:void(0)" className={classes} onClick={onClick}>
-          <i className="material-icons">{link.icon}</i>
+          {icon}
           <div className="nav-label">{link.name}</div>
         </a>
       );
