@@ -314,12 +314,25 @@ table {
         &:last-child {
           padding-right: 10px;
         }
+
+        &.shrink {
+          width: 1px;
+          white-space: nowrap
+        }
+
+        &.right {
+          text-align: right;
+        }
       }
 
       td {
         line-height: 21px;
         vertical-align: inherit;
       }
+    }
+
+    tbody > tr:hover {
+      background-color: rgba(80,198,221,0.04);
     }
   }
 }

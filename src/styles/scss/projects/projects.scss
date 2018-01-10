@@ -1,0 +1,16 @@
+.projects-list {
+
+  .project-list-item-name {
+    color: #27a0b6;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  table.table tbody > tr > td {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}

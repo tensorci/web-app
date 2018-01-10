@@ -37,7 +37,7 @@ class Projects extends Component {
     }
 
     // Projects exist
-    return <ProjectsList projects={this.state.projects}/>;
+    return <ProjectsList projects={this.state.projects} team={team}/>;
   }
 
   render() {

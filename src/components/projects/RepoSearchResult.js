@@ -20,9 +20,9 @@ class RepoSearchResult extends Component {
     var classes = 'button primary';
 
     if (repo.exists) {
-      text = 'View project';
+      text = 'View deploys';
       classes += ' exists';
-      href = '/projects/' + team + '/' + repo.slug;
+      href = '/' + team + '/' + repo.slug;
     } else {
       text = 'Setup project';
       href = '/setup-project/' + team + '/' + repo.slug;
