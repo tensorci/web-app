@@ -12,13 +12,15 @@ class ProfileDropdown extends Dropdown {
 
     this.items = [
       {
-        'heading': 'User settings',
-        'href': '#'
+        heading: 'User settings',
+        href: '/account',
+        internal: true,
+        onClick: this.toggle
       },
       {
-        'heading': 'Log out',
-        'href': 'javascript:void(0)',
-        'onClick': this.logout
+        heading: 'Log out',
+        href: '/logout',
+        onClick: this.logout
       }
     ];
 
@@ -27,7 +29,10 @@ class ProfileDropdown extends Dropdown {
     };
   }
 
-  logout() {
+  logout(e) {
+    e.stopPropagation();
+    e.preventDefault();
+
     Ajax.get('/api/provider_user/logout_url')
       .then((resp) => resp.json())
       .then((data) => {

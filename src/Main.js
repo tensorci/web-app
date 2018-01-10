@@ -25,6 +25,15 @@ class Main extends Component {
         exact: true
       },
       {
+        path: '/account',
+        comp: Dashboard,
+        exact: true,
+        appSection: 'account',
+        meta: {
+          skipTeam: true
+        }
+      },
+      {
         path: '/projects/:team',
         comp: Dashboard,
         exact: true,

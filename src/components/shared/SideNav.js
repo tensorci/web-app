@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Link from '../../utils/Link';
+import Session from '../../utils/Session';
 
 class SideNav extends Component {
 
@@ -65,7 +66,9 @@ class SideNav extends Component {
 
   render() {
     const appSection = this.props.appSection;
-    const team = this.props.team;
+
+    // default team is username
+    const team = this.props.team || Session.username();
 
     return (
       <nav className="aside-left-nav">{this.getLinks(appSection, team)}</nav>

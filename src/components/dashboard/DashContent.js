@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Account from '../account/Account';
 import AddProjects from '../projects/AddProjects';
 import BreadCrumbs from '../shared/BreadCrumbs';
 import Datasets from '../datasets/Datasets';
@@ -29,6 +30,10 @@ class DashContent extends Component {
         name: 'Settings',
         comp: this.getSettingsComp
       },
+      account: {
+        name: 'User',
+        comp: this.getAccountComp
+      }
     };
   }
 
@@ -54,11 +59,19 @@ class DashContent extends Component {
     return <Settings team={team} repo={repo}/>;
   }
 
+  getAccountComp(team, repo, meta) {
+    return <Account/>;
+  }
+
   createBreadCrumbPath(appSection, appSectionName, team, repo, meta) {
     var comps = [{
       title: appSectionName,
       link: appSection === 'deployments' ? ('/' + team) : ('/' + appSection + '/' + team)
     }];
+
+    if (appSection === 'account') {
+      return comps;
+    }
 
     if (appSection === 'projects' && (meta.addProjects || meta.setupProject)) {
       comps.push({

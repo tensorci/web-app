@@ -68,7 +68,7 @@ class Dropdown extends Component {
 
   getItems() {
     return this.items.map((item, i) => {
-      return <DropdownItem key={i} heading={item.heading} desc={item.desc} href={item.href} extLink={item.extLink} onClick={item.onClick} />;
+      return <DropdownItem key={i} heading={item.heading} desc={item.desc} href={item.href} internal={item.internal} onClick={item.onClick} />;
     });
   }
 

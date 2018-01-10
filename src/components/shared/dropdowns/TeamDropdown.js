@@ -13,7 +13,7 @@ class TeamDropdown extends Dropdown {
   }
 
   getButtonContents() {
-    if (this.state.teams.length === 0 || !this.props.selectedTeam) {
+    if (this.state.teams.length === 0) {
       return;
     }
 
@@ -21,14 +21,10 @@ class TeamDropdown extends Dropdown {
     for (var i = 0; i < this.state.teams.length; i++) {
       team = this.state.teams[i];
 
-      if (team.slug === this.props.selectedTeam) {
+      if (!this.props.selectedTeam || team.slug === this.props.selectedTeam) {
         selectedTeam = team;
         break;
       }
-    }
-
-    if (!selectedTeam) {
-      return;
     }
 
     return [

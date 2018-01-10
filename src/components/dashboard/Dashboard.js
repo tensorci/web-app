@@ -16,8 +16,8 @@ class Dashboard extends Component {
       meta: this.props.meta || {}
     };
 
-    // if no team specified, redirect to /<username-as-team>
-    if (!this.state.team) {
+    // if no team specified and one is required, redirect to /<username-as-team>
+    if (!this.state.team && !this.state.meta.skipTeam) {
       const user = Session.user();
 
       if (user && user.username) {
