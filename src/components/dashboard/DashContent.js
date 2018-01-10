@@ -5,6 +5,7 @@ import Datasets from '../datasets/Datasets';
 import Deployments from '../deployments/Deployments';
 import Projects from '../projects/Projects';
 import Settings from '../settings/Settings';
+import SetupProject from '../projects/SetupProject';
 
 class DashContent extends Component {
 
@@ -36,7 +37,13 @@ class DashContent extends Component {
   }
 
   getProjectsComp(team, repo, meta) {
-    return meta.addProjects ? <AddProjects team={team}/> : <Projects team={team} repo={repo}/>;
+    if (meta.addProjects) {
+      return <AddProjects team={team}/>;
+    } else if (meta.setupProject) {
+      return <SetupProject team={team} repo={repo}/>;
+    } else {
+      return <Projects team={team} repo={repo}/>;
+    }
   }
 
   getDatasetsComp(team, repo, meta) {
@@ -53,11 +60,18 @@ class DashContent extends Component {
       link: appSection === 'deployments' ? ('/' + team) : ('/' + appSection + '/' + team)
     }];
 
-    if (appSection === 'projects' && meta.addProjects) {
+    if (appSection === 'projects' && (meta.addProjects || meta.setupProject)) {
       comps.push({
         title: 'Add Projects',
-        link: null
+        link: '/add-projects/' + team
       });
+
+      if (meta.setupProject && repo) {
+        comps.push({
+          title: team + '/' + repo,
+          link: null
+        });
+      }
     } else {
       comps.push({
         title: team,
@@ -78,7 +92,7 @@ class DashContent extends Component {
   getActionBtns(appSection, team, meta) {
     var btns = [];
 
-    if (appSection === 'projects' && !meta.addProjects) {
+    if (appSection === 'projects' && !meta.addProjects && !meta.setupProject) {
       btns.push({
         link: '/add-projects/' + team,
         text: 'Add Project'

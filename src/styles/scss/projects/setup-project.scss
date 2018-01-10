@@ -1,0 +1,51 @@
+#setupProject {
+  margin-top: 10px;
+
+  ul {
+    padding-left: 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .radio, .checkbox {
+    display: inline-block;
+  }
+
+  input[type=radio] {
+    display: none;
+  }
+
+  input[type=radio]:checked + label {
+    background-color: #d9f4f8;
+    border: solid 1px #66d3e4;
+  }
+
+  label {
+    border: solid 1px #ccc;
+    border-radius: 3px;
+    margin: 5px 10px 0 0;
+    cursor: pointer;
+    font-weight: normal;
+    color: #333;
+    line-height: 23px;
+
+    i {
+      margin-right: 5px;
+      position: relative;
+      top: -1px;
+    }
+  }
+
+  .languages {
+    .language-list {
+      label {
+        width: 135px;
+        padding: 5px;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+  }
+}

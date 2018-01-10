@@ -46,6 +46,15 @@ class Main extends Component {
         }
       },
       {
+        path: '/setup-project/:team/:repo',
+        comp: Dashboard,
+        exact: true,
+        appSection: 'projects',
+        meta: {
+          setupProject: true
+        }
+      },
+      {
         path: '/datasets/:team',
         comp: Dashboard,
         exact: true,
