@@ -31,11 +31,19 @@
         color: rgb(33, 33, 33);
         padding: 0 5px;
       }
+
+      &:last-child {
+        pointer-events: none;
+      }
     }
 
-    .node-text {
+    .crumb-text {
       text-decoration: none;
       color: #333;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }

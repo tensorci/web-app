@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import DashContent from './DashContent';
 import Header from '../shared/Header';
-import History from '../../utils/History';
 import Session from '../../utils/Session';
 import SideNav from '../shared/SideNav';
 
