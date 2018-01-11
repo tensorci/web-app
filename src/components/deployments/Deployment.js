@@ -8,32 +8,32 @@ class Deployment extends Component {
 
     this.statusStyleMap = {
       created: {
-        text: 'Created',
-        icon: 'fa fa-ellipsis-h'
+        text: 'Building',
+        icon: 'fa fa-circle'
       },
       train_building: {
-        text: 'Deploying',
-        icon: 'fa fa-ellipsis-h'
+        text: 'Building',
+        icon: 'fa fa-circle'
       },
       train_building_done: {
-        text: 'Deploying',
-        icon: 'fa fa-ellipsis-h'
+        text: 'Deploying to train',
+        icon: 'fa fa-circle'
       },
       training: {
         text: 'Training',
-        icon: 'fa fa-ellipsis-h'
+        icon: 'fa fa-circle'
       },
       training_done: {
-        text: 'Training',
-        icon: 'fa fa-ellipsis-h'
+        text: 'Done Training',
+        icon: 'fa fa-circle'
       },
       api_building: {
-        text: 'Deploying',
-        icon: 'fa fa-ellipsis-h'
+        text: 'Building',
+        icon: 'fa fa-circle'
       },
       api_building_done: {
-        text: 'Deploying',
-        icon: 'fa fa-ellipsis-h'
+        text: 'Deploying to API',
+        icon: 'fa fa-circle'
       },
       predicting: {
         text: 'Predicting',
@@ -57,6 +57,10 @@ class Deployment extends Component {
       statusClass = 'failed';
       statusIcon = 'fa fa-exclamation';
       statusText = 'Failed';
+    } else if (info.canceled) {
+      statusClass = 'canceled';
+      statusIcon = 'fa fa-minus';
+      statusText = 'Canceled';
     }
 
     const deploymentLink = '/' + team + '/' + repo + '/' + info.uid;
@@ -65,7 +69,7 @@ class Deployment extends Component {
       <div className={'deployment ' + statusClass}>
         <div className="status-area">
           <Link href={deploymentLink}>
-            <div className={'badge ' + statusClass}>
+            <div className="badge">
               <i className={'status-icon ' + statusIcon}></i>
               <div className="badge-label">{statusText}</div>
             </div>
