@@ -62,7 +62,7 @@ class AuthSettings extends Component {
               <div className="title">Basic Auth</div>
             </div>
             <div className="card-body">
-              <p>A basic auth password can be used to authorize your TensorCI account when a third-party OAuth flow isn't available, such as logging into the TensorCI CLI.</p>
+              <p>This password can be used to authorize your TensorCI account in places where third-party OAuth isn't available, such as logging into the TensorCI CLI.</p>
               <div className="form">
                 <div className="field">
                   <div className="field-wrapper">

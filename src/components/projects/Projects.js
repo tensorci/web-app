@@ -15,7 +15,7 @@ class Projects extends Component {
   }
 
   componentDidMount() {
-    Ajax.get('/api/repos')
+    Ajax.get('/api/repos', { team: this.props.team })
       .then((resp) => resp.json())
       .then((data) => {
         this.setState({
