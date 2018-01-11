@@ -53,7 +53,7 @@ class DeploymentsList extends Component {
 
     // render the deployments
     return this.state.deployments.map((d, i) => {
-      return <Deployment key={i} info={d}/>;
+      return <Deployment key={i} info={d} team={team} repo={repo}/>;
     });
   }
 
