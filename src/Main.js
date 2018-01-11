@@ -107,6 +107,12 @@ class Main extends Component {
         comp: Dashboard,
         exact: true,
         appSection: 'deployments'
+      },
+      {
+        path: '/:team/:repo/:uid',
+        comp: Dashboard,
+        exact: true,
+        appSection: 'deployments'
       }
     ];
 
@@ -129,7 +135,7 @@ class Main extends Component {
   }
 
   reRoute(loc) {
-    var route, match;
+    var route, match, newState;
     const path = loc.pathname;
 
     for (var i = 0; i < this.routes.length; i++) {
@@ -142,13 +148,18 @@ class Main extends Component {
       match = route.regex.exec(path);
 
       if (match) {
-        this.dashboard.setState({
+        newState = {
           appSection: route.appSection,
-          team: match[1],
-          repo: match[2],
           meta: route.meta || {}
-        });
+        };
 
+        for (var j = 1; j < match.length; j++) {
+          if (route.keys[j - 1]) {
+            newState[route.keys[j - 1].name] = match[j];
+          }
+        }
+
+        this.dashboard.setState(newState);
         break;
       }
     }

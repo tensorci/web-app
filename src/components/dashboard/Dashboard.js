@@ -13,6 +13,7 @@ class Dashboard extends Component {
       appSection: this.props.appSection,
       team: this.props.match.params.team,
       repo: this.props.match.params.repo,
+      uid: this.props.match.params.uid,
       meta: this.props.meta || {}
     };
 

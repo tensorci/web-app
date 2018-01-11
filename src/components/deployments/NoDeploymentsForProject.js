@@ -8,7 +8,7 @@ class NoDeploymentsForProject extends Component {
   }
 
   startTraining() {
-
+    // start a new Deployment
   }
 
   render() {
@@ -25,9 +25,6 @@ class NoDeploymentsForProject extends Component {
         </div>
         <div className="card-body">
           <div className="no-deployments">
-            <div className="icon-container">
-              <i className="material-icons">storage</i>
-            </div>
             <div className="primary-msg">
               No deployments exist yet for <span className="repo-name">{repo}</span>.
             </div>
