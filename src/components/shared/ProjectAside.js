@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
+import History from '../../utils/History';
 import Link from '../../utils/Link';
 
 class ProjectAside extends Component {
@@ -23,24 +24,26 @@ class ProjectAside extends Component {
       });
   }
 
-  formatProjectList(team, repo) {
-    var classes, projHref;
+  formatProjectList(team, repo, linkPrefix) {
+    var classes, teamRepoHref, projHref, editProjHref;
 
     return this.state.projects.map((p, i) => {
       classes = 'project-heading';
 
-      if (p.slug === repo) {
+      if ((!repo && i === 0) || p.slug === repo) {
         classes += ' selected';
       }
 
-      projHref = '/' + team + '/' + p.slug;
+      teamRepoHref = '/' + team + '/' + p.slug;
+      editProjHref = teamRepoHref + '/edit';
+      projHref = linkPrefix + teamRepoHref;
 
       return (
         <li key={i}>
           <div className={classes}>
             <i className="right-arr fa fa-chevron-right"></i>
             <Link href={projHref} className="project-name">{p.name}</Link>
-            <Link href={projHref + '/edit'} className="project-settings-icon">
+            <Link href={editProjHref + '/edit'} className="project-settings-icon">
               <i className="material-icons">settings</i>
             </Link>
           </div>
@@ -52,6 +55,7 @@ class ProjectAside extends Component {
   render() {
     const team = this.props.team;
     const repo = this.props.repo;
+    const linkPrefix = this.props.linkPrefix || '';
 
     return (
       <aside className="app-aside">
@@ -63,7 +67,7 @@ class ProjectAside extends Component {
                 <option value="">Recent</option>
               </select>
             </header>
-            <ul className="projects">{this.formatProjectList(team, repo)}</ul>
+            <ul className="projects">{this.formatProjectList(team, repo, linkPrefix)}</ul>
           </div>
         </nav>
       </aside>
