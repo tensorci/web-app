@@ -27,6 +27,10 @@ class TeamDropdown extends Dropdown {
       }
     }
 
+    if (!selectedTeam) {
+      selectedTeam = this.state.teams[0];
+    }
+
     return [
       <div key={0} className="team-icon">
         <img src={selectedTeam.icon} alt="" className="selected-team-icon"/>

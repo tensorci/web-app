@@ -15,6 +15,7 @@
 
 // Account
 @import 'account/account';
+@import 'account/auth-settings';
 
 // Shared
 @import 'shared/header';
@@ -22,6 +23,7 @@
 @import 'shared/side-nav';
 @import 'shared/breadcrumbs';
 @import 'shared/card';
+@import 'shared/aside';
 @import 'shared/footers/footer';
 @import 'shared/form/form-input';
 @import 'shared/form/form-select';

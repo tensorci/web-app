@@ -16,6 +16,7 @@ class FormInput extends AbstractComponent {
     this.getClassNames = this.getClassNames.bind(this);
     this.clear = this.clear.bind(this);
     this.getInputEl = this.getInputEl.bind(this);
+    this.setValue = this.setValue.bind(this);
   }
 
   setInputRef(ref) {
@@ -35,6 +36,10 @@ class FormInput extends AbstractComponent {
 
   serialize() {
     return $(this.input).val().trim();
+  }
+
+  setValue(val) {
+    $(this.input).val(val);
   }
 
   onMobile() {
@@ -77,14 +82,15 @@ class FormInput extends AbstractComponent {
   }
 
   getInputEl() {
-    var name = this.props.name || '';
-    var placeholder = this.props.placeholder || '';
-    var defaultValue = this.props.defaultValue || '';
-    var classes = this.getClassNames();
+    const name = this.props.name || '';
+    const placeholder = this.props.placeholder || '';
+    const defaultValue = this.props.defaultValue || '';
+    const classes = this.getClassNames();
+    const type = this.props.type || 'text';
 
     return this.props.useTextarea ?
       <textarea className={classes} name={name} placeholder={placeholder} defaultValue={defaultValue} onKeyUp={this.onKeyUp} ref={this.setInputRef}></textarea> :
-      <input type="text" className={classes} name={name} placeholder={placeholder} defaultValue={defaultValue} onKeyUp={this.onKeyUp} ref={this.setInputRef}/>;
+      <input type={type} className={classes} name={name} placeholder={placeholder} defaultValue={defaultValue} onKeyUp={this.onKeyUp} ref={this.setInputRef}/>;
   }
 
   render() {

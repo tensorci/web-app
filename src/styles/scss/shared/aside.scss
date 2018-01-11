@@ -1,0 +1,145 @@
+.app-aside {
+  -webkit-box-flex: 0;
+  box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  flex: 0 0 auto;
+  display: -webkit-box;
+  display: box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
+.aside-left-nav, .aside-left-menu {
+  display: -webkit-box;
+  display: box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
+.aside-left-menu {
+  -webkit-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1 0 1px;
+  flex: 1 0 1px;
+  overflow: hidden;
+  transition: 200ms;
+  transition-timing-function: cubic-bezier(.5, -0.25, .5, 1.25);
+  width: 285px;
+  background-color: transparent;
+}
+
+.aside-user {
+  -webkit-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1 0 1px;
+  flex: 1 0 1px;
+  display: -webkit-box;
+  display: box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  position: relative;
+  width: 285px;
+  height: 100%;
+  background: #fff;
+  color: #555;
+  overflow: hidden;
+
+  header {
+    -webkit-box-flex: 0;
+    box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    flex: 0 0 auto;
+    -webkit-box-pack: center;
+    box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    padding: 0 0 20px;
+  }
+
+  h4 {
+    font-weight: normal;
+    color: #000;
+    white-space: nowrap;
+    transition: 100ms;
+    transition-timing-function: cubic-bezier(.5, -0.25, .5, 1.25);
+    width: 100%;
+    height: 46.66666667px;
+    line-height: 77px;
+    margin: 0;
+    padding: 0 20px;
+  }
+
+  .aside-item {
+    padding: 15px 20px;
+  }
+}
+
+.aside-user-options {
+  -webkit-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  display: -webkit-box;
+  display: box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  overflow-y: auto;
+
+  .aside-item {
+    max-height: 3em;
+    align-items: flex-start;
+    color: #27a0b6;
+    text-decoration: none;
+    transition: all .2s ease-in;
+
+    &:not(.aside-heading):hover {
+      background: #eee;
+    }
+  }
+}
+
+.aside-item {
+  -webkit-box-flex: 0;
+  box-flex: 0;
+  -webkit-flex: 0 1 70px;
+  flex: 0 1 70px;
+  display: -webkit-box;
+  display: box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  white-space: nowrap;
+  transition: 100ms ease-in-out;
+  min-height: 1.5em;
+
+  &.active {
+    background: #eee;
+  }
+}
