@@ -12,11 +12,15 @@ class Link extends Component {
     e.preventDefault();
     e.stopPropagation();
     History.push(this.props.href);
+
+    if (this.props.onClick) {
+      this.props.onClick(e);
+    }
   }
 
   render() {
     return (
-      <a href={this.props.href} className={this.props.className} onClick={this.props.onClick || this.onClick}>{this.props.children}</a>
+      <a href={this.props.href} className={this.props.className} onClick={this.onClick}>{this.props.children}</a>
     );
   }
 }

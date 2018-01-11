@@ -24,7 +24,7 @@ class TeamDropdownItem extends Component {
 
     return (
       <li>
-        <Link className={this.getLinkClasses()} href={'/' + team.slug}>
+        <Link className={this.getLinkClasses()} href={'/' + team.slug} onClick={this.props.onClick}>
           <span className="team-icon-and-name">
             <span className="leading-dot">●</span>
             <img src={team.icon} alt="" className="team-icon" />

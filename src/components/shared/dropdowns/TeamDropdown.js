@@ -50,7 +50,7 @@ class TeamDropdown extends Dropdown {
     var selected = false;
     this.state.teams.forEach((item, i) => {
       selected = item.slug === this.props.selectedTeam;
-      items.push(<TeamDropdownItem key={i + 1} team={item} selected={selected} />);
+      items.push(<TeamDropdownItem key={i + 1} team={item} selected={selected} onClick={this.toggle}/>);
     });
 
     return items;

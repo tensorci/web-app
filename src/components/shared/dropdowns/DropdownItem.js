@@ -20,15 +20,8 @@ class DropdownItem extends Component {
     const description = desc ? <div className="desc">{desc}</div> : null;
 
     if (internal) {
-      var onClick = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        History.push(this.props.href);
-        this.handleClick(e);
-      };
-
       return (
-        <Link href={href} className="nav-item" onClick={onClick}>
+        <Link href={href} className="nav-item" onClick={this.handleClick}>
           <div className="heading">{heading}</div>
           {description}
         </Link>

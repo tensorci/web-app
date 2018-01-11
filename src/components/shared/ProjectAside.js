@@ -18,12 +18,14 @@ class ProjectAside extends Component {
     Ajax.get('/api/repos', { team: this.props.team })
       .then((resp) => resp.json())
       .then((data) => {
-        if (!this.props.repo && this.props.onAutoSelect) {
-          this.props.onAutoSelect(data.repos[0].slug);
+        const repos = data.repos || [];
+
+        if (!this.props.repo && this.props.onAutoSelect && repos.length > 0) {
+          this.props.onAutoSelect(repos[0].slug);
         }
 
         this.setState({
-          projects: data.repos || []
+          projects: repos
         });
       });
   }
