@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
-import Deployment from './Deployment';
+import DeploymentListItem from './DeploymentListItem';
 import NoDeploymentsForProject from './NoDeploymentsForProject';
 
 class DeploymentsList extends Component {
@@ -53,7 +53,7 @@ class DeploymentsList extends Component {
 
     // render the deployments
     return this.state.deployments.map((d, i) => {
-      return <Deployment key={i} info={d} team={team} repo={repo}/>;
+      return <DeploymentListItem key={i} info={d} team={team} repo={repo}/>;
     });
   }
 

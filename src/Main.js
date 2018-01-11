@@ -159,6 +159,14 @@ class Main extends Component {
           }
         }
 
+        const alwaysSet = ['team', 'repo', 'uid'];
+
+        alwaysSet.forEach((k) => {
+          if (!newState[k]) {
+            newState[k] = null;
+          }
+        });
+
         this.dashboard.setState(newState);
         break;
       }

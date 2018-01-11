@@ -3,6 +3,7 @@ import Account from '../account/Account';
 import AddProjects from '../projects/AddProjects';
 import BreadCrumbs from '../shared/BreadCrumbs';
 import Datasets from '../datasets/Datasets';
+import Deployment from '../deployments/Deployment';
 import Deployments from '../deployments/Deployments';
 import Projects from '../projects/Projects';
 import Settings from '../settings/Settings';
@@ -37,11 +38,11 @@ class DashContent extends Component {
     };
   }
 
-  getDeploymentsComp(team, repo, meta) {
-    return <Deployments team={team} repo={repo}/>;
+  getDeploymentsComp(team, repo, uid, meta) {
+    return uid ? <Deployment team={team} repo={repo} uid={uid}/> : <Deployments team={team} repo={repo}/>;
   }
 
-  getProjectsComp(team, repo, meta) {
+  getProjectsComp(team, repo, uid, meta) {
     if (meta.addProjects) {
       return <AddProjects team={team}/>;
     } else if (meta.setupProject) {
@@ -51,19 +52,19 @@ class DashContent extends Component {
     }
   }
 
-  getDatasetsComp(team, repo, meta) {
+  getDatasetsComp(team, repo, uid, meta) {
     return <Datasets team={team} repo={repo}/>;
   }
 
-  getSettingsComp(team, repo, meta) {
+  getSettingsComp(team, repo, uid, meta) {
     return <Settings team={team} repo={repo}/>;
   }
 
-  getAccountComp(team, repo, meta) {
+  getAccountComp(team, repo, uid, meta) {
     return <Account/>;
   }
 
-  createBreadCrumbPath(appSection, appSectionName, team, repo, meta) {
+  createBreadCrumbPath(appSection, appSectionName, team, repo, uid, meta) {
     var comps = [{
       title: appSectionName,
       link: appSection === 'deployments' ? ('/' + team) : ('/' + appSection + '/' + team)
@@ -119,6 +120,7 @@ class DashContent extends Component {
     const appSection = this.props.appSection;
     const team = this.props.team;
     const repo = this.props.repo;
+    const uid = this.props.uid;
     const meta = this.props.meta;
     const content = this.contentOptions[appSection];
 
@@ -126,14 +128,14 @@ class DashContent extends Component {
       return <div></div>;
     }
 
-    const breadCrumbPath = this.createBreadCrumbPath(appSection, content.name, team, repo, meta);
+    const breadCrumbPath = this.createBreadCrumbPath(appSection, content.name, team, repo, uid, meta);
 
     return (
       <div id="dashContent">
         <div className="sub-header">
           <BreadCrumbs path={breadCrumbPath} actionBtns={this.getActionBtns(appSection, team, meta)}/>
         </div>
-        <div className="app-dominant">{content.comp(team, repo, meta)}</div>
+        <div className="app-dominant">{content.comp(team, repo, uid, meta)}</div>
       </div>
     );
   }

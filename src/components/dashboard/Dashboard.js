@@ -33,7 +33,7 @@ class Dashboard extends Component {
         <Header team={this.state.team}/>
         <div className="below-header">
           <SideNav appSection={this.state.appSection} team={this.state.team}/>
-          <DashContent appSection={this.state.appSection} team={this.state.team} repo={this.state.repo} meta={this.state.meta}/>
+          <DashContent appSection={this.state.appSection} team={this.state.team} repo={this.state.repo} uid={this.state.uid} meta={this.state.meta}/>
         </div>
       </div>
     );
