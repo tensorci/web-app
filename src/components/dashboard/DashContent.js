@@ -98,6 +98,13 @@ class DashContent extends Component {
           link: comps[1].link + '/' + repo
         });
       }
+
+      if (uid) {
+        comps.push({
+          title: uid,
+          link: null
+        });
+      }
     }
 
     return comps;

@@ -69,7 +69,7 @@ class DeploymentListItem extends Component {
       <div className={'deployment ' + statusClass}>
         <div className="status-area">
           <Link href={deploymentLink}>
-            <div className="badge">
+            <div className={'badge ' + statusClass}>
               <i className={'status-icon ' + statusIcon}></i>
               <div className="badge-label">{statusText}</div>
             </div>

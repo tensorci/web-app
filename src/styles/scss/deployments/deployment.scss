@@ -1,0 +1,105 @@
+#deployment {
+
+  .build-info-v2 {
+    margin-top: 15px;
+  }
+
+  .build-head-content > .summary-header {
+    margin-bottom: 15px;
+
+    .summary-item a {
+      color: #27a0b6;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .build-head-summary-header {
+    display: -webkit-box;
+    display: box;
+    display: -webkit-flex;
+    display: flex;
+    font-size: 13px;
+    line-height: 25px;
+  }
+
+  .build-head-summary-header > *,
+  .build-head-summary-header > .right-side > * {
+    margin-right: 20px;
+  }
+
+  .build-head-summary-header > .right-side {
+    display: -webkit-box;
+    display: box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: stretch;
+    box-align: stretch;
+    -webkit-align-items: stretch;
+    align-items: stretch;
+    -webkit-box-pack: end;
+    box-pack: end;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+    -webkit-box-orient: horizontal;
+    box-orient: horizontal;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    flex-grow: 1;
+  }
+
+  .build-head-summary-header > .right-side > *:last-child {
+    margin-right: 0;
+  }
+
+  .summary-label {
+    font-family: Avenir-Next-Medium;
+    display: block;
+    color: #555;
+  }
+
+  .build-head-commits {
+    color: #555;
+
+    .heading {
+      font-size: 11px;
+      font-weight: 400;
+      text-transform: uppercase;
+      padding-bottom: 8px;
+    }
+
+    .commit-line {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      .octicon-git-commit {
+        margin-right: 8px;
+        font-size: 18px;
+        vertical-align: middle;
+        color: #ccc;
+      }
+    }
+
+    .commit-line > .commit-message,
+    .commit-line > .metadata-item {
+      font-size: 13px;
+      margin-right: 20px;
+    }
+
+    .metadata-item.sha-one,
+    .commit-message {
+      font-family: "Roboto Mono", Monaco, "Courier New", monospace;
+    }
+
+    .metadata-item.sha-one {
+      color: #27a0b6;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

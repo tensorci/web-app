@@ -27,106 +27,6 @@
   a {
     text-decoration: none;
   }
-
-  &.failed {
-    .badge {
-      background: #ed5c5c;
-    }
-
-    .status-icon {
-      color: #ed5c5c;
-    }
-  }
-
-  &.created {
-    .badge {
-      background: #66d3e4;
-    }
-
-    .status-icon {
-      color: #66d3e4;
-    }
-  }
-
-  &.train_building {
-    .badge {
-      background: #66d3e4;
-    }
-
-    .status-icon {
-      color: #66d3e4;
-    }
-  }
-
-  &.train_building_done {
-    .badge {
-      background: #66d3e4;
-    }
-
-    .status-icon {
-      color: #66d3e4;
-    }
-  }
-
-  &.training {
-    .badge {
-      background: #66d3e4;
-    }
-
-    .status-icon {
-      color: #66d3e4;
-    }
-  }
-
-  &.training_done {
-    .badge {
-      background: #66d3e4;
-    }
-
-    .status-icon {
-      color: #66d3e4;
-    }
-  }
-
-  &.api_building {
-    .badge {
-      background: #66d3e4;
-    }
-
-    .status-icon {
-      color: #66d3e4;
-    }
-  }
-
-  &.api_building_done {
-    .badge {
-      background: #66d3e4;
-    }
-
-    .status-icon {
-      color: #66d3e4;
-    }
-  }
-
-  &.predicting {
-    .badge {
-      background: #42c88a;
-    }
-
-    .status-icon {
-      color: #42c88a;
-    }
-  }
-
-  &.canceled {
-    .badge {
-      background: #898989;
-    }
-
-    .status-icon {
-      color: #898989;
-    }
-  }
 }
 
 .status-area {
@@ -156,6 +56,86 @@
   border-radius: 12.5px;
   color: #fff;
   text-align: left;
+
+  &.failed {
+    background: #ed5c5c;
+
+    .status-icon {
+      color: #ed5c5c;
+    }
+  }
+
+  &.created {
+    background: #66d3e4;
+
+    .status-icon {
+      color: #66d3e4;
+    }
+  }
+
+  &.train_building {
+    background: #66d3e4;
+
+    .status-icon {
+      color: #66d3e4;
+    }
+  }
+
+  &.train_building_done {
+    background: #66d3e4;
+
+    .status-icon {
+      color: #66d3e4;
+    }
+  }
+
+  &.training {
+    background: #66d3e4;
+
+    .status-icon {
+      color: #66d3e4;
+    }
+  }
+
+  &.training_done {
+    background: #66d3e4;
+
+    .status-icon {
+      color: #66d3e4;
+    }
+  }
+
+  &.api_building {
+    background: #66d3e4;
+
+    .status-icon {
+      color: #66d3e4;
+    }
+  }
+
+  &.api_building_done {
+    background: #66d3e4;
+
+    .status-icon {
+      color: #66d3e4;
+    }
+  }
+
+  &.predicting {
+    background: #42c88a;
+
+    .status-icon {
+      color: #42c88a;
+    }
+  }
+
+  &.canceled {
+    background: #898989;
+
+    .status-icon {
+      color: #898989;
+    }
+  }
 }
 
 .badge > .status-icon {
