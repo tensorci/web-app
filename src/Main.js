@@ -34,7 +34,7 @@ class Main extends Component {
         }
       },
       {
-        path: '/account/:page',
+        path: '/account/auth',
         comp: Dashboard,
         exact: true,
         appSection: 'account',
