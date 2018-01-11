@@ -48,7 +48,7 @@ class DeploymentsList extends Component {
 
     // Project exists, but no deployments for project
     if (this.state.deployments.length === 0) {
-      return <NoDeploymentsForProject repo={repo}/>;
+      return <NoDeploymentsForProject team={team} repo={repo}/>;
     }
 
     // render the deployments
