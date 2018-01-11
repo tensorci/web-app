@@ -172,6 +172,12 @@ input {
   color: inherit;
 }
 
+select {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
 input[type=search] {
   -webkit-appearance: none;
 }
@@ -200,6 +206,16 @@ input[type=checkbox] {
     resize: none;
     box-shadow: none !important;
   }
+}
+
+.main-display {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  -webkit-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
 }
 
 code, pre {
