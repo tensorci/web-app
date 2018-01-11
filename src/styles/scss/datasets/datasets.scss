@@ -7,4 +7,15 @@
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   overflow: hidden;
+
+  .main-body {
+    padding-top: 37px !important;
+  }
+
+  .card-header .dataset-icon {
+    margin-right: 10px;
+    font-size: 16px;
+    position: relative;
+    top: 1px;
+  }
 }

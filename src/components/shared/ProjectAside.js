@@ -18,6 +18,10 @@ class ProjectAside extends Component {
     Ajax.get('/api/repos', { team: this.props.team })
       .then((resp) => resp.json())
       .then((data) => {
+        if (!this.props.repo && this.props.onAutoSelect) {
+          this.props.onAutoSelect(data.repos[0].slug);
+        }
+
         this.setState({
           projects: data.repos || []
         });
@@ -43,7 +47,7 @@ class ProjectAside extends Component {
           <div className={classes}>
             <i className="right-arr fa fa-chevron-right"></i>
             <Link href={projHref} className="project-name">{p.name}</Link>
-            <Link href={editProjHref + '/edit'} className="project-settings-icon">
+            <Link href={editProjHref} className="project-settings-icon">
               <i className="material-icons">settings</i>
             </Link>
           </div>
