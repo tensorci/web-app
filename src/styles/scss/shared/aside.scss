@@ -265,6 +265,31 @@
       text-decoration: underline;
     }
   }
+
+  .proj-list-empty {
+    text-align: center;
+    color: #000;
+    margin: 20px;
+    font-size: 14px;
+
+    .card-body {
+      padding: 20px 15px;
+    }
+
+    a.button:hover {
+      background-color: rgb(232, 232, 232);
+    }
+
+    span > i {
+      margin: 0 5px 0 0;
+    }
+
+    .btn-text {
+      position: relative;
+      top: 1px;
+      font-family: Avenir-Next-Medium;
+    }
+  }
 }
 
 .aside-activity > ul {

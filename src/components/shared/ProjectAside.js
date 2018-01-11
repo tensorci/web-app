@@ -1,36 +1,40 @@
 import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
-import History from '../../utils/History';
 import Link from '../../utils/Link';
 
 class ProjectAside extends Component {
 
   constructor(props) {
     super(props);
+
     this.formatProjectList = this.formatProjectList.bind(this);
+    this.fetchProjects = this.fetchProjects.bind(this);
 
     this.state = {
-      projects: []
+      projects: [],
+      loading: true,
+      team: this.props.team
     };
   }
 
-  componentDidMount() {
-    Ajax.get('/api/repos', { team: this.props.team })
-      .then((resp) => resp.json())
-      .then((data) => {
-        const repos = data.repos || [];
-
-        if (!this.props.repo && this.props.onAutoSelect && repos.length > 0) {
-          this.props.onAutoSelect(repos[0].slug);
-        }
-
-        this.setState({
-          projects: repos
-        });
-      });
-  }
-
   formatProjectList(team, repo, linkPrefix) {
+    if (this.state.projects.length === 0 && !this.state.loading) {
+      return (
+        <div className="proj-list-empty">
+          <div className="card">
+            <div className="card-body">
+              <div>
+                <p>No projects listed?</p>
+                <Link href={'/add-projects/' + team} className="button secondary">
+                  <span><i className="material-icons">library_add</i><span className="btn-text">Add projects</span></span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     var classes, teamRepoHref, projHref, editProjHref;
 
     return this.state.projects.map((p, i) => {
@@ -56,6 +60,35 @@ class ProjectAside extends Component {
         </li>
       );
     });
+  }
+
+  componentDidMount() {
+    this.fetchProjects();
+  }
+
+  componentDidUpdate() {
+    if (this.props.team !== this.state.team) {
+      this.setState({ team: this.props.team, loading: true });
+    } else if (this.state.loading) {
+      this.fetchProjects();
+    }
+  }
+
+  fetchProjects() {
+    Ajax.get('/api/repos', { team: this.state.team })
+      .then((resp) => resp.json())
+      .then((data) => {
+        const repos = data.repos || [];
+
+        if (!this.props.repo && this.props.onAutoSelect && repos.length > 0) {
+          this.props.onAutoSelect(repos[0].slug);
+        }
+
+        this.setState({
+          projects: repos,
+          loading: false
+        });
+      });
   }
 
   render() {
