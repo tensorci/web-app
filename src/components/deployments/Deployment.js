@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
+import Logs from './Logs';
 
 class Deployment extends Component {
 
@@ -105,7 +106,7 @@ class Deployment extends Component {
                     </div>
                     <div className="summary-item">
                       <span className="summary-label">Triggered by:</span>
-                      <a href={'https://github.com/' + commit.author}>{commit.author}</a>
+                      <a href={'https://github.com/' + commit.author} target="_blank" rel="noopener noreferrer">{commit.author}</a>
                     </div>
                   </div>
                 </div>
@@ -116,7 +117,9 @@ class Deployment extends Component {
                       <div className="build-commits">
                         <div className="build-commits-list">
                           <div className="commit-line">
-                            <span className="metadata-item">{commit.author}</span>
+                            <span className="metadata-item">
+                              <a href={'https://github.com/' + commit.author} target="_blank" rel="noopener noreferrer">{commit.author}</a>
+                            </span>
                             <i className="octicon octicon-git-commit"></i>
                             <a href={'https://github.com/' + team + '/' + repo + '/commit/' + commit.sha} className="metadata-item sha-one">{(commit.sha || '').slice(0, 7)}</a>
                             <span className="commit-message">{commit.message}</span>
@@ -128,6 +131,7 @@ class Deployment extends Component {
                 </div>
               </div>
             </div>
+            <Logs team={team} repo={repo} uid={uid}/>
           </div>
         </div>
       </div>

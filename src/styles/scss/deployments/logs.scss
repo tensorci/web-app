@@ -1,0 +1,22 @@
+.log-container {
+  margin-bottom: 15px;
+  margin-top: 15px;
+  padding: 1em;
+}
+
+.action-log-messages {
+  overflow: hidden;
+  width: 100%;
+  background: #212121;
+
+  pre {
+    margin: 0;
+    padding: 1em;
+    border-radius: 0;
+    border: none;
+  }
+
+  .pre {
+    white-space: pre-wrap;
+  }
+}

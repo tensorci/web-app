@@ -94,7 +94,8 @@
       font-family: "Roboto Mono", Monaco, "Courier New", monospace;
     }
 
-    .metadata-item.sha-one {
+    .metadata-item.sha-one,
+    .metadata-item > a {
       color: #27a0b6;
       
       &:hover {
