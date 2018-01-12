@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Ajax from '../../utils/Ajax';
 
 class Logs extends Component {
 
@@ -13,7 +14,24 @@ class Logs extends Component {
   }
 
   componentDidMount() {
-    // stream logs and update state
+    const payload = {
+      git_url: 'https://github.com/' + this.props.team + '/' + this.props.repo + '.git',
+      uid: this.props.uid,
+      follow: true
+    };
+
+    Ajax.get('/api/deployment/logs', payload)
+      .then((resp) => {
+        return resp.body.getReader().read();
+      }).then((result, done) => {
+        if (done) {
+          // ???
+        } else {
+          // do something with each chunk
+          console.log(result);
+          this.setState({ logs: result });
+        }
+      });
   }
 
   getLogs() {
