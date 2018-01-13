@@ -6,9 +6,6 @@
 # testing
 /coverage
 
-# production
-/build
-
 # misc
 .DS_Store
 .env.local
@@ -20,8 +17,8 @@
 
 src/styles/css/*
 
-static.json
-
 .idea/
 
 *.log
+
+package-lock.json

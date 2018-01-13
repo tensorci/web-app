@@ -1,0 +1,26 @@
+{
+  "root": "build/",
+  "https_only": true,
+  "routes": {
+    "/favicon.ico": "/favicon.ico",
+    "/fonts/*": "/fonts/",
+    "/static/*": "/static/",
+    "/**": "/index.html"
+  },
+  "headers": {
+    "/": {
+      "Cache-Control": "no-store, no-cache"
+    },
+    "/fonts/**": {
+      "Cache-Control": "public, max-age=3600"
+    },
+    "/static/**": {
+      "Cache-Control": "public, max-age=31536000"
+    }
+  },
+  "proxies": {
+    "/api/": {
+      "origin": "https://api.tensorci.com/api"
+    }
+  }
+}
