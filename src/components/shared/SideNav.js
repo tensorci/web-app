@@ -24,11 +24,6 @@ class SideNav extends Component {
         name: 'Projects',
         slug: 'projects',
         icon: 'book'
-      },
-      {
-        name: 'Settings',
-        slug: 'settings',
-        icon: 'settings'
       }
     ];
   }
