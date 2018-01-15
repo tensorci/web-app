@@ -103,7 +103,7 @@ class Deployment extends Component {
                     </div>
                     <div className="summary-item">
                       <span className="summary-label">Started:</span>
-                      <span>{this.state.created_at ? timeago().format(this.state.created_at * 1000) : null}</span>
+                      <span>{this.state.createdAt ? timeago().format(this.state.createdAt * 1000) : null}</span>
                     </div>
                     <div className="summary-item">
                       <span className="summary-label">Triggered by:</span>
