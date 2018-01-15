@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
+import DatasetPreview from './DatasetPreview';
 import moment from 'moment';
 import $ from 'jquery';
 
@@ -113,6 +114,9 @@ class Dataset extends Component {
               </tr>
             </tbody>
           </table>
+          <div className="preview-container">
+            <DatasetPreview uid={info.uid}/>
+          </div>
         </div>
       </div>
     );

@@ -1,0 +1,57 @@
+.dataset-preview-container {
+
+  .toggle-preview-btn-container {
+    text-align: center;
+    padding: 6px 0;
+
+    .toggle-dset-preview {
+      position: relative;
+      text-transform: uppercase;
+      padding: 15px;
+      background: transparent;
+      color: #bcbcbc;
+      font-size: 12px;
+      margin: 0 auto;
+      width: 150px;
+      border: none;
+      -webkit-transition: color 0.1s;
+      -moz-transition: color 0.1s;
+      -ms-transition: color 0.1s;
+      -o-transition: color 0.1s;
+      transition: color 0.1s;
+      outline: none;
+
+      &:hover {
+        color: #3dc1d9;
+      }
+
+      i {
+        width: 30px;
+        text-align: center;
+        position: absolute;
+        left: 60px;
+        font-size: 21px;
+        top: 31px;
+      }
+    }
+  }
+
+  .dataset-preview {
+    display: none;
+
+    pre {
+      overflow: auto;
+      max-height: 350px;
+    }
+  }
+
+  &.show {
+    .dataset-preview {
+      display: block;
+    }
+
+    .toggle-dset-preview > i {
+      top: -11px;
+    }
+  }
+}
