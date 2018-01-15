@@ -48,6 +48,7 @@ class Deployment extends Component {
       failed: false,
       canceled: false,
       createdAt: null,
+      triggeredBy: null,
       commit: {}
     };
   }
@@ -61,6 +62,7 @@ class Deployment extends Component {
           failed: data.failed,
           canceled: data.canceled,
           createdAt: data.created_at,
+          triggeredBy: data.triggered_by,
           commit: data.commit
         });
       });
@@ -107,7 +109,7 @@ class Deployment extends Component {
                     </div>
                     <div className="summary-item">
                       <span className="summary-label">Triggered by:</span>
-                      <a href={'https://github.com/' + commit.author} target="_blank" rel="noopener noreferrer">{commit.author}</a>
+                      <a href={'https://github.com/' + this.state.triggeredBy} target="_blank" rel="noopener noreferrer">{this.state.triggeredBy}</a>
                     </div>
                   </div>
                 </div>
