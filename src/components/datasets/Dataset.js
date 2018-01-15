@@ -27,7 +27,7 @@ class Dataset extends Component {
               <tr>
                 <td>{info.num_records}</td>
                 <td>{info.retrain_step_size || 'Not set'}</td>
-                <td>{info.last_train_record_count}</td>
+                <td>{info.last_train_record_count || 'Not trained yet'}</td>
                 <td>{info.created_at}</td>
               </tr>
             </tbody>

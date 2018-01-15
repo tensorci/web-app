@@ -121,7 +121,7 @@ class Deployment extends Component {
                               <a href={'https://github.com/' + commit.author} target="_blank" rel="noopener noreferrer">{commit.author}</a>
                             </span>
                             <i className="octicon octicon-git-commit"></i>
-                            <a href={'https://github.com/' + team + '/' + repo + '/commit/' + commit.sha} className="metadata-item sha-one">{(commit.sha || '').slice(0, 7)}</a>
+                            <a href={'https://github.com/' + team + '/' + repo + '/commit/' + commit.sha} className="metadata-item sha-one" target="_blank" rel="noopener noreferrer">{(commit.sha || '').slice(0, 7)}</a>
                             <span className="commit-message">{commit.message}</span>
                           </div>
                         </div>
