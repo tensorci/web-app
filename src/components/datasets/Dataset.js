@@ -10,7 +10,7 @@ class Dataset extends Component {
     this.getStepSizes = this.getStepSizes.bind(this);
     this.getRetrainStepSize = this.getRetrainStepSize.bind(this);
     
-    this.stepSizeNotSet = this.stepSizeNotSet;
+    this.stepSizeNotSet = 'Never';
   }
   
   getStepSizes() {
@@ -30,22 +30,21 @@ class Dataset extends Component {
   }
 
   getRetrainStepSize(info) {
+    const retrainStepSize = info.retrain_step_size;
+
     // if user has write access to dataset, allow them to edit the retrain step-size
     if (info.has_write_access) {
+      const defaultVal = retrainStepSize ? retrainStepSize.toString() : this.stepSizeNotSet;
+
       return (
-        <select name="select-retrain-ss" className="select-retrain-ss" ref={(ref) => { this.stepSizeSelect = ref; }}>
+        <select name="select-retrain-ss" className="select-retrain-ss" ref={(ref) => { this.stepSizeSelect = ref; }} defaultValue={defaultVal}>
           {this.getStepSizes().map((size, i) => {
-            // if no value set, auto choose the first one. If it is set, choose that value.
-            if ((!info.retrain_step_size && i === 0) || info.retrain_step_size.toString() === size.toString()) {
-              return <option value={size.toString()} key={i} selected>{size}</option>;  
-            } else {
-              return <option value={size.toString()} key={i}>{size}</option>;
-            }
+            return <option value={size.toString()} key={i}>{size}</option>;
           })}
         </select>
       );
     } else {
-      return <span>{info.retrain_step_size || this.stepSizeNotSet}</span>;
+      return <span>{retrainStepSize || this.stepSizeNotSet}</span>;
     }
   }
 
@@ -90,9 +89,9 @@ class Dataset extends Component {
           <div className="title">
             <i className="dataset-icon fa fa-table"></i>
             {info.name}
-            <div className="pull-right">
-              {this.getSaveDatasetBtn(info)}
-            </div>
+          </div>
+          <div className="dataset-actions">
+            {this.getSaveDatasetBtn(info)}
           </div>
         </div>
         <div className="card-body">

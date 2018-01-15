@@ -19,13 +19,28 @@
     top: 1px;
   }
 
+  .dataset-actions {
+    display: -webkit-box;
+    display: box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+  }
+
   .select-retrain-ss {
     margin: 0;
     padding-right: 26px;
     -webkit-appearance: none;
     -moz-appearance: none;
     border: none;
-    background-image: url(https://s3-us-west-1.amazonaws.com/jarvisdev/UI-DropdownArrow.svg);
+    background-image: url(https://s3-us-west-1.amazonaws.com/jarvisdev/UI-DropdownArrow-blue.svg);
     background-size: 12px;
     background-repeat: no-repeat;
     background-position: calc(100% - 10px) calc(50% + 1px);
