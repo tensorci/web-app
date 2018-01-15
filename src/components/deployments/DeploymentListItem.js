@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Link from '../../utils/Link';
+import timeago from 'timeago.js';
 
 class DeploymentListItem extends Component {
 
@@ -94,7 +95,7 @@ class DeploymentListItem extends Component {
           <div className="metadata-row timing">
             <span className="metadata-item recent-time start-time">
               <i className="material-icons">today</i>
-              <span>4 days ago</span>
+              <span>{timeago().format(info.created_at)}</span>
             </span>
             <span className="metadata-item recent-time duration">
               <i className="material-icons">timer</i>

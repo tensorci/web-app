@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
 import Logs from './Logs';
+import timeago from 'timeago.js';
 
 class Deployment extends Component {
 
@@ -102,7 +103,7 @@ class Deployment extends Component {
                     </div>
                     <div className="summary-item">
                       <span className="summary-label">Started:</span>
-                      <span>10:43 ago</span>
+                      <span>{timeago().format(this.state.created_at)}</span>
                     </div>
                     <div className="summary-item">
                       <span className="summary-label">Triggered by:</span>

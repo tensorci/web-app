@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 class Dataset extends Component {
 
@@ -28,7 +29,7 @@ class Dataset extends Component {
                 <td>{info.num_records}</td>
                 <td>{info.retrain_step_size || 'Not set'}</td>
                 <td>{info.last_train_record_count || 'Not trained yet'}</td>
-                <td>{info.created_at}</td>
+                <td>{moment(info.created_at).format('MMMM Do YYYY, h:mm:ss a')}</td>
               </tr>
             </tbody>
           </table>
