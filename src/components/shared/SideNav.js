@@ -16,14 +16,14 @@ class SideNav extends Component {
         icon: 'storage'
       },
       {
-        name: 'Projects',
-        slug: 'projects',
-        icon: 'book'
-      },
-      {
         name: 'Datasets',
         slug: 'datasets',
         icon: 'fa-table'
+      },
+      {
+        name: 'Projects',
+        slug: 'projects',
+        icon: 'book'
       },
       {
         name: 'Settings',
