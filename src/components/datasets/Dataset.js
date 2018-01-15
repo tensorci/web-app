@@ -110,7 +110,7 @@ class Dataset extends Component {
                 <td>{info.num_records}</td>
                 <td>{this.getRetrainStepSize(info)}</td>
                 <td>{info.last_train_record_count || 'Not trained yet'}</td>
-                <td>{moment(info.created_at).format('MMMM Do YYYY, h:mm:ss a')}</td>
+                <td>{info.created_at ? moment(info.created_at * 1000).format('MMMM Do YYYY, h:mm:ss a') : null}</td>
               </tr>
             </tbody>
           </table>
