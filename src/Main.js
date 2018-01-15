@@ -109,6 +109,24 @@ class Main extends Component {
         appSection: 'deployments'
       },
       {
+        path: '/:team/:repo/settings',
+        comp: Dashboard,
+        exact: true,
+        appSection: 'projects',
+        meta: {
+          projectSettings: true
+        }
+      },
+      {
+        path: '/:team/:repo/settings/envs',
+        comp: Dashboard,
+        exact: true,
+        appSection: 'projects',
+        meta: {
+          projectSettings: true
+        }
+      },
+      {
         path: '/:team/:repo/:uid',
         comp: Dashboard,
         exact: true,

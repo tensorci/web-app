@@ -16,7 +16,7 @@ class ProjectsList extends Component {
           </td>
           <td className="shrink right">Yes</td>
           <td className="shrink">
-            <Link href={href + '/edit'}>
+            <Link href={href + '/settings'}>
               <i className="material-icons">settings</i>
             </Link>
           </td>

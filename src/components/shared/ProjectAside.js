@@ -45,7 +45,7 @@ class ProjectAside extends Component {
       }
 
       teamRepoHref = '/' + team + '/' + p.slug;
-      editProjHref = teamRepoHref + '/edit';
+      editProjHref = teamRepoHref + '/settings';
       projHref = linkPrefix + teamRepoHref;
 
       return (

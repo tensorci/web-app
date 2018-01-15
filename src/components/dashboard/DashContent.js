@@ -6,6 +6,7 @@ import Datasets from '../datasets/Datasets';
 import Deployment from '../deployments/Deployment';
 import Deployments from '../deployments/Deployments';
 import Projects from '../projects/Projects';
+import ProjectSettings from '../projects/ProjectSettings';
 import Settings from '../settings/Settings';
 import SetupProject from '../projects/SetupProject';
 
@@ -47,6 +48,8 @@ class DashContent extends Component {
       return <AddProjects team={team}/>;
     } else if (meta.setupProject) {
       return <SetupProject team={team} repo={repo}/>;
+    } else if (meta.projectSettings) {
+      return <ProjectSettings team={team} repo={repo}/>;
     } else {
       return <Projects team={team} repo={repo}/>;
     }
@@ -113,7 +116,7 @@ class DashContent extends Component {
   getActionBtns(appSection, team, meta) {
     var btns = [];
 
-    if (appSection === 'projects' && !meta.addProjects && !meta.setupProject) {
+    if (appSection === 'projects' && !meta.addProjects && !meta.setupProject && !meta.projectSettings) {
       btns.push({
         link: '/add-projects/' + team,
         text: 'Add Project'

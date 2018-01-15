@@ -80,7 +80,7 @@
   }
 }
 
-.aside-user {
+.aside-user, .aside-project {
   -webkit-box-flex: 1;
   box-flex: 1;
   -webkit-flex: 1 0 1px;
@@ -130,7 +130,7 @@
   }
 }
 
-.aside-user-options {
+.aside-user-options, .aside-project-options {
   -webkit-box-flex: 1;
   box-flex: 1;
   -webkit-flex: 1;
