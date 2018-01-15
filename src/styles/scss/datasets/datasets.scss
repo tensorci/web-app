@@ -18,4 +18,20 @@
     position: relative;
     top: 1px;
   }
+
+  .select-retrain-ss {
+    margin: 0;
+    padding-right: 26px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background-image: url(https://s3-us-west-1.amazonaws.com/jarvisdev/UI-DropdownArrow.svg);
+    background-size: 12px;
+    background-repeat: no-repeat;
+    background-position: calc(100% - 10px) calc(50% + 1px);
+    background-color: transparent;
+    cursor: pointer;
+    color: #333;
+    outline: none;
+  }
 }
