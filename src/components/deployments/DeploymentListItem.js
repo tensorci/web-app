@@ -43,6 +43,18 @@ class DeploymentListItem extends Component {
     };
   }
 
+  formatSecDuration(duration) {
+    var seconds = parseInt(duration % 60);
+    var minutes = parseInt((duration / 60) % 60);
+    var hours = parseInt((duration / (60 * 60)) % 24);
+
+    hours = (hours < 10) ? '0' + hours : hours;
+    minutes = (minutes < 10) ? '0' + minutes : minutes;
+    seconds = (seconds < 10) ? '0' + seconds : seconds;
+
+    return hours + ':' + minutes + ':' + seconds;
+  }
+
   render() {
     const team = this.props.team;
     const repo = this.props.repo;
@@ -99,7 +111,7 @@ class DeploymentListItem extends Component {
             </span>
             <span className="metadata-item recent-time duration">
               <i className="material-icons">timer</i>
-              <span>09:08</span>
+              <span>{this.formatSecDuration(info.train_duration_sec)}</span>
             </span>
           </div>
           <div className="metadata-row sha">
