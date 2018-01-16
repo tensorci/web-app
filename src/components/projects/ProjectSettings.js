@@ -19,12 +19,12 @@ class ProjectSettings extends Component {
       {
         href: baseLink,
         text: 'Credentials',
-        comp: <ProjectCreds/>
+        comp: <ProjectCreds team={team} repo={repo}/>
       },
       {
         href: baseLink + '/envs',
         text: 'Environment Variables',
-        comp: <ProjectEnvs/>
+        comp: <ProjectEnvs team={team} repo={repo}/>
       }
     ];
   }

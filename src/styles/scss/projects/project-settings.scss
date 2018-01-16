@@ -10,5 +10,48 @@
 
   .project-settings-inner {
     width: 100%;
+
+    a {
+      color: #3dc1d9;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .form {
+      padding: 5px 0;
+    }
+
+    input.cred {
+      pointer-events: none;
+      display: inline-block;
+      width: 415px;
+      padding: 11px;
+      line-height: 18px;
+      background: #e6e6e9;
+      border-radius: 3px;
+      border: none;
+      outline: none;
+    }
+
+    .cred-action-btn {
+      padding: 10px 0;
+      margin: 0 9px;
+      font-size: 12px;
+      color: #3dc1d9;
+      background: none;
+      border: none;
+      outline: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    input.cred + .cred-action-btn {
+      margin-left: 15px;
+    }
   }
 }
