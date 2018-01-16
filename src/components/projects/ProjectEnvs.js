@@ -9,7 +9,8 @@ class ProjectEnvs extends Component {
           <legend>Environment Variables</legend>
           <div className="card">
             <div className="card-body">
-              <p>Some lead in text about what these can be used for and when they're pulled, etc.</p>
+              <p>Configure environment variables for your project.</p>
+              <p>Coming soon.</p>
             </div>
           </div>
         </div>
