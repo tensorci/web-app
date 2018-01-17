@@ -107,7 +107,7 @@ class DeploymentListItem extends Component {
           <div className="metadata-row timing">
             <span className="metadata-item recent-time start-time">
               <i className="material-icons">today</i>
-              <span>{info.created_at ? timeago().format(info.created_at * 1000) : null}</span>
+              <span>{info.date ? timeago().format(info.date * 1000) : null}</span>
             </span>
             <span className="metadata-item recent-time duration">
               <i className="material-icons">timer</i>

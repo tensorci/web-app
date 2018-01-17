@@ -47,7 +47,7 @@ class Deployment extends Component {
       status: null,
       failed: false,
       canceled: false,
-      createdAt: null,
+      date: null,
       triggeredBy: null,
       commit: {}
     };
@@ -61,7 +61,7 @@ class Deployment extends Component {
           status: data.status,
           failed: data.failed,
           canceled: data.canceled,
-          createdAt: data.created_at,
+          date: data.date,
           triggeredBy: data.triggered_by,
           commit: data.commit
         });
@@ -105,7 +105,7 @@ class Deployment extends Component {
                     </div>
                     <div className="summary-item">
                       <span className="summary-label">Started:</span>
-                      <span>{this.state.createdAt ? timeago().format(this.state.createdAt * 1000) : null}</span>
+                      <span>{this.state.date ? timeago().format(this.state.date * 1000) : null}</span>
                     </div>
                     <div className="summary-item">
                       <span className="summary-label">Triggered by:</span>
