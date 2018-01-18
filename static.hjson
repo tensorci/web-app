@@ -8,17 +8,7 @@
      "/**": "/index.html"
   },
   "headers": {
-    // Don't cache index.html or favicon.ico. We may want to change those.
-    "/": {
-      "Cache-Control": "no-store, no-cache"
-    },
-    // Fonts should never change, but only cache for an hour just to be safe.
-    "/fonts/**": {
-      "Cache-Control": "public, max-age=3600"
-    },
-    // Every file in /static/ should contain a hash of its contents in its
-    // name.  Cache for as long as possible.
-    "/static/**": {
+    "/**": {
       "Cache-Control": "no-store, no-cache"
     }
   },

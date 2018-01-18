@@ -8,13 +8,7 @@
     "/**": "/index.html"
   },
   "headers": {
-    "/": {
-      "Cache-Control": "no-store, no-cache"
-    },
-    "/fonts/**": {
-      "Cache-Control": "public, max-age=3600"
-    },
-    "/static/**": {
+    "/**": {
       "Cache-Control": "no-store, no-cache"
     }
   },
