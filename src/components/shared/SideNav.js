@@ -16,6 +16,12 @@ class SideNav extends Component {
         icon: 'storage'
       },
       {
+        name: 'Predictions',
+        slug: 'predictions',
+        icon: 'prediction',
+        cssIcon: true
+      },
+      {
         name: 'Datasets',
         slug: 'datasets',
         icon: 'fa-table'
@@ -46,6 +52,8 @@ class SideNav extends Component {
 
       if (link.icon.startsWith('fa-')) {
         icon = <i className={'fa ' + link.icon}></i>;
+      } else if (link.cssIcon) {
+        icon = <i className={'bk-image-icon ' + link.icon}></i>;
       } else {
         icon = <i className="material-icons">{link.icon}</i>;
       }

@@ -35,6 +35,19 @@
     color: inherit;
     font-size: 24px;
     transition: 100ms ease-in-out;
+
+    &.bk-image-icon {
+      background-size: cover;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      width: 22px;
+      height: 22px;
+      opacity: 0.95;
+
+      &.prediction {
+        background-image: url(https://s3-us-west-1.amazonaws.com/jarvisdev/prediction-white.svg);
+      }
+    }
   }
 
   .nav-label {
@@ -83,6 +96,10 @@
 
     i {
       opacity: 1;
+
+      &.prediction {
+        background-image: url(https://s3-us-west-1.amazonaws.com/jarvisdev/prediction-gray.svg);
+      }
     }
   }
 }
@@ -90,6 +107,11 @@
 @media screen and (max-height: 650px) {
   .aside-item > i {
     font-size: 18px;
+
+    &.bk-image-icon {
+      width: 18px;
+      height: 18px;
+    }
   }
 
   .aside-item .nav-label {

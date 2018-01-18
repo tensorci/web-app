@@ -5,6 +5,7 @@ import BreadCrumbs from '../shared/BreadCrumbs';
 import Datasets from '../datasets/Datasets';
 import Deployment from '../deployments/Deployment';
 import Deployments from '../deployments/Deployments';
+import Predictions from '../predictions/Predictions';
 import Projects from '../projects/Projects';
 import ProjectSettings from '../projects/ProjectSettings';
 import Settings from '../settings/Settings';
@@ -35,6 +36,10 @@ class DashContent extends Component {
       account: {
         name: 'User',
         comp: this.getAccountComp
+      },
+      predictions: {
+        name: 'Predictions',
+        comp: this.getPredictionsComp
       }
     };
   }
@@ -65,6 +70,10 @@ class DashContent extends Component {
 
   getAccountComp(team, repo, uid, meta) {
     return <Account/>;
+  }
+
+  getPredictionsComp(team, repo, uid, meta) {
+    return <Predictions team={team} repo={repo}/>;
   }
 
   createBreadCrumbPath(appSection, appSectionName, team, repo, uid, meta) {

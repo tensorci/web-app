@@ -97,6 +97,18 @@ class Main extends Component {
         appSection: 'settings'
       },
       {
+        path: '/predictions/:team',
+        comp: Dashboard,
+        exact: true,
+        appSection: 'predictions'
+      },
+      {
+        path: '/predictions/:team/:repo',
+        comp: Dashboard,
+        exact: true,
+        appSection: 'predictions'
+      },
+      {
         path: '/:team',
         comp: Dashboard,
         exact: true,
