@@ -88,11 +88,16 @@
         padding: 10px 20px;
         white-space: normal;
         color: #212121;
-        transition: none;
+        transition: all .1s ease-in-out;
 
         .heading {
           font-family: Avenir-Next-DemiBold;
           padding: 2px 0;
+        }
+
+        &:hover {
+          background-color: #27A3B6;
+          color: #fbfbfb;
         }
       }
     }
@@ -213,13 +218,13 @@
       border-bottom: 1px solid #eee;
       color: #212121;
       padding: 6px 20px 6px 6px;
+      transition: all .1s ease-in-out;
 
       .team-icon-and-name {
         .leading-dot {
           padding-right: 5px;
           color: transparent;
           vertical-align: middle;
-          transition: color .3s ease-in-out;
         }
 
         .team-icon {
@@ -265,6 +270,17 @@
 
         .leading-dot, .provider-icon {
           color: #212121;
+        }
+      }
+
+      &:hover:not(.switch-team-text) {
+        background-color: #27A3B6;
+        color: #fbfbfb;
+        border-bottom: 1px solid #27A3B6;
+
+        .provider-icon,
+        .leading-dot {
+          color: #fbfbfb;
         }
       }
     }
