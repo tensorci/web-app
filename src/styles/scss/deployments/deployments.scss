@@ -32,8 +32,8 @@
 .status-area {
   -webkit-box-flex: 0;
   box-flex: 0;
-  -webkit-flex: 0 0 130px;
-  flex: 0 0 130px;
+  -webkit-flex: 0 0 197px;
+  flex: 0 0 197px;
   padding: 7px 6px;
   border-right: 1px solid rgba(0,0,0,0.05);
 }
@@ -55,6 +55,7 @@
   min-width: 118px;
   border-radius: 12.5px;
   color: #fff;
+  padding: 3px 9px 3px 7px;
   text-align: left;
 
   &.running {
