@@ -43,7 +43,12 @@ class Sess {
   }
 
   setCookie(name, value) {
-    this.cookies.set(name, value, { path: '/' });
+    const days_til_expiration = 30;
+
+    var date = new Date();
+    date.setTime(date.getTime() + (days_til_expiration * 24 * 60 * 60 * 1000));
+
+    this.cookies.set(name, value, { path: '/', expires: date });
   }
 
   deleteCookie(name) {
