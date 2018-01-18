@@ -1,47 +1,9 @@
 import React, { Component } from 'react';
+import DeploymentStatusBadge from './DeploymentStatusBadge';
 import Link from '../../utils/Link';
 import timeago from 'timeago.js';
 
 class DeploymentListItem extends Component {
-
-  constructor(props) {
-    super(props);
-
-    this.statusStyleMap = {
-      created: {
-        text: 'Building',
-        icon: 'fa fa-circle'
-      },
-      train_building: {
-        text: 'Building',
-        icon: 'fa fa-circle'
-      },
-      train_building_done: {
-        text: 'Deploying to train',
-        icon: 'fa fa-circle'
-      },
-      training: {
-        text: 'Training',
-        icon: 'fa fa-circle'
-      },
-      training_done: {
-        text: 'Done Training',
-        icon: 'fa fa-circle'
-      },
-      api_building: {
-        text: 'Building',
-        icon: 'fa fa-circle'
-      },
-      api_building_done: {
-        text: 'Deploying to API',
-        icon: 'fa fa-circle'
-      },
-      predicting: {
-        text: 'Predicting',
-        icon: 'fa fa-check'
-      }
-    };
-  }
 
   formatSecDuration(duration) {
     var seconds = parseInt(duration % 60);
@@ -60,32 +22,14 @@ class DeploymentListItem extends Component {
     const repo = this.props.repo;
     const info = this.props.info || {};
     const commit = info.commit || {};
-    const statusStyle = this.statusStyleMap[info.status] || {};
-
-    var statusClass = info.status;
-    var statusIcon = statusStyle.icon;
-    var statusText = statusStyle.text;
-
-    if (info.failed) {
-      statusClass = 'failed';
-      statusIcon = 'fa fa-exclamation';
-      statusText = 'Failed';
-    } else if (info.canceled) {
-      statusClass = 'canceled';
-      statusIcon = 'fa fa-minus';
-      statusText = 'Canceled';
-    }
 
     const deploymentLink = '/' + team + '/' + repo + '/' + info.uid;
 
     return (
-      <div className={'deployment ' + statusClass}>
+      <div className="deployment">
         <div className="status-area">
           <Link href={deploymentLink}>
-            <div className={'badge ' + statusClass}>
-              <i className={'status-icon ' + statusIcon}></i>
-              <div className="badge-label">{statusText}</div>
-            </div>
+            <DeploymentStatusBadge status={info.readable_status} failed={info.failed} succeeded={info.succeeded}/>
           </Link>
         </div>
         <div className="commit-info">
@@ -107,7 +51,7 @@ class DeploymentListItem extends Component {
           <div className="metadata-row timing">
             <span className="metadata-item recent-time start-time">
               <i className="material-icons">today</i>
-              <span>{info.created_at ? timeago().format(info.created_at * 1000) : null}</span>
+              <span>{info.date ? timeago().format(info.date * 1000) : null}</span>
             </span>
             <span className="metadata-item recent-time duration">
               <i className="material-icons">timer</i>

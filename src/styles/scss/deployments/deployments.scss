@@ -57,6 +57,14 @@
   color: #fff;
   text-align: left;
 
+  &.running {
+    background: #66d3e4;
+
+    .status-icon {
+      color: #66d3e4;
+    }
+  }
+
   &.failed {
     background: #ed5c5c;
 
@@ -65,75 +73,11 @@
     }
   }
 
-  &.created {
-    background: #66d3e4;
-
-    .status-icon {
-      color: #66d3e4;
-    }
-  }
-
-  &.train_building {
-    background: #66d3e4;
-
-    .status-icon {
-      color: #66d3e4;
-    }
-  }
-
-  &.train_building_done {
-    background: #66d3e4;
-
-    .status-icon {
-      color: #66d3e4;
-    }
-  }
-
-  &.training {
-    background: #66d3e4;
-
-    .status-icon {
-      color: #66d3e4;
-    }
-  }
-
-  &.training_done {
-    background: #66d3e4;
-
-    .status-icon {
-      color: #66d3e4;
-    }
-  }
-
-  &.api_building {
-    background: #66d3e4;
-
-    .status-icon {
-      color: #66d3e4;
-    }
-  }
-
-  &.api_building_done {
-    background: #66d3e4;
-
-    .status-icon {
-      color: #66d3e4;
-    }
-  }
-
-  &.predicting {
+  &.succeeded {
     background: #42c88a;
 
     .status-icon {
       color: #42c88a;
-    }
-  }
-
-  &.canceled {
-    background: #898989;
-
-    .status-icon {
-      color: #898989;
     }
   }
 }

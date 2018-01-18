@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
+import DeploymentStatusBadge from './DeploymentStatusBadge';
 import Logs from './Logs';
 import timeago from 'timeago.js';
 
@@ -8,46 +9,11 @@ class Deployment extends Component {
   constructor(props) {
     super(props);
 
-    this.statusStyleMap = {
-      created: {
-        text: 'Building',
-        icon: 'fa fa-circle'
-      },
-      train_building: {
-        text: 'Building',
-        icon: 'fa fa-circle'
-      },
-      train_building_done: {
-        text: 'Deploying to train',
-        icon: 'fa fa-circle'
-      },
-      training: {
-        text: 'Training',
-        icon: 'fa fa-circle'
-      },
-      training_done: {
-        text: 'Done Training',
-        icon: 'fa fa-circle'
-      },
-      api_building: {
-        text: 'Building',
-        icon: 'fa fa-circle'
-      },
-      api_building_done: {
-        text: 'Deploying to API',
-        icon: 'fa fa-circle'
-      },
-      predicting: {
-        text: 'Predicting',
-        icon: 'fa fa-check'
-      }
-    };
-
     this.state = {
       status: null,
       failed: false,
-      canceled: false,
-      createdAt: null,
+      succeeded: false,
+      date: null,
       triggeredBy: null,
       commit: {}
     };
@@ -58,10 +24,10 @@ class Deployment extends Component {
       .then((resp) => resp.json())
       .then((data) => {
         this.setState({
-          status: data.status,
+          status: data.readable_status,
           failed: data.failed,
-          canceled: data.canceled,
-          createdAt: data.created_at,
+          succeeded: data.succeeded,
+          date: data.date,
           triggeredBy: data.triggered_by,
           commit: data.commit
         });
@@ -73,21 +39,6 @@ class Deployment extends Component {
     const repo = this.props.repo;
     const uid = this.props.uid;
     const commit = this.state.commit;
-    const statusStyle = this.statusStyleMap[this.state.status] || {};
-
-    var statusClass = this.state.status;
-    var statusIcon = statusStyle.icon;
-    var statusText = statusStyle.text;
-
-    if (this.state.failed) {
-      statusClass = 'failed';
-      statusIcon = 'fa fa-exclamation';
-      statusText = 'Failed';
-    } else if (this.state.canceled) {
-      statusClass = 'canceled';
-      statusIcon = 'fa fa-minus';
-      statusText = 'Canceled';
-    }
 
     return (
       <div id="deployment" className="main-body">
@@ -98,14 +49,11 @@ class Deployment extends Component {
                 <div className="summary-header">
                   <div className="build-head-summary-header">
                     <div className="summary-item">
-                      <div className={'badge ' + statusClass}>
-                        <i className={'status-icon ' + statusIcon}></i>
-                        <div className="badge-label">{statusText}</div>
-                      </div>
+                      <DeploymentStatusBadge status={this.state.status} failed={this.state.failed} succeeded={this.state.succeeded}/>
                     </div>
                     <div className="summary-item">
                       <span className="summary-label">Started:</span>
-                      <span>{this.state.createdAt ? timeago().format(this.state.createdAt * 1000) : null}</span>
+                      <span>{this.state.date ? timeago().format(this.state.date * 1000) : null}</span>
                     </div>
                     <div className="summary-item">
                       <span className="summary-label">Triggered by:</span>
