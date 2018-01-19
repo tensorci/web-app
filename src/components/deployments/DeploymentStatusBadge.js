@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class DeploymentStatusBadge extends Component {
   render() {
-    const status = this.props.status;
+    var status = this.props.status;
     const failed = this.props.failed;
     const succeeded = this.props.succeeded;
 
@@ -12,6 +12,7 @@ class DeploymentStatusBadge extends Component {
     if (failed) {
       badgeClasses.push('failed');
       iconClasses.push('fa-exclamation');
+      status = 'Failed';
     } else if (succeeded) {
       badgeClasses.push('succeeded');
       iconClasses.push('fa-check');
