@@ -34,6 +34,10 @@ class LogStage extends Component {
   }
 
   render() {
+    const detailWrapperStyle = {
+      height: (this.state.current && !this.parent) || (this.parent && $(this.parent).hasClass('open')) ? 'auto' : 0
+    };
+
     return (
       <div className="build-output">
         <div className={'action-header contents' + (this.state.current ? ' open' : '') + (this.state.success ? ' success' : '')} ref={(r) => { this.parent = r; }}>
@@ -46,7 +50,7 @@ class LogStage extends Component {
                 <span className="stage-name">{this.state.name}</span>
               </div>
             </div>
-            <div className="detail-wrapper" ref={(r) => { this.wrapperRef = r; }}>
+            <div className="detail-wrapper" style={detailWrapperStyle} ref={(r) => { this.wrapperRef = r; }}>
               <div className={'detail contents' + (this.state.success ? ' success' : '')}>
                 <div className="action-log-messages">
                   <pre className="output">
