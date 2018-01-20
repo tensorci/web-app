@@ -16,7 +16,7 @@ class StatusStage extends Component {
           <div className="ah-wrapper">
             <div className="header contents">
               <div className="button contents">
-                <i class="fa fa-success stage-status-icon"></i>
+                <i className="fa fa-success stage-status-icon"></i>
               </div>
               <div className="command contents">
                 <span className="stage-name">{this.state.name}</span>
