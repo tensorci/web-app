@@ -65,7 +65,9 @@ class DeploymentStages extends Component {
     const currentStage = this.props.currentStage;
 
     return (
-      <div className="deployment-stages">{this.formatStages(stages, currentStage)}</div>
+      <div className="card col-sm-12">
+        <div className="build-steps-animator">{this.formatStages(stages, currentStage)}</div>
+      </div>
     );
   }
 }
