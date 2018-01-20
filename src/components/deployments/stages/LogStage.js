@@ -43,7 +43,7 @@ class LogStage extends Component {
           <div className="ah-wrapper">
             <div className="header contents">
               <div className="button contents">
-                <i className="fa fa-chevron-right right-arrow"></i>
+                <i className="fa fa-chevron-right right-arrow" onClick={() => { this.setState({ open: !this.state.open }); }}></i>
               </div>
               <div className="command contents">
                 <span className="stage-name">{this.state.name}</span>
