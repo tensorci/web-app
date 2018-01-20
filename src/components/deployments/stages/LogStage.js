@@ -42,9 +42,9 @@ class LogStage extends Component {
       <div className="build-output">
         <div className={'action-header contents' + (this.state.current ? ' open' : '') + (this.state.success ? ' success' : '')} ref={(r) => { this.parent = r; }}>
           <div className="ah-wrapper">
-            <div className="header contents">
+            <div className="header contents" onClick={this.toggleHeight}>
               <div className="button contents">
-                <i className="fa fa-chevron-right right-arrow" onClick={this.toggleHeight}></i>
+                <i className="fa fa-chevron-right right-arrow"></i>
               </div>
               <div className="command contents">
                 <span className="stage-name">{this.state.name}</span>
