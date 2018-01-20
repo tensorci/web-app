@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
-import DeploymentStatusBadge from './DeploymentStatusBadge';
 import DeploymentStages from './DeploymentStages';
+import DeploymentStatusBadge from './DeploymentStatusBadge';
 import timeago from 'timeago.js';
 
 class Deployment extends Component {

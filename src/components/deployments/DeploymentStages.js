@@ -50,8 +50,12 @@ class DeploymentStages extends Component {
     var stage, comp;
     var stageComps = [];
 
+    console.log('this.state.stages = ', this.state.stages);
+
     this.orderedStages.forEach((stageSlug, i) => {
       stage = this.state.stages[stageSlug];
+
+      console.log(stageSlug, stage);
 
       if (stage && stage.show) {
         comp = this.compForStage(stageSlug, stage, stageSlug === this.state.currentStage, i);
