@@ -26,10 +26,10 @@ class LogStage extends Component {
 
     if ($parent.hasClass('open')) {
       $parent.removeClass('open');
-      $el.animate({ height: 0 }, 200 );
+      $el.animate({ height: 0 }, 600 );
     } else {
       $parent.addClass('open');
-      $el.animate({ height: $el.get(0).scrollHeight }, 200 );
+      $el.animate({ height: $el.get(0).scrollHeight }, 600 );
     }
   }
 
