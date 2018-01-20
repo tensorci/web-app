@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
 import DeploymentStatusBadge from './DeploymentStatusBadge';
-import Logs from './Logs';
+import DeploymentStages from './DeploymentStages';
 import timeago from 'timeago.js';
 
 class Deployment extends Component {
@@ -15,7 +15,9 @@ class Deployment extends Component {
       succeeded: false,
       date: null,
       triggeredBy: null,
-      commit: {}
+      commit: {},
+      currentStage: null,
+      stages: {}
     };
   }
 
@@ -29,7 +31,9 @@ class Deployment extends Component {
           succeeded: data.succeeded,
           date: data.date,
           triggeredBy: data.triggered_by,
-          commit: data.commit
+          commit: data.commit || {},
+          currentStage: data.current_stage,
+          stages: data.stages || {}
         });
       });
   }
@@ -37,7 +41,6 @@ class Deployment extends Component {
   render() {
     const team = this.props.team;
     const repo = this.props.repo;
-    const uid = this.props.uid;
     const commit = this.state.commit;
 
     return (
@@ -82,7 +85,7 @@ class Deployment extends Component {
                 </div>
               </div>
             </div>
-            <Logs team={team} repo={repo} uid={uid}/>
+            <DeploymentStages stages={this.state.stages} currentStage={this.state.currentStage}/>
           </div>
         </div>
       </div>
