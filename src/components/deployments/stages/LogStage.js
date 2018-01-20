@@ -9,6 +9,8 @@ class LogStage extends Component {
     this.getLogs = this.getLogs.bind(this);
     this.toggleHeight = this.toggleHeight.bind(this);
 
+    this.slideDuration = 250;
+
     this.state = this.props.data || {};
     this.state.current = this.props.current || false;
     this.state.success = true;
@@ -26,10 +28,10 @@ class LogStage extends Component {
 
     if ($parent.hasClass('open')) {
       $parent.removeClass('open');
-      $el.animate({ height: 0 }, 300 );
+      $el.animate({ height: 0 }, this.slideDuration );
     } else {
       $parent.addClass('open');
-      $el.animate({ height: $el.get(0).scrollHeight }, 300 );
+      $el.animate({ height: $el.get(0).scrollHeight }, this.slideDuration );
     }
   }
 
