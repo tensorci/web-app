@@ -39,11 +39,11 @@ class LogStage extends Component {
     var statusClass = '';
 
     if (this.state.succeeded) {
-      statusClass = 'success';
+      statusClass = ' success';
     } else if (this.state.failed) {
-      statusClass = 'failed';
+      statusClass = ' failed';
     } else if (this.state.current) {
-      statusClass = 'running';
+      statusClass = ' running';
     }
 
     return statusClass;
