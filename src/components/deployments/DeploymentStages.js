@@ -18,11 +18,6 @@ class DeploymentStages extends Component {
       'predicting_scheduled',
       'predicting'
     ];
-
-    this.state = {
-      stages: this.props.stages || {},
-      currentStage: this.props.currentStage
-    };
   }
 
   compForStage(stageSlug, stage, isCurrentStage, i) {
@@ -46,19 +41,15 @@ class DeploymentStages extends Component {
     }
   }
 
-  formatStages() {
+  formatStages(stages, currentStage) {
     var stage, comp;
     var stageComps = [];
 
-    console.log('this.state.stages = ', this.state.stages);
-
     this.orderedStages.forEach((stageSlug, i) => {
-      stage = this.state.stages[stageSlug];
-
-      console.log(stageSlug, stage);
+      stage = stages[stageSlug];
 
       if (stage && stage.show) {
-        comp = this.compForStage(stageSlug, stage, stageSlug === this.state.currentStage, i);
+        comp = this.compForStage(stageSlug, stage, stageSlug === currentStage, i);
 
         if (comp) {
           stageComps.push(comp);
@@ -70,8 +61,11 @@ class DeploymentStages extends Component {
   }
 
   render() {
+    const stages = this.props.stages;
+    const currentStage = this.props.currentStage;
+
     return (
-      <div className="deployment-stages">{this.formatStages()}</div>
+      <div className="deployment-stages">{this.formatStages(stages, currentStage)}</div>
     );
   }
 }
