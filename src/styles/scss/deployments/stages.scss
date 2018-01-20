@@ -40,6 +40,28 @@
       &.contents {
         cursor: pointer;
       }
+
+      &.status-stage {
+        i {
+          font-size: 35px;
+          margin-left: 10px;
+
+          &.success {
+            color: #42c88a;
+          }
+        }
+
+        .stage-name {
+          color: #42c88a;
+          padding-left: 22px;
+          font-size: 18px;
+          font-family: Avenir-Next-Regular;
+        }
+
+        .command {
+          line-height: 4em;
+        }
+      }
     }
 
     .button {
@@ -66,8 +88,6 @@
       height: inherit;
       overflow: hidden;
       line-height: 3em;
-
-
     }
   }
 

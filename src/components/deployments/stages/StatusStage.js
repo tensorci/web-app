@@ -9,13 +9,19 @@ class StatusStage extends Component {
     this.state.success = true;
   }
 
+  getIcon() {
+    if (this.state.success) {
+      return <i className="material-icons success">check_circle</i>;
+    }
+  }
+
   render() {
     return (
       <div className="build-output">
         <div className={'action-header contents' + (this.state.success ? ' success' : '')}>
           <div className="ah-wrapper">
-            <div className="header contents">
-              <div className="button contents">
+            <div className="header contents status-stage">
+              <div className="button contents">{this.getIcon()}
                 <i className="fa fa-success stage-status-icon"></i>
               </div>
               <div className="command contents">

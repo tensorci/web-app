@@ -66,12 +66,7 @@ class DeploymentStages extends Component {
 
     return (
       <div className="card col-sm-12 deployment-stages">
-        <div className="build-steps-animator">
-          <div className="build-steps-type-divider">
-            <span>Deploy Process</span>
-          </div>
-          <div className="build-steps">{this.formatStages(stages, currentStage)}</div>
-        </div>
+        <div className="build-steps">{this.formatStages(stages, currentStage)}</div>
       </div>
     );
   }
