@@ -32,7 +32,7 @@ class LogStage extends Component {
 
   getLogs() {
     return this.state.logs.map((line, i) => {
-      return <span key={i} className="white">{line}</span>;
+      return <div key={i} className="log-msg white">{line}</div>;
     });
   }
 
@@ -43,7 +43,7 @@ class LogStage extends Component {
           <div className="ah-wrapper">
             <div className="header contents">
               <div className="button contents">
-                <i class="fa fa-chevron-right right-arrow"></i>
+                <i className="fa fa-chevron-right right-arrow"></i>
               </div>
               <div className="command contents">
                 <span className="stage-name">{this.state.name}</span>
