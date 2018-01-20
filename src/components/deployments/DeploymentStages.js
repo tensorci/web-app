@@ -8,6 +8,7 @@ class DeploymentStages extends Component {
     super(props);
 
     this.formatStages = this.formatStages.bind(this);
+    this.heardStageUpdate = this.heardStageUpdate.bind(this);
 
     this.orderedStages = [
       'train_building',
@@ -23,19 +24,19 @@ class DeploymentStages extends Component {
   compForStage(stageSlug, stage, isCurrentStage, i) {
     switch (stageSlug) {
     case 'train_building':
-      return <LogStage data={stage} current={isCurrentStage} key={i}/>;
+      return <LogStage data={stage} current={isCurrentStage} key={i} ref={(r) => { this.train_building = r; }}/>;
     case 'training_scheduled':
-      return <LogStage data={stage} current={isCurrentStage} key={i}/>;
+      return <LogStage data={stage} current={isCurrentStage} key={i} ref={(r) => { this.training_scheduled = r; }}/>;
     case 'training':
-      return <LogStage data={stage} current={isCurrentStage} key={i}/>;
+      return <LogStage data={stage} current={isCurrentStage} key={i} ref={(r) => { this.training = r; }}/>;
     case 'training_done':
-      return <StatusStage data={stage} current={isCurrentStage} key={i}/>;
+      return <StatusStage data={stage} current={isCurrentStage} key={i} ref={(r) => { this.training_done = r; }}/>;
     case 'api_building':
-      return <LogStage data={stage} current={isCurrentStage} key={i}/>;
+      return <LogStage data={stage} current={isCurrentStage} key={i} ref={(r) => { this.api_building = r; }}/>;
     case 'predicting_scheduled':
-      return <LogStage data={stage} current={isCurrentStage} key={i}/>;
+      return <LogStage data={stage} current={isCurrentStage} key={i} ref={(r) => { this.predicting_scheduled = r; }}/>;
     case 'predicting':
-      return <StatusStage data={stage} current={isCurrentStage} key={i}/>;
+      return <StatusStage data={stage} current={isCurrentStage} key={i} ref={(r) => { this.predicting = r; }}/>;
     default:
       return null;
     }
@@ -58,6 +59,15 @@ class DeploymentStages extends Component {
     });
 
     return stageComps;
+  }
+
+  heardStageUpdate(data) {
+    // set new state on the stages that were updated
+    for (var stage in data) {
+      if (this[stage]) {
+        this[stage].setState(data[stage]);
+      }
+    }
   }
 
   render() {
