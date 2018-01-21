@@ -23,19 +23,19 @@ class DeploymentStages extends Component {
   compForStage(stageSlug, stage, isCurrentStage, i) {
     switch (stageSlug) {
     case 'train_building':
-      return <LogStage data={stage} current={isCurrentStage} key={i} ref={(r) => { this.train_building = r; }}/>;
+      return <LogStage data={stage} current={isCurrentStage} key={i}/>;
     case 'training_scheduled':
-      return <LogStage data={stage} current={isCurrentStage} key={i} ref={(r) => { this.training_scheduled = r; }}/>;
+      return <LogStage data={stage} current={isCurrentStage} key={i}/>;
     case 'training':
-      return <LogStage data={stage} current={isCurrentStage} key={i} ref={(r) => { this.training = r; }}/>;
+      return <LogStage data={stage} current={isCurrentStage} key={i}/>;
     case 'training_done':
-      return <StatusStage data={stage} current={isCurrentStage} key={i} ref={(r) => { this.training_done = r; }}/>;
+      return <StatusStage data={stage} current={isCurrentStage} key={i}/>;
     case 'api_building':
-      return <LogStage data={stage} current={isCurrentStage} key={i} ref={(r) => { this.api_building = r; }}/>;
+      return <LogStage data={stage} current={isCurrentStage} key={i}/>;
     case 'predicting_scheduled':
-      return <LogStage data={stage} current={isCurrentStage} key={i} ref={(r) => { this.predicting_scheduled = r; }}/>;
+      return <LogStage data={stage} current={isCurrentStage} key={i}/>;
     case 'predicting':
-      return <StatusStage data={stage} current={isCurrentStage} key={i} ref={(r) => { this.predicting = r; }}/>;
+      return <StatusStage data={stage} current={isCurrentStage} key={i}/>;
     default:
       return null;
     }
