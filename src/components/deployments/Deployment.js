@@ -98,7 +98,7 @@ class Deployment extends Component {
                 </div>
               </div>
             </div>
-            <DeploymentStages stages={this.stages} currentStage={this.currentStage} ref={(r) => { this.stagesRef = r; }}/>
+            <DeploymentStages stages={this.state.stages} currentStage={this.state.currentStage}/>
           </div>
         </div>
       </div>
