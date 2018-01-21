@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 
 class Form extends Component {
 
@@ -14,12 +14,11 @@ class Form extends Component {
 
     this.state = {
       status: this.status.STATIC,
-      formComps: this.props.formComps
+      values: this.props.values
     };
 
     this.formCompRefs = [];
     this.pushFormCompRef = this.pushFormCompRef.bind(this);
-    this.clear = this.clear.bind(this);
     this.serialize = this.serialize.bind(this);
   }
 
@@ -30,8 +29,8 @@ class Form extends Component {
   formValid() {
     var isValid = true;
 
-    this.formCompRefs.forEach((formComp) => {
-      if (!formComp.isValid()) {
+    this.formCompRefs.forEach((ref) => {
+      if (!ref.isValid()) {
         isValid = false;
       }
     });
@@ -39,21 +38,18 @@ class Form extends Component {
     return isValid;
   }
   
-  clear() {
-    this.formCompRefs.forEach((formComp) => {
-      formComp.clear();
-    });
-  }
-
-  serialize() {
-    var formComps = this.formCompRefs.map((ref) => {
+  serialize(inPlace) {
+    const values = this.formCompRefs.map((ref) => {
       return ref.serialize();
     });
 
-    this.setState({
-      status: this.status.SERIALIZING,
-      formComps: formComps
-    });
+    var updates = { values: values };
+
+    if (!inPlace) {
+      updates.status = this.status.SERIALIZING;
+    }
+
+    this.setState(updates);
   }
 }
 

@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import Envs from './Envs';
 
 class ProjectEnvs extends Component {
 
   render() {
+    const team = this.props.team;
+    const repo = this.props.repo;
+
     return (
       <div className="main-content">
         <div className="project-settings-inner">
@@ -10,7 +14,7 @@ class ProjectEnvs extends Component {
           <div className="card">
             <div className="card-body">
               <p>Configure environment variables for your project.</p>
-              <p>Coming soon.</p>
+              <Envs team={team} repo={repo}/>
             </div>
           </div>
         </div>

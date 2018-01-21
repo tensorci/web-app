@@ -66,7 +66,7 @@ class DeploymentStages extends Component {
   getBuildActionBtn(currentStage, intent) {
     // if done training and there was only the intent to train, show the serve button.
     if (currentStage === stages.DONE_TRAINING && intent === intents.TRAIN && this.props.serve) {
-      return <button className="primary" onClick={this.props.serve}>Deploy to API</button>;
+      return <button className="primary large" onClick={this.props.serve}>Deploy to API</button>;
     }
   }
 
