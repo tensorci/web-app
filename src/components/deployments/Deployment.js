@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
 import DeploymentStages from './DeploymentStages';
 import DeploymentStatusBadge from './DeploymentStatusBadge';
+import intents from '../../utils/Intents';
 import pubnub from '../../utils/PubSub';
+import stages from '../../utils/Stages';
 import timeago from 'timeago.js';
 
 class Deployment extends Component {
@@ -14,6 +16,7 @@ class Deployment extends Component {
 
     this.state = {
       status: null,
+      intent: null,
       failed: false,
       succeeded: false,
       date: null,
@@ -32,6 +35,7 @@ class Deployment extends Component {
 
         this.setState({
           status: data.readable_status,
+          intent: data.intent,
           failed: data.failed,
           succeeded: data.succeeded,
           date: data.date,
@@ -49,6 +53,7 @@ class Deployment extends Component {
 
       this.setState({
         status: data.readable_status,
+        intent: data.intent,
         failed: data.failed,
         succeeded: data.succeeded,
         currentStage: data.current_stage,
@@ -59,6 +64,13 @@ class Deployment extends Component {
     pubnub.subscribe({
       channels: [this.props.uid]
     });
+  }
+
+  serve() {
+    if (this.state.currentStage === stages.DONE_TRAINING && this.state.intent === intents.TRAIN) {
+      const gitUrl = 'https://github.com/' + this.props.team + '/' + this.props.repo + '.git';
+      Ajax.post('/api/deployment/api', { git_url: gitUrl });
+    }
   }
 
   render() {
@@ -108,7 +120,7 @@ class Deployment extends Component {
                 </div>
               </div>
             </div>
-            <DeploymentStages stages={this.state.stages} currentStage={this.state.currentStage}/>
+            <DeploymentStages stages={this.state.stages} currentStage={this.state.currentStage} intent={this.state.intent} serve={this.serve}/>
           </div>
         </div>
       </div>
