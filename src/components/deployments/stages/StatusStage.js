@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 
 class StatusStage extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = this.props.data || {};
-  }
-
   render() {
+    const data = this.props.data || {};
+
     return (
       <div className="build-output">
         <div className="action-header contents success">
@@ -17,7 +13,7 @@ class StatusStage extends Component {
                 <i className="material-icons">check_circle</i>
               </div>
               <div className="command contents">
-                <span className="stage-name">{this.state.name}</span>
+                <span className="stage-name">{data.name}</span>
               </div>
             </div>
           </div>
