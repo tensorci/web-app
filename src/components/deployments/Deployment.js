@@ -13,6 +13,7 @@ class Deployment extends Component {
     super(props);
 
     this.listenForStageUpdates = this.listenForStageUpdates.bind(this);
+    this.serve = this.serve.bind(this);
 
     this.state = {
       status: null,
