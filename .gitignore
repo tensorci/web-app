@@ -22,3 +22,5 @@ src/styles/css/*
 *.log
 
 package-lock.json
+
+bin/
