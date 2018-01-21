@@ -8,7 +8,6 @@ class DeploymentStages extends Component {
     super(props);
 
     this.formatStages = this.formatStages.bind(this);
-    this.heardStageUpdate = this.heardStageUpdate.bind(this);
 
     this.orderedStages = [
       'train_building',
@@ -59,15 +58,6 @@ class DeploymentStages extends Component {
     });
 
     return stageComps;
-  }
-
-  heardStageUpdate(data) {
-    // set new state on the stages that were updated
-    for (var stage in data) {
-      if (this[stage]) {
-        this[stage].setState(data[stage]);
-      }
-    }
   }
 
   render() {
