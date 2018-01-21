@@ -48,12 +48,17 @@ class Deployment extends Component {
       const data = m.message;
 
       this.setState({
+        status: data.readable_status,
+        failed: data.failed,
+        succeeded: data.succeeded,
         currentStage: data.current_stage,
         stages: data.stages
       });
     }});
 
-    pubnub.subscribe({ channels: [this.props.uid] });
+    pubnub.subscribe({
+      channels: [this.props.uid]
+    });
   }
 
   render() {
