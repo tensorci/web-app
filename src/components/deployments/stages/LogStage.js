@@ -56,7 +56,7 @@ class LogStage extends Component {
 
     return (
       <div className="build-output">
-        <div className={'action-header contents open' + this.getStatusClass(data, current)} ref={(r) => { this.actionHeaderRef = r; }}>
+        <div className={'action-header contents' + (detailWrapperStyle.height === 'auto' ? ' open' : '') + this.getStatusClass(data, current)} ref={(r) => { this.actionHeaderRef = r; }}>
           <div className="ah-wrapper">
             <div className="ah-wrapper-header contents" onClick={this.toggleHeight}>
               <div className="button contents">
