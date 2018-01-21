@@ -45,6 +45,7 @@ class Deployment extends Component {
 
   listenForStageUpdates() {
     pubnub.addListener({ message: (m) => {
+      console.log(m.message);
       this.setState(m.message);
     }});
 
