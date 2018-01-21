@@ -48,16 +48,9 @@ class Deployment extends Component {
   }
 
   listenForStageUpdates() {
-    pubnub.addListener({
-      message: function(m) {
-        console.log('Received message: ', m);
-        console.log('Data received: ', m.message);
-        this.heardStageUpdate(m.message);
-      },
-      presence: function(p) {
-        console.log('Heard PubNub action: ', p.action);
-      }
-    });
+    pubnub.addListener({ message: (m) => {
+      this.heardStageUpdate(m.message);
+    }});
 
     pubnub.subscribe({ channels: [this.props.uid] });
   }
