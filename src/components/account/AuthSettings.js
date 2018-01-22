@@ -68,7 +68,7 @@ class AuthSettings extends Component {
                   <div className="field-wrapper">
                     <label>Basic Auth Password</label>
                     <div className="field">
-                      <FormInput onKeyUp={this.onBasicAuthPwKeyUp} type="password" ref={(ref) => { this.basicAuthPwInput = ref; }}/>
+                      <FormInput onKeyUp={this.onBasicAuthPwKeyUp} password={true} ref={(ref) => { this.basicAuthPwInput = ref; }}/>
                     </div>
                     <div className="pw-preview">
                       <div className="readable-pw" ref={(ref) => { this.readablePw = ref; }}></div>

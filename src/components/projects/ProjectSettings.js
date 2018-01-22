@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Link from '../../utils/Link';
 import ProjectCreds from './ProjectCreds';
 import ProjectEnvs from './ProjectEnvs';
+import ProjectWebhooks from './ProjectWebhooks';
 
 class ProjectSettings extends Component {
 
@@ -25,6 +26,11 @@ class ProjectSettings extends Component {
         href: baseLink + '/envs',
         text: 'Environment Variables',
         comp: <ProjectEnvs team={team} repo={repo}/>
+      },
+      {
+        href: baseLink + '/webhooks',
+        text: 'Webhooks',
+        comp: <ProjectWebhooks team={team} repo={repo}/>
       }
     ];
   }

@@ -139,6 +139,15 @@ class Main extends Component {
         }
       },
       {
+        path: '/:team/:repo/settings/webhooks',
+        comp: Dashboard,
+        exact: true,
+        appSection: 'projects',
+        meta: {
+          projectSettings: true
+        }
+      },
+      {
         path: '/:team/:repo/:uid',
         comp: Dashboard,
         exact: true,

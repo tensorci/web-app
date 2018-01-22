@@ -54,12 +54,22 @@
       margin-left: 15px;
     }
 
-    .card {
-      margin-bottom: 15px;
-
-      &:last-child {
-        margin-bottom: 0;
+    &.webhooks {
+      .card-header {
+        padding-right: 25px;
       }
     }
+  }
+
+  .card {
+    margin-bottom: 15px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .toggle-enabled-status-container {
+    padding: 10px;
   }
 }
