@@ -15,6 +15,7 @@ class Env extends Component {
 
   serialize() {
     return {
+      uid: this.props.uid,
       name: this.name.serialize(),
       value: this.value.serialize()
     };
@@ -24,13 +25,14 @@ class Env extends Component {
     const name = this.props.name;
     const value = this.props.value;
     const uid = this.props.uid;
+    const idx = this.props.idx;
     const disabled = this.props.disabled;
 
     return (
       <div className="env">
-        <FormInput required={true} placeholder="NAME" defaultValue={name} disabled={disabled} ref={(r) => { this.name = r; }}/>
-        <FormInput required={true} placeholder="VALUE" defaultValue={value} disabled={disabled} ref={(r) => { this.name = r; }}/>
-        <button className="remove-env" onClick={() => { this.props.removeEnv(uid); }}>&times;</button>
+        <FormInput key={Math.random().toString()} required={true} placeholder="NAME" defaultValue={name} disabled={disabled} ref={(r) => { this.name = r; }}/>
+        <FormInput key={Math.random().toString()} required={true} placeholder="VALUE" defaultValue={value} disabled={disabled} ref={(r) => { this.value = r; }}/>
+        <button className="remove-env" onClick={() => { this.props.removeEnv(uid, idx); }}>&times;</button>
       </div>
     );
   }

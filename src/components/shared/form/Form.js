@@ -14,7 +14,7 @@ class Form extends Component {
 
     this.state = {
       status: this.status.STATIC,
-      values: this.props.values
+      values: this.props.values || []
     };
 
     this.formCompRefs = [];
@@ -23,7 +23,9 @@ class Form extends Component {
   }
 
   pushFormCompRef(ref) {
-    this.formCompRefs.push(ref);
+    if (ref) {
+      this.formCompRefs.push(ref);
+    }
   }
 
   formValid() {
@@ -43,13 +45,14 @@ class Form extends Component {
       return ref.serialize();
     });
 
-    var updates = { values: values };
-
-    if (!inPlace) {
-      updates.status = this.status.SERIALIZING;
+    if (inPlace) {
+      return values;
+    } else {
+      this.setState({
+        values: values,
+        status: this.status.SERIALIZING
+      });
     }
-
-    this.setState(updates);
   }
 }
 

@@ -11,6 +11,7 @@ class Envs extends Form {
     this.getEnvs = this.getEnvs.bind(this);
     this.removeEnv = this.removeEnv.bind(this);
     this.addEnvInput = this.addEnvInput.bind(this);
+    this.getSaveBtn = this.getSaveBtn.bind(this);
   }
 
   componentDidMount() {
@@ -54,21 +55,45 @@ class Envs extends Form {
   }
 
   getEnvs() {
+    this.formCompRefs = [];
+
     return this.state.values.map((env, i) => {
-      return <Env key={i} name={env.name} value={env.value} uid={env.uid} removeEnv={this.removeEnv} disabled={this.state.status === this.status.SENDING}/>;
+      return (
+        <Env
+          key={Math.random().toString()}
+          idx={i}
+          name={env.name}
+          value={env.value}
+          uid={env.uid}
+          removeEnv={this.removeEnv}
+          disabled={this.state.status === this.status.SENDING}
+          ref={this.pushFormCompRef}/>
+      );
     });
   }
 
-  removeEnv(uid) {
+  removeEnv(uid, idx) {
+    // If uid doesn't exist, it's a new env, so just remove on the FE.
+    if (!uid) {
+      // Serialize current values (without updating status to SERIALIZING).
+      var values = this.serialize(true);
+
+      // Remove env data at index idx.
+      values.splice(idx, 1);
+
+      // remove ref from formCompRefs
+      this.formCompRefs.splice(idx, 1);
+
+      // Update state.
+      this.setState({ values: values });
+      return;
+    }
+
+    // uid exists, so delete the env from the BE and then update state.
+
     this.setState({ status: this.status.SENDING });
 
-    const payload = {
-      team: this.props.team,
-      repo: this.props.repo,
-      uid: uid
-    };
-
-    Ajax.delete('/api/env', payload)
+    Ajax.delete('/api/env', { uid: uid })
       .then((resp) => resp.json())
       .then((data) => {
         this.setState({
@@ -93,12 +118,21 @@ class Envs extends Form {
 
     // Add an empty env
     values.push({
-      name: '',
-      value: ''
+      uid: null,
+      name: null,
+      value: null
     });
 
     // Update state
     this.setState({ values: values });
+  }
+
+  getSaveBtn() {
+    if (this.state.values.length === 0) {
+      return;
+    }
+
+    return <button className="primary large" onClick={this.serialize}>Save</button>;
   }
 
   render() {
@@ -110,7 +144,7 @@ class Envs extends Form {
             <i className="plus">+</i>
             <span>New Environment Variable</span>
           </button>
-          <button className="primary large" onClick={this.serialize}>Save</button>
+          {this.getSaveBtn()}
         </div>
       </div>
     );

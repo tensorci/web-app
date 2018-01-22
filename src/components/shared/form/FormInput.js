@@ -89,7 +89,7 @@ class FormInput extends Component {
   }
 
   getInput(name, placeholder, defaultValue, classes, disabled, password) {
-    var type = password ? 'password' : 'text';
+    const type = password ? 'password' : 'text';
 
     if (disabled) {
       return <input type={type} disabled className={classes} name={name} placeholder={placeholder} defaultValue={defaultValue} onKeyUp={this.onKeyUp} ref={this.setInputRef}/>;
@@ -99,11 +99,11 @@ class FormInput extends Component {
   }
 
   getEl() {
-    var name = this.props.name || '';
-    var placeholder = this.props.placeholder || '';
-    var defaultValue = this.props.defaultValue || '';
-    var disabled = !!this.props.disabled;
-    var classes = this.getClassNames();
+    const name = this.props.name || '';
+    const placeholder = this.props.placeholder || '';
+    const defaultValue = this.props.defaultValue || '';
+    const disabled = !!this.props.disabled;
+    const classes = this.getClassNames();
 
     if (this.props.useTextarea) {
       return this.getTextarea(name, placeholder, defaultValue, classes, disabled);
