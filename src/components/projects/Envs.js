@@ -14,19 +14,6 @@ class Envs extends Form {
     this.getSaveBtn = this.getSaveBtn.bind(this);
   }
 
-  componentDidMount() {
-    const payload = {
-      team: this.props.team,
-      repo: this.props.repo
-    };
-
-    Ajax.get('/api/envs', payload)
-      .then((resp) => resp.json())
-      .then((data) => {
-        this.setState({ values: data.envs });
-      });
-  }
-
   componentDidUpdate() {
     if (this.state.status === this.status.SERIALIZING && this.formValid()) {
       this.submit();
@@ -53,6 +40,7 @@ class Envs extends Form {
     const payload = {
       team: this.props.team,
       repo: this.props.repo,
+      forCluster: this.props.forCluster,
       envs: envs
     };
 
