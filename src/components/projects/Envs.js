@@ -38,10 +38,22 @@ class Envs extends Form {
   submit() {
     this.setState({ status: this.status.SENDING });
 
+    var data;
+    const envs = this.state.values.map((env) => {
+      data = { name: env.name, value: env.value };
+
+      // only include uid if not null
+      if (env.uid) {
+        data.uid = env.uid;
+      }
+
+      return data;
+    });
+
     const payload = {
       team: this.props.team,
       repo: this.props.repo,
-      envs: this.state.values
+      envs: envs
     };
 
     Ajax.put('/api/envs', payload)
@@ -132,7 +144,7 @@ class Envs extends Form {
       return;
     }
 
-    return <button className="primary large" onClick={this.serialize}>Save</button>;
+    return <button className="primary large" onClick={() => { this.serialize(false); }}>Save</button>;
   }
 
   render() {

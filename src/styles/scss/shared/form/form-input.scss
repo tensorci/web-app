@@ -6,12 +6,10 @@
   color: $default-dark;
   width: 100%;
 
-  &.invalid-shadow {
-    box-shadow: 0 0 4px 2px $primary;
-  }
-
   &.invalid-border {
-    border: 2px solid $red;
+    -webkit-box-shadow: 0 0 0 1px #ed5c5c;
+    -moz-box-shadow: 0 0 0 1px #ed5c5c;
+    box-shadow: 0 0 0 1px #ed5c5c;
   }
 }
 
@@ -31,8 +29,4 @@ textarea.form-input {
   padding: 10px 12px;
   resize: none;
   font-size: 14.5px;
-
-  &.invalid-shadow {
-    box-shadow: 0 0 2px 1px $red;
-  }
 }

@@ -5,13 +5,11 @@ class FormInput extends Component {
 
   constructor(props) {
     super(props);
+
     this.setInputRef = this.setInputRef.bind(this);
     this.isValid = this.isValid.bind(this);
     this.serialize = this.serialize.bind(this);
-    this.onMobile = this.onMobile.bind(this);
     this.showInvalid = this.showInvalid.bind(this);
-    this.addInvalidBorder = this.addInvalidBorder.bind(this);
-    this.addInvalidShadow = this.addInvalidShadow.bind(this);
     this.onKeyUp = this.onKeyUp.bind(this);
     this.getClassNames = this.getClassNames.bind(this);
     this.clear = this.clear.bind(this);
@@ -19,7 +17,7 @@ class FormInput extends Component {
     this.getInput = this.getInput.bind(this);
     this.getEl = this.getEl.bind(this);
 
-    this.MOBILE_THRESH = 991;
+    this.invalidClass = 'invalid-border';
   }
 
   setInputRef(ref) {
@@ -41,26 +39,13 @@ class FormInput extends Component {
     return $(this.input).val().trim().replace(/(<)(\/?script[^>]*)(>)/igm, '');
   }
 
-  onMobile() {
-    return window.innerWidth < this.MOBILE_THRESH;
-  }
-
-  // display the input as invalid
   showInvalid() {
-    this.onMobile() && !this.props.useTextarea ? this.addInvalidBorder() : this.addInvalidShadow();
-  }
-
-  addInvalidBorder() {
-    $(this.input).addClass('invalid-border');
-  }
-
-  addInvalidShadow() {
-    $(this.input).addClass('invalid-shadow');
+    $(this.input).addClass(this.invalidClass);
   }
 
   // remove any invalid display of the input field when user begins typing again
   onKeyUp(e) {
-    $(this.input).removeClass('invalid-border invalid-shadow');
+    $(this.input).removeClass(this.invalidClass);
 
     // bubble this up if necessary
     if (this.props.onKeyUp) {
