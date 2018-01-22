@@ -26,16 +26,9 @@ class Envs extends Form {
   submit() {
     this.setState({ status: this.status.SENDING });
 
-    var data;
-    const envs = this.state.values.map((env) => {
-      data = { name: env.name, value: env.value };
-
-      // only include uid if not null
-      if (env.uid) {
-        data.uid = env.uid;
-      }
-
-      return data;
+    var envs = {};
+    this.state.values.forEach((env) => {
+      envs[env.name] = env.value;
     });
 
     const payload = {
