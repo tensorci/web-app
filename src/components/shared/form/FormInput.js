@@ -13,6 +13,7 @@ class FormInput extends Component {
     this.onKeyUp = this.onKeyUp.bind(this);
     this.getClassNames = this.getClassNames.bind(this);
     this.clear = this.clear.bind(this);
+    this.setValue = this.setValue.bind(this);
     this.getTextarea = this.getTextarea.bind(this);
     this.getInput = this.getInput.bind(this);
     this.getEl = this.getEl.bind(this);
@@ -63,6 +64,10 @@ class FormInput extends Component {
   // empty the input
   clear() {
     $(this.input).val('');
+  }
+
+  setValue(val) {
+    $(this.input).val(val);
   }
 
   getTextarea(name, placeholder, defaultValue, classes, disabled) {

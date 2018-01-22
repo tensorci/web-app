@@ -1,0 +1,54 @@
+$gutter: 10px;
+
+.envs-container {
+  .action-btns {
+    button {
+      margin-bottom: 10px;
+      height: 40px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.envs {
+  padding: 10px 0;
+}
+
+.env {
+  margin-bottom: $gutter;
+
+  .form-input {
+    width: calc(50% - 30px);
+    display: inline-block;
+    padding: 13px 11px;
+    line-height: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    background-color: #fff;
+    outline: none;
+
+    &:first-child {
+      margin-right: $gutter;
+    }
+  }
+
+  .remove-env {
+    width: 50px;
+    float: right;
+    height: 44px;
+    display: inline-block;
+    font-size: 30px;
+    cursor: pointer;
+    color: #ed5c5c;
+    font-family: Avenir-Next-Thin;
+    text-align: center;
+
+
+    &:hover {
+      opacity: 0.95;
+    }
+  }
+}

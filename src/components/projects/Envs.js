@@ -144,7 +144,7 @@ class Envs extends Form {
       return;
     }
 
-    return <button className="primary large" onClick={() => { this.serialize(false); }}>Save</button>;
+    return <button className="primary large save" onClick={() => { this.serialize(false); }}>Save</button>;
   }
 
   render() {
@@ -152,10 +152,7 @@ class Envs extends Form {
       <div className="envs-container">
         <div className="envs">{this.getEnvs()}</div>
         <div className="action-btns">
-          <button className="primary large" onClick={this.addEnvInput}>
-            <i className="plus">+</i>
-            <span>New Environment Variable</span>
-          </button>
+          <button className="primary large" onClick={this.addEnvInput}>Add Environment Variable</button>
           {this.getSaveBtn()}
         </div>
       </div>
