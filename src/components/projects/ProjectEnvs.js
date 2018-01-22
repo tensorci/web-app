@@ -6,6 +6,8 @@ class ProjectEnvs extends Component {
 
   constructor(props) {
     super(props);
+    this.saveTrainEnvs = this.saveTrainEnvs.bind(this);
+    this.saveApiEnvs = this.saveApiEnvs.bind(this);
   }
 
   componentDidMount() {
@@ -22,17 +24,32 @@ class ProjectEnvs extends Component {
       });
   }
 
+  saveTrainEnvs() {
+    if (this.trainEnvs) {
+      this.trainEnvs.save();
+    }
+  }
+
+  saveApiEnvs() {
+    if (this.apiEnvs) {
+      this.apiEnvs.save();
+    }
+  }
+
   render() {
     const team = this.props.team;
     const repo = this.props.repo;
 
     return (
       <div className="main-content">
-        <div className="project-settings-inner">
+        <div className="project-settings-inner edit-envs">
           <legend>Environment Variables</legend>
           <div className="card">
             <div className="card-header">
               <div className="title">Training Env</div>
+              <button className="save-envs" onClick={this.saveTrainEnvs}>
+                <i className="material-icons">save</i>
+              </button>
             </div>
             <div className="card-body">
               <p>Configure environment variables for your project when running on the TensorCI training cluster.</p>
@@ -42,9 +59,12 @@ class ProjectEnvs extends Component {
           <div className="card">
             <div className="card-header">
               <div className="title">API Env</div>
+              <button className="save-envs" onClick={this.saveApiEnvs}>
+                <i className="material-icons">save</i>
+              </button>
             </div>
             <div className="card-body">
-              <p>Configure environment variables for your project when serving model predictions from an API cluster.</p>
+              <p>Configure environment variables for your project when serving model predictions from your API cluster.</p>
               <Envs team={team} repo={repo} forCluster="api" ref={(r) => { this.apiEnvs = r; }}/>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Ajax from '../../utils/Ajax';
-import Form from '../shared/form/Form';
 import Env from './Env';
+import Form from '../shared/form/Form';
 
 class Envs extends Form {
 
@@ -11,7 +11,8 @@ class Envs extends Form {
     this.getEnvs = this.getEnvs.bind(this);
     this.removeEnv = this.removeEnv.bind(this);
     this.addEnvInput = this.addEnvInput.bind(this);
-    this.getSaveBtn = this.getSaveBtn.bind(this);
+    this.save = this.save.bind(this);
+    this.clusterName = this.clusterName.bind(this);
   }
 
   componentDidUpdate() {
@@ -127,12 +128,19 @@ class Envs extends Form {
     this.setState({ values: values });
   }
 
-  getSaveBtn() {
+  save() {
     if (this.state.values.length === 0) {
       return;
     }
 
-    return <button className="primary large save" onClick={() => { this.serialize(false); }}>Save</button>;
+    this.serialize(false);
+  }
+
+  clusterName() {
+    return {
+      train: 'Training',
+      api: 'API'
+    }[this.props.forCluster];
   }
 
   render() {
@@ -140,8 +148,10 @@ class Envs extends Form {
       <div className="envs-container">
         <div className="envs">{this.getEnvs()}</div>
         <div className="action-btns">
-          <button className="primary large" onClick={this.addEnvInput}>Add Environment Variable</button>
-          {this.getSaveBtn()}
+          <button className="primary small" onClick={this.addEnvInput}>
+            <span className="plus">+</span>
+            {'New ' + this.clusterName() + ' Environment Variable'}
+          </button>
         </div>
       </div>
     );

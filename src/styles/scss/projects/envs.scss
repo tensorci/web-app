@@ -1,14 +1,50 @@
 $gutter: 10px;
 
+.edit-envs {
+  .card-header {
+    position: relative;
+  }
+
+  .save-envs {
+    position: absolute;
+    right: 15px;
+    top: 8px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #d6d6d9;
+    border: none;
+    outline: none;
+    -webkit-transition: background 0.15s;
+    -moz-transition: background 0.15s;
+    -ms-transition: background 0.15s;
+    -o-transition: background 0.15s;
+    transition: background 0.15s;
+
+    &:hover {
+      background: #3dc1d9;
+    }
+
+    &:active {
+      opacity: 0.8;
+    }
+
+    i {
+      color: #fff;
+      margin: 0;
+      font-size: 22px;
+      text-align: center;
+      line-height: 36px;
+    }
+  }
+}
+
 .envs-container {
   .action-btns {
-    button {
-      margin-bottom: 10px;
-      height: 40px;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
+    button > span.plus {
+      font-size: 18px;
+      position: relative;
+      left: -4px;
     }
   }
 }
