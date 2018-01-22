@@ -13,7 +13,7 @@ class ProjectEnvs extends Component {
           <legend>Environment Variables</legend>
           <div className="card">
             <div className="card-body">
-              <p>Configure environment variables for your project.</p>
+              <p>Configure environment variables for your project when running on the TensorCI training cluster.</p>
               <Envs team={team} repo={repo}/>
             </div>
           </div>
