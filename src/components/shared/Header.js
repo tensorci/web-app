@@ -3,30 +3,8 @@ import SupportDropdown from './dropdowns/SupportDropdown';
 import ProfileDropdown from './dropdowns/ProfileDropdown';
 import TeamDropdown from './dropdowns/TeamDropdown';
 import UpdatesDropdown from './dropdowns/UpdatesDropdown';
-import Session from '../../utils/Session';
 
 class Header extends Component {
-
-  constructor(props) {
-    super(props);
-
-    this.setTeamDropdownRef = this.setTeamDropdownRef.bind(this);
-    this.setProfileDropdownRef = this.setProfileDropdownRef.bind(this);
-
-    this.state = {
-      user: Session.user(),
-      teams: Session.teams()
-    };
-  }
-
-  setTeamDropdownRef(ref) {
-    this.teamDropdown = ref;
-  }
-
-  setProfileDropdownRef(ref) {
-    this.profileDropdown = ref;
-  }
-
   render() {
     const team = this.props.team;
 
@@ -35,7 +13,7 @@ class Header extends Component {
         <div className="nav-container">
           <div className="nav">
             <ul className="nav-options collapsing-nav">
-              <TeamDropdown classes={['team-dropdown']} dropdownMenuClasses={['team-menu']} teams={this.state.teams} selectedTeam={team} ref={this.setTeamDropdownRef}/>
+              <TeamDropdown classes={['team-dropdown']} dropdownMenuClasses={['team-menu']} selectedTeam={team}/>
             </ul>
             <a href="/" className="logoLink">
               <i className="ico">
@@ -45,7 +23,7 @@ class Header extends Component {
             <ul className="nav-options">
               <UpdatesDropdown title="Updates" classes={['updates-dropdown']}/>
               <SupportDropdown title="Support" classes={['support-dropdown']}/>
-              <ProfileDropdown classes={['profile-dropdown']} user={this.state.user} ref={this.setProfileDropdownRef}/>
+              <ProfileDropdown classes={['profile-dropdown']}/>
             </ul>
           </div>
         </div>

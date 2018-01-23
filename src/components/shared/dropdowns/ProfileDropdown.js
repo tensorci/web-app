@@ -23,10 +23,6 @@ class ProfileDropdown extends Dropdown {
         onClick: this.logout
       }
     ];
-
-    this.state = {
-      user: this.props.user || {}
-    };
   }
 
   logout(e) {
@@ -44,7 +40,11 @@ class ProfileDropdown extends Dropdown {
   }
 
   getButtonContents() {
-    return <img src={this.state.user.icon} alt="" className="user-profile-icon"/>;
+    const user = Session.user();
+
+    if (user && user.icon) {
+      return <img src={user.icon} alt="" className="user-profile-icon"/>;
+    }
   }
 }
 

@@ -1,25 +1,24 @@
 import React from 'react';
 import Dropdown from './Dropdown';
 import TeamDropdownItem from './TeamDropdownItem';
+import Session from '../../../utils/Session';
 
 class TeamDropdown extends Dropdown {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      teams: this.props.teams || []
-    };
   }
 
   getButtonContents() {
-    if (this.state.teams.length === 0) {
+    const teams = Session.teams();
+
+    if (!teams || teams.length === 0) {
       return;
     }
 
     var selectedTeam, team;
-    for (var i = 0; i < this.state.teams.length; i++) {
-      team = this.state.teams[i];
+    for (var i = 0; i < teams.length; i++) {
+      team = teams[i];
 
       if (!this.props.selectedTeam || team.slug === this.props.selectedTeam) {
         selectedTeam = team;
@@ -28,7 +27,7 @@ class TeamDropdown extends Dropdown {
     }
 
     if (!selectedTeam) {
-      selectedTeam = this.state.teams[0];
+      selectedTeam = teams[0];
     }
 
     return [
@@ -43,12 +42,18 @@ class TeamDropdown extends Dropdown {
   }
 
   getItems() {
+    const teams = Session.teams();
+
+    if (!teams || teams.length === 0) {
+      return;
+    }
+
     var items = [
       <li key={0} className="team-dropdown-menu-item switch-team-text">Switch Team</li>
     ];
 
     var selected = false;
-    this.state.teams.forEach((item, i) => {
+    teams.forEach((item, i) => {
       selected = item.slug === this.props.selectedTeam;
       items.push(<TeamDropdownItem key={i + 1} team={item} selected={selected} onClick={this.toggle}/>);
     });
