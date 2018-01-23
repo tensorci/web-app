@@ -11,9 +11,14 @@
     outline: none;
     border: none;
     color: #fff;
+    -webkit-transition: background-color 0.15s;
+    -moz-transition: background-color 0.15s;
+    -ms-transition: background-color 0.15s;
+    -o-transition: background-color 0.15s;
+    transition: background-color 0.15s;
 
     &:hover {
-      background-color: $primary; // should be $primary-hover
+      background-color: $primary-lighter;
     }
 
     &:active {
@@ -39,7 +44,9 @@
 
   &.complete {
     button {
-      background-color: $tertiary;
+      background-color: #fff;
+      color: $primary;
+      border: 1px solid $primary;
     }
   }
 }

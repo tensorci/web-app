@@ -132,7 +132,11 @@ a.button {
 
   &.primary {
     color: #fff;
-    background-color: #3dc1d9;
+    background-color: $primary;
+
+    &:hover {
+      background-color: $primary-lighter;
+    }
   }
 
   &.small {
@@ -148,7 +152,6 @@ button.primary {
   cursor: pointer;
   white-space: nowrap;
   color: #fff;
-  background-color: #3dc1d9;
   height: 36px;
   font-size: 14px;
   padding: 4px 1em;
@@ -159,9 +162,15 @@ button.primary {
   border-radius: 3px;
   box-shadow: none;
   outline: none;
+  background-color: $primary;
+  -webkit-transition: background-color 0.15s;
+  -moz-transition: background-color 0.15s;
+  -ms-transition: background-color 0.15s;
+  -o-transition: background-color 0.15s;
+  transition: background-color 0.15s;
 
   &:hover {
-    opacity: 0.9;
+    background-color: $primary-lighter;
   }
 
   &.large {

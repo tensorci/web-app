@@ -12,7 +12,7 @@ div.form {
 
   .field-wrapper > label {
     display: block;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
     font-size: 11.5px;
     font-family: Avenir-Next-Medium;
     color: #555;
@@ -28,7 +28,7 @@ div.form {
     width: 100%;
     padding: 8px 10px;
     line-height: 18px;
-    border: solid 1px #66d3e4;
+    border: 1px solid #e0e0e0;
   }
 
   .pw-preview {
@@ -45,7 +45,7 @@ div.form {
 
     .pw-preview-toggle {
       font-size: 12px;
-      color: #3dc1d9;
+      color: $secondary;
       cursor: pointer;
 
       &:hover {

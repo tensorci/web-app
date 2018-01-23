@@ -12,7 +12,7 @@
     margin-bottom: 15px;
 
     .summary-item a {
-      color: #27a0b6;
+      color: $secondary;
 
       &:hover {
         text-decoration: underline;
@@ -100,7 +100,7 @@
 
     .metadata-item.sha-one,
     .metadata-item > a {
-      color: #27a0b6;
+      color: $secondary;
       
       &:hover {
         text-decoration: underline;

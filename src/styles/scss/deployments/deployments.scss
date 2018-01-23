@@ -59,26 +59,26 @@
   text-align: left;
 
   &.running {
-    background: #66d3e4;
+    background: $running;
 
     .status-icon {
-      color: #66d3e4;
+      color: $running;
     }
   }
 
   &.failed {
-    background: #ed5c5c;
+    background: $failed;
 
     .status-icon {
-      color: #ed5c5c;
+      color: $failed;
     }
   }
 
   &.succeeded {
-    background: #42c88a;
+    background: $success;
 
     .status-icon {
-      color: #42c88a;
+      color: $success;
     }
   }
 }
@@ -90,7 +90,7 @@
   margin: 4px 8px 4px 4px;
   margin-left: 0px;
   background: #fff;
-  color: #42c88a;
+  color: $success;
   font-size: 12px;
   text-align: center;
   line-height: 18px;

@@ -94,6 +94,10 @@
         -webkit-align-items: center;
         align-items: center;
         margin-right: auto;
+
+        a {
+          color: $secondary;
+        }
       }
 
       .setup-column a {
@@ -104,28 +108,28 @@
         background: none;
         border-radius: 2em;
         outline: none;
-        border: 1px solid #3dc1d9;
-        color: #3dc1d9;
+        border: 1px solid $primary;
+        color: $primary;
         transition: .2s;
         min-width: 180px;
         height: 30px;
         text-decoration: none;
 
         &:hover {
-          background: #3dc1d9;
-          border-color: #3dc1d9;
+          background: $primary;
+          border-color: $primary;
           transition: .1s;
           color: #fff;
           text-shadow: none;
         }
 
         &.exists {
-          border: 1px solid #42c88a;
-          color: #42c88a;
+          border: 1px solid $secondary;
+          color: $secondary;
 
           &:hover {
-            background: #42c88a;
-            border-color: #42c88a;
+            background: $secondary;
+            border-color: $secondary;
             transition: .1s;
             color: #fff;
             text-shadow: none;
@@ -163,6 +167,6 @@
     margin: 5px;
     margin-right: 10px;
     padding: 5px 15px;
-    border: 1px solid #66d3e4;
+    border: 1px solid $secondary;
   }
 }

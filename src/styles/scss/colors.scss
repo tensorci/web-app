@@ -1,7 +1,10 @@
-$primary: #000;
-$secondary: #111;
-$tertiary: #222;
+// Theme-based colors
+$primary: #ff7277;
+$primary-darker: #ff5f64;
+$primary-lighter: #FD8488;
+$secondary: #35ACC4;
 
-$default-dark: #212121;
-
-$red: #D51E1E;
+// State-based colors
+$running: #66d3e4;
+$success: #42c88a;
+$failed: #ed4b3a;

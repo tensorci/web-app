@@ -3,13 +3,13 @@
   box-shadow: none;
   outline: none;
   border: 1px solid #dedede;
-  color: $default-dark;
+  color: #212121;
   width: 100%;
 
   &.invalid-border {
-    -webkit-box-shadow: 0 0 0 1px #ed5c5c;
-    -moz-box-shadow: 0 0 0 1px #ed5c5c;
-    box-shadow: 0 0 0 1px #ed5c5c;
+    -webkit-box-shadow: 0 0 0 1px $failed;
+    -moz-box-shadow: 0 0 0 1px $failed;
+    box-shadow: 0 0 0 1px $failed;
   }
 }
 

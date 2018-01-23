@@ -50,7 +50,7 @@
   }
 
   a:not(.button) {
-    color: #27a0b6;
+    color: $secondary;
     text-decoration: none;
 
     &:hover {
@@ -70,7 +70,6 @@
     cursor: pointer;
     white-space: nowrap;
     color: rgb(255, 255, 255);
-    background-color: rgb(39, 154, 241);
     height: 36px;
     font-size: 14px;
     width: 155px;
@@ -83,17 +82,17 @@
     box-shadow: none;
     outline: none;
 
-    &:hover {
+    &:not(.primary) {
+      background-color: $secondary;
+    }
+
+    &:hover:not(.primary) {
       opacity: 0.9;
     }
 
-    &.primary {
-      background-color: #3dc1d9;
-    }
-
     &.launched {
-      color: rgb(39, 154, 241);
-      border-color: rgb(39, 154, 241);
+      color: $primary;
+      border-color: $primary;
       background-color: #fff;
       pointer-events: none;
     }

@@ -22,7 +22,7 @@ $gutter: 10px;
     transition: background 0.15s;
 
     &:hover {
-      background: #3dc1d9;
+      background: $secondary;
     }
 
     &:active {
@@ -78,7 +78,7 @@ $gutter: 10px;
     display: inline-block;
     font-size: 30px;
     cursor: pointer;
-    color: #ed5c5c;
+    color: $failed;
     font-family: Avenir-Next-Thin;
     text-align: center;
 
