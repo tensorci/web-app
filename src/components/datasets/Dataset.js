@@ -10,7 +10,6 @@ class Dataset extends Component {
     super(props);
     this.getStepSizes = this.getStepSizes.bind(this);
     this.getRetrainStepSize = this.getRetrainStepSize.bind(this);
-    
     this.stepSizeNotSet = 'Never';
   }
   
@@ -115,7 +114,7 @@ class Dataset extends Component {
             </tbody>
           </table>
           <div className="preview-container">
-            <DatasetPreview uid={info.uid}/>
+            <DatasetPreview preview={info.preview}/>
           </div>
         </div>
       </div>

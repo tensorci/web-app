@@ -1,52 +1,44 @@
 import React, { Component } from 'react';
-import Ajax from '../../utils/Ajax';
+import $ from 'jquery';
 
 class DatasetPreview extends Component {
 
   constructor(props) {
     super(props);
-
     this.toggleVisibility = this.toggleVisibility.bind(this);
-
-    this.state = {
-      uid: this.props.uid,
-      shown: false,
-      content: null
-    };
+    this.slideDuration = 250;
   }
 
   toggleVisibility() {
-    if (this.state.shown) {
-      // Preview is being shown. Hide it.
-      this.setState({ shown: false });
-    } else if (this.state.content) {
-      // Preview is hidden, but content has already been fetched
-      this.setState({ shown: true });
+    const $container = $(this.container);
+    const $btnText = $(this.btnText);
+    const $preview = $(this.preview);
+
+    if ($container.hasClass('show')) {
+      $btnText.html('Preview dataset');
+      $container.removeClass('show');
+      $preview.animate({ height: 0 }, this.slideDuration );
     } else {
-      // Fetch content and then show
-      Ajax.get('/api/dataset/preview', { uid: this.state.uid })
-        .then((resp) => resp.json())
-        .then((data) => {
-          this.setState({
-            shown: true,
-            content: JSON.stringify(data.preview, undefined, 2)
-          });
-        });
+      $btnText.html('Hide preview');
+      $container.addClass('show');
+      $preview.animate({ height: $preview.get(0).scrollHeight }, this.slideDuration );
     }
   }
 
   render() {
+    const preview = JSON.stringify(this.props.preview || {}, undefined, 2);
+
     return (
-      <div className={'dataset-preview-container' + (this.state.shown ? ' show' : '')}>
+      <div className="dataset-preview-container" ref={(r) => { this.container = r; }}>
         <div className="toggle-preview-btn-container">
           <button className="toggle-dset-preview" onClick={this.toggleVisibility}>
-            {this.state.shown ? <i className="fa fa-angle-up"></i> : null}
-            <span>{this.state.shown ? 'Hide preview' : 'Preview dataset'}</span>
-            {this.state.shown ? null : <i className="fa fa-angle-down"></i>}
+            <i className="fa fa-angle-up up-arrow"></i>
+            <span ref={(r) => { this.btnText = r; }}>Preview dataset</span>
+            <i className="fa fa-angle-down down-arrow"></i>
           </button>
         </div>
-        <div className="dataset-preview">
-          <pre className="language-json">{this.state.content}</pre>
+        <div className="dataset-preview" ref={(r) => { this.preview = r; }}>
+          <pre className="language-json">{preview}</pre>
         </div>
       </div>
     );
