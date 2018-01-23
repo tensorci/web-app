@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
+import DashLoadingSpinner from '../widgets/spinners/DashLoadingSpinner';
 import DeploymentStages from './DeploymentStages';
 import DeploymentStatusBadge from './DeploymentStatusBadge';
 import pubnub from '../../utils/PubSub';
@@ -13,6 +14,7 @@ class Deployment extends Component {
     this.listenForStageUpdates = this.listenForStageUpdates.bind(this);
 
     this.state = {
+      loading: true,
       status: null,
       intent: null,
       failed: false,
@@ -29,9 +31,8 @@ class Deployment extends Component {
     Ajax.get('/api/deployment', { uid: this.props.uid })
       .then((resp) => resp.json())
       .then((data) => {
-        this.listenForStageUpdates();
-
         this.setState({
+          loading: false,
           status: data.readable_status,
           intent: data.intent,
           failed: data.failed,
@@ -42,6 +43,8 @@ class Deployment extends Component {
           currentStage: data.current_stage,
           stages: data.stages || {}
         });
+
+        this.listenForStageUpdates();
       });
   }
 
@@ -68,6 +71,10 @@ class Deployment extends Component {
     const team = this.props.team;
     const repo = this.props.repo;
     const commit = this.state.commit;
+
+    if (this.state.loading) {
+      return <div id="deployment"><DashLoadingSpinner/></div>;
+    }
 
     return (
       <div id="deployment" className="main-body">
