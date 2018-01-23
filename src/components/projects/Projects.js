@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
-import ProjectsList from './ProjectsList';
+import DashLoadingSpinner from '../widgets/spinners/DashLoadingSpinner';
 import NoProjectsForTeam from './NoProjectsForTeam';
+import ProjectsList from './ProjectsList';
 
 class Projects extends Component {
 
   constructor(props) {
     super(props);
 
+    this.getProjectComp = this.getProjectComp.bind(this);
+
     this.state = {
+      loading: true,
       projects: [],
-      loading: true
+      team: this.props.team
     };
   }
 
   componentDidMount() {
-    Ajax.get('/api/repos', { team: this.props.team })
+    Ajax.get('/api/repos', { team: this.state.team })
       .then((resp) => resp.json())
       .then((data) => {
         this.setState({
@@ -25,29 +29,25 @@ class Projects extends Component {
       });
   }
 
-  getMainComp(team, repo) {
-    // The existing projects are being fetched
-    if (this.state.loading) {
-      return <div className="dash-loading-spinner"></div>;
-    }
-
+  getProjectComp() {
     // No projects have been created for this team yet
-    if (this.state.projects.length === 0) {
-      return <NoProjectsForTeam team={team}/>;
+    if (!this.state.projects || this.state.projects.length === 0) {
+      return <NoProjectsForTeam team={this.state.team}/>;
     }
 
     // Projects exist
-    return <ProjectsList projects={this.state.projects} team={team}/>;
+    return <ProjectsList projects={this.state.projects} team={this.state.team}/>;
   }
 
   render() {
-    const team = this.props.team;
-    const repo = this.props.repo;
+    if (this.state.loading) {
+      return <div id="projects"><DashLoadingSpinner/></div>;
+    }
 
     return (
       <div id="projects" className="main-body">
         <div className="main-content">
-          <div className="main">{this.getMainComp(team, repo)}</div>
+          <div className="main">{this.getProjectComp()}</div>
         </div>
       </div>
     );

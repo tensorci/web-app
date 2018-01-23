@@ -56,7 +56,7 @@ class DashContent extends Component {
     } else if (meta.projectSettings) {
       return <ProjectSettings team={team} repo={repo}/>;
     } else {
-      return <Projects team={team} repo={repo}/>;
+      return <Projects team={team}/>;
     }
   }
 

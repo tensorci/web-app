@@ -13,7 +13,6 @@ class Predictions extends Component {
 
     return (
       <div id="predictions">
-        <ProjectAside team={team} repo={repo} linkPrefix="/predictions"/>
         <div className="main-display">
           <div className="main-body">
           </div>
