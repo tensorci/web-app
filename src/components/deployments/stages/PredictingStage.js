@@ -6,7 +6,7 @@ class PredictingStage extends StatusStage {
 
   getActionBtns(data, isCurrentStage, team, repo, intent) {
     return [
-      <Link href={'/predictions/' + team + '/' + repo} className="button secondary small">View predictions</Link>
+      <Link href={'/predictions/' + team + '/' + repo} className="button secondary">View predictions</Link>
     ];
   }
 }

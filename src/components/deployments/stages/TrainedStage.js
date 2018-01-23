@@ -18,7 +18,7 @@ class PredictingStage extends StatusStage {
     }
 
     return [
-      <button className="secondary small" onClick={() => { this.deployToApi(team, repo); }}>Deploy to API</button>
+      <button className="secondary" onClick={() => { this.deployToApi(team, repo); }}>Deploy to API</button>
     ];
   }
 }

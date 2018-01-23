@@ -61,6 +61,13 @@
           .right-side {
             display: inline-block;
             float: right;
+            margin-right: 15px;
+
+            button, a.button {
+              height: 36px;
+              font-size: 12px;
+              text-transform: uppercase;
+            }
           }
         }
       }
