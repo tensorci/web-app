@@ -137,15 +137,37 @@ a.button {
     &:hover {
       background-color: $primary-lighter;
     }
+
+    &:active {
+      background-color: $primary-darker;
+    }
+  }
+
+  &.secondary {
+    color: #fff;
+    background-color: $secondary;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &:active {
+      opacity: 1;
+    }
   }
 
   &.small {
     height: 30px;
     font-size: 12px;
   }
+
+  &.large {
+    width: 100%;
+  }
 }
 
-button.primary {
+button.primary,
+button.secondary {
   box-sizing: border-box;
   line-height: 1;
   font-weight: 500;
@@ -162,19 +184,38 @@ button.primary {
   border-radius: 3px;
   box-shadow: none;
   outline: none;
-  background-color: $primary;
   -webkit-transition: background-color 0.15s;
   -moz-transition: background-color 0.15s;
   -ms-transition: background-color 0.15s;
   -o-transition: background-color 0.15s;
   transition: background-color 0.15s;
 
+  &.large {
+    width: 100%;
+  }
+}
+
+button.primary {
+  background-color: $primary;
+
   &:hover {
     background-color: $primary-lighter;
   }
 
-  &.large {
-    width: 100%;
+  &:active {
+    background-color: $primary-darker;
+  }
+}
+
+button.secondary {
+  background-color: $secondary;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    opacity: 1;
   }
 }
 

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import intents from '../../utils/Intents';
 import LogStage from './stages/LogStage';
 import stages from '../../utils/Stages';
-import StatusStage from './stages/StatusStage';
+import TrainedStage from './stages/TrainedStage';
+import PredictingStage from './stages/PredictingStage';
 
 class DeploymentStages extends Component {
 
@@ -23,7 +23,7 @@ class DeploymentStages extends Component {
     ];
   }
 
-  compForStage(stageSlug, stage, isCurrentStage, i) {
+  compForStage(stageSlug, stage, isCurrentStage, team, repo, intent, i) {
     switch (stageSlug) {
     case stages.BUILDING_FOR_TRAIN:
       return <LogStage data={stage} current={isCurrentStage} key={i}/>;
@@ -32,19 +32,19 @@ class DeploymentStages extends Component {
     case stages.TRAINING:
       return <LogStage data={stage} current={isCurrentStage} key={i}/>;
     case stages.DONE_TRAINING:
-      return <StatusStage data={stage} current={isCurrentStage} key={i}/>;
+      return <TrainedStage data={stage} current={isCurrentStage} team={team} repo={repo} intent={intent} key={i}/>;
     case stages.BUILDING_FOR_API:
       return <LogStage data={stage} current={isCurrentStage} key={i}/>;
     case stages.PREDICTING_SCHEDULED:
       return <LogStage data={stage} current={isCurrentStage} key={i}/>;
     case stages.PREDICTING:
-      return <StatusStage data={stage} current={isCurrentStage} key={i}/>;
+      return <PredictingStage data={stage} current={isCurrentStage} team={team} repo={repo} key={i}/>;
     default:
       return null;
     }
   }
 
-  formatStages(stages, currentStage) {
+  formatStages(stages, currentStage, team, repo, intent) {
     var stage, comp;
     var stageComps = [];
 
@@ -52,7 +52,7 @@ class DeploymentStages extends Component {
       stage = stages[stageSlug];
 
       if (stage && stage.show) {
-        comp = this.compForStage(stageSlug, stage, stageSlug === currentStage, i);
+        comp = this.compForStage(stageSlug, stage, stageSlug === currentStage, team, repo, intent, i);
 
         if (comp) {
           stageComps.push(comp);
@@ -63,22 +63,16 @@ class DeploymentStages extends Component {
     return stageComps;
   }
 
-  getBuildActionBtn(currentStage, intent) {
-    // if done training and there was only the intent to train, show the serve button.
-    if (currentStage === stages.DONE_TRAINING && intent === intents.TRAIN && this.props.serve) {
-      return <button className="primary large" onClick={this.props.serve}>Deploy to API</button>;
-    }
-  }
-
   render() {
+    const team = this.props.team;
+    const repo = this.props.repo;
     const stages = this.props.stages;
     const currentStage = this.props.currentStage;
     const intent = this.props.intent;
 
     return (
       <div className="card col-sm-12 deployment-stages">
-        <div className="build-steps">{this.formatStages(stages, currentStage)}</div>
-        <div className="build-actions">{this.getBuildActionBtn(currentStage, intent)}</div>
+        <div className="build-steps">{this.formatStages(stages, currentStage, team, repo, intent)}</div>
       </div>
     );
   }

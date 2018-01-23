@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
 import DeploymentStages from './DeploymentStages';
 import DeploymentStatusBadge from './DeploymentStatusBadge';
-import intents from '../../utils/Intents';
 import pubnub from '../../utils/PubSub';
-import stages from '../../utils/Stages';
 import timeago from 'timeago.js';
 
 class Deployment extends Component {
@@ -13,7 +11,6 @@ class Deployment extends Component {
     super(props);
 
     this.listenForStageUpdates = this.listenForStageUpdates.bind(this);
-    this.serve = this.serve.bind(this);
 
     this.state = {
       status: null,
@@ -67,13 +64,6 @@ class Deployment extends Component {
     });
   }
 
-  serve() {
-    if (this.state.currentStage === stages.DONE_TRAINING && this.state.intent === intents.TRAIN) {
-      const gitUrl = 'https://github.com/' + this.props.team + '/' + this.props.repo + '.git';
-      Ajax.post('/api/deployment/api', { git_url: gitUrl });
-    }
-  }
-
   render() {
     const team = this.props.team;
     const repo = this.props.repo;
@@ -121,7 +111,7 @@ class Deployment extends Component {
                 </div>
               </div>
             </div>
-            <DeploymentStages stages={this.state.stages} currentStage={this.state.currentStage} intent={this.state.intent} serve={this.serve}/>
+            <DeploymentStages stages={this.state.stages} currentStage={this.state.currentStage} intent={this.state.intent} team={team} repo={repo}/>
           </div>
         </div>
       </div>
