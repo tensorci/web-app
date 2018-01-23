@@ -14,6 +14,7 @@ class Deployments extends Component {
     this.state = {
       loading: true,
       projects: [],
+      deployments: [],
       team: this.props.team,
       repo: this.props.repo
     };
@@ -73,7 +74,7 @@ class Deployments extends Component {
       .then((resp) => resp.json())
       .then((data) => {
         this.setState({
-          deployments: data.deployments,
+          deployments: data.deployments || [],
           repo: this.props.repo
         });
       });
@@ -84,7 +85,7 @@ class Deployments extends Component {
       return;
     }
 
-    return <DeploymentsList team={this.state.team} repo={this.state.repo} deployments={this.state.deployments} ref={(ref) => { this.deploymentsList = ref; }}/>;
+    return <DeploymentsList team={this.state.team} repo={this.state.repo} deployments={this.state.deployments}/>;
   }
 
   render() {
