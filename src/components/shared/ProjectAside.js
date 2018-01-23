@@ -1,24 +1,10 @@
 import React, { Component } from 'react';
-import Ajax from '../../utils/Ajax';
 import Link from '../../utils/Link';
 
 class ProjectAside extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.formatProjectList = this.formatProjectList.bind(this);
-    this.fetchProjects = this.fetchProjects.bind(this);
-
-    this.state = {
-      projects: [],
-      loading: true,
-      team: this.props.team
-    };
-  }
-
-  formatProjectList(team, repo, linkPrefix) {
-    if (this.state.projects.length === 0 && !this.state.loading) {
+  formatProjectList(projects, team, repo, linkPrefix) {
+    if (!projects || projects.length === 0) {
       return (
         <div className="proj-list-empty">
           <div className="card">
@@ -37,7 +23,7 @@ class ProjectAside extends Component {
 
     var classes, teamRepoHref, projHref, editProjHref;
 
-    return this.state.projects.map((p, i) => {
+    return projects.map((p, i) => {
       classes = 'project-heading';
 
       if ((!repo && i === 0) || p.slug === repo) {
@@ -62,39 +48,11 @@ class ProjectAside extends Component {
     });
   }
 
-  componentDidMount() {
-    this.fetchProjects();
-  }
-
-  componentDidUpdate() {
-    if (this.props.team !== this.state.team) {
-      this.setState({ team: this.props.team, loading: true });
-    } else if (this.state.loading) {
-      this.fetchProjects();
-    }
-  }
-
-  fetchProjects() {
-    Ajax.get('/api/repos', { team: this.state.team })
-      .then((resp) => resp.json())
-      .then((data) => {
-        const repos = data.repos || [];
-
-        if (!this.props.repo && this.props.onAutoSelect && repos.length > 0) {
-          this.props.onAutoSelect(repos[0].slug);
-        }
-
-        this.setState({
-          projects: repos,
-          loading: false
-        });
-      });
-  }
-
   render() {
     const team = this.props.team;
     const repo = this.props.repo;
     const linkPrefix = this.props.linkPrefix || '';
+    const projects = this.props.projects || [];
 
     return (
       <aside className="app-aside">
@@ -106,7 +64,7 @@ class ProjectAside extends Component {
                 <option value="">Recent</option>
               </select>
             </header>
-            <ul className="projects">{this.formatProjectList(team, repo, linkPrefix)}</ul>
+            <ul className="projects">{this.formatProjectList(projects, team, repo, linkPrefix)}</ul>
           </div>
         </nav>
       </aside>

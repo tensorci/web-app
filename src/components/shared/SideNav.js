@@ -69,9 +69,7 @@ class SideNav extends Component {
 
   render() {
     const appSection = this.props.appSection;
-
-    // default team is username
-    const team = this.props.team || Session.username();
+    const team = this.props.team || Session.username(); // default to username team
 
     return (
       <nav className="aside-left-nav">{this.getLinks(appSection, team)}</nav>
