@@ -165,5 +165,11 @@
     text-transform: uppercase;
     font-size: 13px;
     height: 40px;
+    background-color: $secondary !important;
+
+    &:hover {
+      opacity: 0.9;
+      background-color: $secondary !important;
+    }
   }
 }
