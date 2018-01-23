@@ -57,11 +57,16 @@
 
         .command {
           line-height: 4em;
+
+          .right-side {
+            display: inline-block;
+            float: right;
+          }
         }
       }
     }
 
-    .button {
+    .button:not(.secondary) {
       float: left;
       background-repeat: no-repeat;
       background-position: center;
