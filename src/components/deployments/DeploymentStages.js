@@ -10,7 +10,6 @@ class DeploymentStages extends Component {
     super(props);
 
     this.formatStages = this.formatStages.bind(this);
-    this.getBuildActionBtn = this.getBuildActionBtn.bind(this);
 
     this.orderedStages = [
       stages.BUILDING_FOR_TRAIN,
