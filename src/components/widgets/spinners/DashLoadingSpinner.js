@@ -4,9 +4,7 @@ class DashLoadingSpinner extends Component {
 
   render() {
     return (
-      <div className="">
-        SPINNER
-      </div>
+      <div className="chasing-tail-spinner"></div>
     );
   }
 }
