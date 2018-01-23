@@ -47,7 +47,7 @@ reload_model: module1.module2:function`;
               <div className="title">Setup Project</div>
             </div>
             <div className="card-body">
-              <p>TensorCI helps you manage machine learning apps, better. To kick things off, you'll need to add a <code>.tensorci.yml</code> file to the root of your project and commit that to GitHub. After that, we'll start a new build for you each time someone pushes a new commit.</p>
+              <p>TensorCI helps you manage machine learning apps more efficiently. To kick things off, you'll need to add a <code>.tensorci.yml</code> file to the root of your project and commit that to GitHub. After that, we'll start a new build for you each time someone pushes a new commit.</p>
               <p>Select from the following languages to generate a sample .yml for your project.</p>
               <div>
                 <div>
