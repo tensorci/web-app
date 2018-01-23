@@ -20,7 +20,7 @@ class Link extends Component {
 
   render() {
     return (
-      <a href={this.props.href} className={this.props.className} onClick={this.onClick}>{this.props.children}</a>
+      <a href={this.props.href} className={this.props.className} title={this.props.title} onClick={this.onClick}>{this.props.children}</a>
     );
   }
 }

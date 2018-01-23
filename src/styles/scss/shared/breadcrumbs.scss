@@ -60,5 +60,52 @@
     box-pack: justify;
     -webkit-justify-content: space-between;
     justify-content: space-between;
+
+    >:not(:first-child) {
+      margin-left: 1em;
+    }
+
+    .breadcrumb-icon-action-btn {
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      display: -ms-inline-flexbox;
+      display: -webkit-inline-box;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      font-size: 14px;
+      line-height: 1;
+      outline: none;
+      cursor: pointer;
+      white-space: nowrap;
+      color: #333;
+      background-color: #eee;
+      font-weight: 500;
+      transition: all .2s cubic-bezier(.4, 0, .2, 1);
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 30px;
+      padding: 4px 6px;
+
+      &:hover {
+        background-color: #d5d5d5;
+      }
+
+      &:active {
+        background-color: #8d8d8d;
+        color: #fff;
+      }
+
+      i {
+        color: #4a4a4a;
+
+        &.material-icons {
+          margin-left: 0;
+        }
+      }
+    }
   }
 }

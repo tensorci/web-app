@@ -15,7 +15,7 @@ class BreadCrumbs extends Component {
 
   getActionBtns(btns) {
     return (btns || []).map((info, i) => {
-      return <Link key={i} href={info.link} className="button primary small">{info.text}</Link>;
+      return <Link key={i} href={info.link} title={info.title} className={(info.classes || []).join(' ')}>{info.contents}</Link>;
     });
   }
 

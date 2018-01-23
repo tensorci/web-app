@@ -122,14 +122,32 @@ class DashContent extends Component {
     return comps;
   }
 
-  getActionBtns(appSection, team, meta) {
+  getActionBtns(appSection, team, repo, uid, meta) {
     var btns = [];
 
     if (appSection === 'projects' && !meta.addProjects && !meta.setupProject && !meta.projectSettings) {
-      btns.push({
+      btns = [{
         link: '/add-projects/' + team,
-        text: 'Add Project'
-      });
+        contents: 'Add Project',
+        classes: ['button', 'primary', 'small']
+      }];
+    } else if (appSection === 'deployments' && !!uid) {
+      const teamRepo = '/' + team + '/' + repo;
+
+      btns = [
+        {
+          link: '/datasets' + teamRepo,
+          contents: <i className="fa fa-table"></i>,
+          classes: ['breadcrumb-icon-action-btn'],
+          title: 'Project datasets'
+        },
+        {
+          link: teamRepo + '/settings',
+          contents: <i className="material-icons">settings</i>,
+          classes: ['breadcrumb-icon-action-btn'],
+          title: 'Project settings'
+        }
+      ];
     }
 
     return btns;
@@ -152,7 +170,7 @@ class DashContent extends Component {
     return (
       <div id="dashContent">
         <div className="sub-header">
-          <BreadCrumbs path={breadCrumbPath} actionBtns={this.getActionBtns(appSection, team, meta)}/>
+          <BreadCrumbs path={breadCrumbPath} actionBtns={this.getActionBtns(appSection, team, repo, uid, meta)}/>
         </div>
         <div className="app-dominant">{content.comp(team, repo, uid, meta)}</div>
       </div>
