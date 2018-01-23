@@ -11,8 +11,11 @@ class ProjectAside extends Component {
             <div className="card-body">
               <div>
                 <p>No projects listed?</p>
-                <Link href={'/add-projects/' + team} className="button secondary">
-                  <span><i className="material-icons">library_add</i><span className="btn-text">Add projects</span></span>
+                <Link href={'/add-projects/' + team} className="button">
+                  <span>
+                    <i className="material-icons">library_add</i>
+                    <span className="btn-text">Add projects</span>
+                  </span>
                 </Link>
               </div>
             </div>
