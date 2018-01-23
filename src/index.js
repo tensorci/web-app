@@ -9,7 +9,8 @@ import Session from './utils/Session';
 
 // if not authed and not trying to become authed, then redirect to marketing site
 if (!Session.authed() && !document.location.pathname.startsWith('/oauth_redirect')) {
-  window.location = 'http://localhost:9000';
+  // TODO: get this from env var
+  window.location = 'https://www.tensorci.com';
 } else {
   ReactDOM.render((
     <BrowserRouter>
