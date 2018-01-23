@@ -26,7 +26,7 @@ class DatasetPreview extends Component {
   }
 
   render() {
-    const preview = JSON.stringify(this.props.preview || {}, undefined, 2);
+    const preview = JSON.stringify(this.props.preview || [], undefined, 2);
 
     return (
       <div className="dataset-preview-container" ref={(r) => { this.container = r; }}>
