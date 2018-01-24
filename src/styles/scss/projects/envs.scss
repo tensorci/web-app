@@ -36,6 +36,12 @@ $gutter: 10px;
       text-align: center;
       line-height: 36px;
     }
+
+    &.circle-button-spinner {
+      i {
+        opacity: 0;
+      }
+    }
   }
 }
 

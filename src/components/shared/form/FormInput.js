@@ -25,12 +25,15 @@ class FormInput extends Component {
     this.input = ref;
   }
 
-  isValid() {
+  isValid(silent) {
     var isValid = true;
 
     if (this.props.required && !this.serialize()) {
       isValid = false;
-      this.showInvalid();
+
+      if (!silent) {
+        this.showInvalid();
+      }
     }
 
     return isValid;

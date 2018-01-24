@@ -28,11 +28,11 @@ class Form extends Component {
     }
   }
 
-  formValid() {
+  formValid(silent) {
     var isValid = true;
 
     this.formCompRefs.forEach((ref) => {
-      if (!ref.isValid()) {
+      if (!ref.isValid(silent)) {
         isValid = false;
       }
     });

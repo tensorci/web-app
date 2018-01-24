@@ -9,10 +9,10 @@ class Env extends Component {
     this.isValid = this.isValid.bind(this);
   }
 
-  isValid() {
+  isValid(silent) {
     // Do these separately so they both show up as invalid if that's the case.
-    const nameValid = this.name.isValid();
-    const valueValid = this.value.isValid();
+    const nameValid = this.name.isValid(silent);
+    const valueValid = this.value.isValid(silent);
 
     return nameValid && valueValid;
   }

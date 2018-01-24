@@ -12,6 +12,8 @@ class Envs extends Form {
     this.removeEnv = this.removeEnv.bind(this);
     this.addEnvInput = this.addEnvInput.bind(this);
     this.save = this.save.bind(this);
+    this.isEmpty = this.isEmpty.bind(this);
+    this.isStatic = this.isStatic.bind(this);
     this.clusterName = this.clusterName.bind(this);
   }
 
@@ -41,10 +43,16 @@ class Envs extends Form {
     Ajax.put('/api/envs', payload)
       .then((resp) => resp.json())
       .then((data) => {
-        this.setState({
-          status: this.status.STATIC,
-          values: data.envs
-        });
+        setTimeout(() => {
+          this.setState({
+            status: this.status.STATIC,
+            values: data.envs
+          });
+
+          if (this.props.onSaved) {
+            this.props.onSaved();
+          }
+        }, 500);
       });
   }
 
@@ -121,12 +129,20 @@ class Envs extends Form {
     this.setState({ values: values });
   }
 
+  isEmpty() {
+    return !this.state.values || this.state.values.length === 0;
+  }
+
   save() {
-    if (this.state.values.length === 0) {
+    if (this.isEmpty()) {
       return;
     }
 
     this.serialize(false);
+  }
+
+  isStatic() {
+    return this.state.status === this.status.STATIC;
   }
 
   clusterName() {
