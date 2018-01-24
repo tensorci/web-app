@@ -48,7 +48,7 @@ reload_model: module1.module2:function`;
 
     Ajax.post('/api/deployment/train', payload)
       .then((resp) => {
-        if (resp.status === 201) {
+        if (resp.status === 200 || resp.status === 201) {
           // redirect to deployments page
           History.push('/' + this.props.team + '/' + this.props.repo);
         } else {
