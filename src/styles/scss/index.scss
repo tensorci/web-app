@@ -37,6 +37,7 @@
 @import 'shared/breadcrumbs';
 @import 'shared/card';
 @import 'shared/aside';
+@import 'shared/spinner-btn';
 @import 'shared/footers/footer';
 @import 'shared/form/form-input';
 @import 'shared/form/form-select';
@@ -44,7 +45,6 @@
 
 // Widgets
 @import 'widgets/spinners/spinners';
-@import 'widgets/spinners/horiz-spinner';
 @import 'widgets/spinners/chasing-tail-spinner';
 @import 'widgets/spinners/circle-button-spinner';
 @import 'widgets/spinners/basic-spinner';

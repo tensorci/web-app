@@ -82,15 +82,7 @@
     box-shadow: none;
     outline: none;
 
-    &:not(.primary) {
-      background-color: $secondary;
-    }
-
-    &:hover:not(.primary) {
-      opacity: 0.9;
-    }
-
-    &.launched {
+    &.complete {
       color: $primary;
       border-color: $primary;
       background-color: #fff;

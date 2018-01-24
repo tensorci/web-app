@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import Ajax from '../../utils/Ajax';
 import Link from '../../utils/Link';
+import SpinnerBtn from '../shared/SpinnerBtn';
 
 class SetupProject extends Component {
 
@@ -28,7 +29,7 @@ reload_model: module1.module2:function`;
     Ajax.post('/api/repo/register', { git_url: gitUrl })
       .then((resp) => {
         if (resp.status === 201) {
-          $(this.launchBtn).addClass('launched').html('Launched!');
+          this.launchBtn.complete();
         } else {
           console.error('Couldn\'t launch project -- Invalid permissions.');
         }
@@ -113,7 +114,15 @@ reload_model: module1.module2:function`;
                               <p>Officially launch project.</p>
                             </td>
                             <td>
-                              <button className="checklist-btn primary" onClick={this.launchProject} ref={(ref) => { this.launchBtn = ref; }}>Launch project</button>
+                              <SpinnerBtn
+                                className="checklist-btn primary"
+                                onClick={this.launchProject}
+                                completeText="Launched"
+                                minLoadingDuration={1000}
+                                infiniteComplete={true}
+                                ref={(ref) => { this.launchBtn = ref; }}>
+                                Launch project
+                              </SpinnerBtn>
                             </td>
                           </tr>
                           <tr>
@@ -122,7 +131,7 @@ reload_model: module1.module2:function`;
                               <p>Create a dataset for your project.</p>
                             </td>
                             <td>
-                              <Link href={'/datasets/' + team} className="button checklist-btn">View datasets</Link>
+                              <Link href={'/datasets/' + team} className="button checklist-btn secondary">View datasets</Link>
                             </td>
                           </tr>
                           <tr>
@@ -131,7 +140,7 @@ reload_model: module1.module2:function`;
                               <p>Start training! You can use either the CLI or the dashboard to kick off a new training build.</p>
                             </td>
                             <td>
-                              <Link href={'/' + team + '/' + repo} className="button checklist-btn">Start training</Link>
+                              <Link href={'/' + team + '/' + repo} className="button checklist-btn secondary">Start training</Link>
                             </td>
                           </tr>
                         </tbody>

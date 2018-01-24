@@ -1,13 +1,21 @@
-.horiz-spinner {
-  position: absolute;
-  margin: 0 auto;
-  width: 70px;
-  text-align: center;
+$dot-size: 15px;
+
+.spinner-btn {
+  position: relative;
+
+  i.check {
+    width: 20px;
+    position: absolute;
+    margin-left: -22px;
+    font-size: 1.3em;
+    margin-top: -1px;
+  }
 }
 
-.horiz-spinner > div {
-  width: 18px;
-  height: 18px;
+.spinner-btn > div {
+  width: $dot-size;
+  height: $dot-size;
+  margin-top: 1px;
   background-color: #fff;
 
   border-radius: 100%;
@@ -16,12 +24,12 @@
   animation: sk-bouncedelay 1.4s infinite ease-in-out both;
 }
 
-.horiz-spinner .bounce1 {
+.spinner-btn .bounce1 {
   -webkit-animation-delay: -0.32s;
   animation-delay: -0.32s;
 }
 
-.horiz-spinner .bounce2 {
+.spinner-btn .bounce2 {
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
 }
