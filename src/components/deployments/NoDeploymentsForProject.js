@@ -18,9 +18,8 @@ class NoDeploymentsForProject extends Component {
     Ajax.post('/api/deployment/train', payload)
       .then((resp) => {
         if (resp.status === 200 || resp.status === 201) {
-          if (this.props.refreshDeployments) {
-            this.props.refreshDeployments();
-          }
+          // TODO: this is bad UX --> ideal is to just refetch deployments & update all DeploymentsList children
+          window.location = '/' + team + '/' + repo;
         } else {
           // error
         }
@@ -46,7 +45,7 @@ class NoDeploymentsForProject extends Component {
             </div>
             <div className="secondary-msg">Let's fix that by deploying to the TensorCI training cluster.</div>
             <div className="action-btn-center-container">
-              <SpinnerBtn className="primary" onClick={() => { this.startTraining(team, repo);} }>Start training</SpinnerBtn>
+              <SpinnerBtn className="primary start-training" onClick={() => { this.startTraining(team, repo);} }>Start training</SpinnerBtn>
             </div>
           </div>
         </div>

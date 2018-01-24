@@ -6,7 +6,7 @@ class DeploymentsList extends Component {
 
   formatDeployments(deployments, team, repo) {
     if (!deployments || deployments.length === 0) {
-      return <NoDeploymentsForProject team={team} repo={repo} refreshDeployments={this.props.refreshDeployments}/>;
+      return <NoDeploymentsForProject team={team} repo={repo}/>;
     }
 
     return deployments.map((d, i) => {

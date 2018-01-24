@@ -9,6 +9,8 @@ class Deployments extends Component {
   constructor(props) {
     super(props);
 
+    this.fetchReposAndDeployments = this.fetchReposAndDeployments.bind(this);
+    this.fetchDeployments = this.fetchDeployments.bind(this);
     this.getDeploymentsList = this.getDeploymentsList.bind(this);
 
     this.state = {
@@ -85,7 +87,7 @@ class Deployments extends Component {
       return;
     }
 
-    return <DeploymentsList team={this.state.team} repo={this.state.repo} deployments={this.state.deployments} refreshDeployments={this.fetchDeployments}/>;
+    return <DeploymentsList team={this.state.team} repo={this.state.repo} deployments={this.state.deployments}/>;
   }
 
   render() {
