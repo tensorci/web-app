@@ -52,7 +52,7 @@ class Envs extends Form {
           if (this.props.onSaved) {
             this.props.onSaved();
           }
-        }, 500);
+        }, 250);
       });
   }
 

@@ -6,7 +6,7 @@ class DatasetPreview extends Component {
   constructor(props) {
     super(props);
     this.toggleVisibility = this.toggleVisibility.bind(this);
-    this.slideDuration = 250;
+    this.slideDuration = 300;
   }
 
   toggleVisibility() {
