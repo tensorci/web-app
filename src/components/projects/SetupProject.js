@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
 import Ajax from '../../utils/Ajax';
+import History from '../../utils/History';
 import Link from '../../utils/Link';
 import SpinnerBtn from '../shared/SpinnerBtn';
 
@@ -20,26 +20,44 @@ test: module1.module2:function
 predict: module1.module2:function
 reload_model: module1.module2:function`;
 
+    this.gitUrl = this.gitUrl.bind(this);
     this.launchProject = this.launchProject.bind(this);
+    this.startTraining = this.startTraining.bind(this);
+  }
+
+  gitUrl() {
+    return 'https://github.com/' + this.props.team + '/' + this.props.repo + '.git';
   }
 
   launchProject() {
-    const gitUrl = 'https://github.com/' + this.props.team + '/' + this.props.repo + '.git';
-
-    Ajax.post('/api/repo/register', { git_url: gitUrl })
+    Ajax.post('/api/repo/register', { git_url: this.gitUrl() })
       .then((resp) => {
         if (resp.status === 201) {
           this.launchBtn.complete();
         } else {
-          console.error('Couldn\'t launch project -- Invalid permissions.');
+          // error
+        }
+      });
+  }
+
+  startTraining() {
+    const payload = {
+      git_url: this.gitUrl(),
+      with_log_stream: false
+    };
+
+    Ajax.post('/api/deployment/train', payload)
+      .then((resp) => {
+        if (resp.status === 201) {
+          // redirect to deployments page
+          History.push('/' + this.props.team + '/' + this.props.repo);
+        } else {
+          // error
         }
       });
   }
 
   render() {
-    const team = this.props.team;
-    const repo = this.props.repo;
-
     return (
       <div className="main-body">
         <div id="setupProject">
@@ -131,7 +149,7 @@ reload_model: module1.module2:function`;
                               <p>Create a dataset for your project.</p>
                             </td>
                             <td>
-                              <Link href={'/datasets/' + team} className="button checklist-btn secondary">View datasets</Link>
+                              <Link href={'/datasets/' + this.props.team} className="button checklist-btn secondary">View datasets</Link>
                             </td>
                           </tr>
                           <tr>
@@ -140,7 +158,7 @@ reload_model: module1.module2:function`;
                               <p>Start training! You can use either the CLI or the dashboard to kick off a new training build.</p>
                             </td>
                             <td>
-                              <Link href={'/' + team + '/' + repo} className="button checklist-btn secondary">Start training</Link>
+                              <SpinnerBtn className="checklist-btn secondary" onClick={this.startTraining}>Start training</SpinnerBtn>
                             </td>
                           </tr>
                         </tbody>
