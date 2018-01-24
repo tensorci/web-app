@@ -1,5 +1,6 @@
 import React from 'react';
 import Ajax from '../../utils/Ajax';
+import DataLoadingSpinner from '../widgets/spinners/DataLoadingSpinner';
 import Env from './Env';
 import Form from '../shared/form/Form';
 
@@ -7,6 +8,7 @@ class Envs extends Form {
 
   constructor(props) {
     super(props);
+
     this.submit = this.submit.bind(this);
     this.getEnvs = this.getEnvs.bind(this);
     this.removeEnv = this.removeEnv.bind(this);
@@ -15,6 +17,8 @@ class Envs extends Form {
     this.isEmpty = this.isEmpty.bind(this);
     this.isStatic = this.isStatic.bind(this);
     this.clusterName = this.clusterName.bind(this);
+
+    this.state.loading = true;
   }
 
   componentDidUpdate() {
@@ -153,6 +157,10 @@ class Envs extends Form {
   }
 
   render() {
+    if (this.state.loading || true) {
+      return <div className="envs-container"><DataLoadingSpinner/></div>;
+    }
+
     return (
       <div className="envs-container">
         <div className="envs">{this.getEnvs()}</div>
