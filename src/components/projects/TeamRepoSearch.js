@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
+import DashLoadingSpinner from '../widgets/spinners/DashLoadingSpinner';
 import RepoSearchResult from './RepoSearchResult';
 import SearchInput, { createFilter } from 'react-search-input';
 
@@ -13,7 +14,8 @@ class TeamRepoSearch extends Component {
 
     this.state = {
       search: '',
-      projects: []
+      projects: [],
+      loading: true
     };
   }
 
@@ -21,7 +23,10 @@ class TeamRepoSearch extends Component {
     Ajax.get('/api/repos/available', { team: this.props.team })
       .then((resp) => resp.json())
       .then((data) => {
-        this.setState({ projects: data.repos });
+        this.setState({
+          projects: data.repos,
+          loading: false
+        });
       });
   }
 
@@ -44,7 +49,9 @@ class TeamRepoSearch extends Component {
           <SearchInput className="search-input" placeholder="Filter projects..." onChange={this.searchUpdated}/>
         </div>
         <div>
-          <ul className="proj-list">{this.formatResults(results)}</ul>
+          {this.state.loading ?
+            <div className="filter-project-loading"><DashLoadingSpinner/><p>Fetching repos from GitHub...</p></div> :
+            <ul className="proj-list">{this.formatResults(results)}</ul>}
         </div>
       </div>
     );
