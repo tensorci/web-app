@@ -33,6 +33,10 @@
     box-pack: justify;
     -webkit-justify-content: space-between;
     justify-content: space-between;
+
+    button {
+      width: 130px;
+    }
   }
 
   .select-retrain-ss {

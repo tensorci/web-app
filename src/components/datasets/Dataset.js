@@ -59,6 +59,7 @@ class Dataset extends Component {
         className="primary"
         completeText="Updated"
         minLoadingDuration={1000}
+        completeTime={1500}
         onClick={() => { this.saveDataset(info.uid); }}
         ref={(r) => { this.updateDatasetBtn = r; }}>
         Update dataset

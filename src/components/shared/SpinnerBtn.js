@@ -10,7 +10,6 @@ class SpinnerBtn extends Component {
     this.onClick = this.onClick.bind(this);
 
     this.defaultCompleteTime = 1000; // ms
-    this.defaultMinLoadingDuration = 1000; // ms
     this.loadingLocked = false;
     this.completeScheduled = false;
 
