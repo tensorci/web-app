@@ -157,7 +157,7 @@ class Envs extends Form {
   }
 
   render() {
-    if (this.state.loading || true) {
+    if (this.state.loading) {
       return <div className="envs-container"><DataLoadingSpinner/></div>;
     }
 
