@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Ajax from '../../utils/Ajax';
+import SpinnerBtn from '../shared/SpinnerBtn';
 
 class NoDeploymentsForProject extends Component {
 
@@ -7,8 +9,22 @@ class NoDeploymentsForProject extends Component {
     this.startTraining = this.startTraining.bind(this);
   }
 
-  startTraining() {
-    // start a new Deployment
+  startTraining(team, repo) {
+    const payload = {
+      git_url: 'https://github.com/' + team + '/' + repo + '.git',
+      with_log_stream: false
+    };
+
+    Ajax.post('/api/deployment/train', payload)
+      .then((resp) => {
+        if (resp.status === 200 || resp.status === 201) {
+          if (this.props.refreshDeployments) {
+            this.props.refreshDeployments();
+          }
+        } else {
+          // error
+        }
+      });
   }
 
   render() {
@@ -30,7 +46,7 @@ class NoDeploymentsForProject extends Component {
             </div>
             <div className="secondary-msg">Let's fix that by deploying to the TensorCI training cluster.</div>
             <div className="action-btn-center-container">
-              <button className="button primary small" onClick={this.startTraining}>Start Training</button>
+              <SpinnerBtn className="primary" onClick={() => { this.startTraining(team, repo);} }>Start training</SpinnerBtn>
             </div>
           </div>
         </div>

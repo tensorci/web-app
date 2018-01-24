@@ -193,6 +193,11 @@ button.secondary {
   &.large {
     width: 100%;
   }
+
+  &.spinner-btn.complete {
+    background-color: #fff;
+    pointer-events: none;
+  }
 }
 
 button.primary {
@@ -205,6 +210,11 @@ button.primary {
   &:active {
     background-color: $primary-darker;
   }
+
+  &.spinner-btn.complete {
+    color: $primary;
+    border-color: $primary;
+  }
 }
 
 button.secondary {
@@ -216,6 +226,11 @@ button.secondary {
 
   &:active {
     opacity: 1;
+  }
+
+  &.spinner-btn.complete {
+    color: $secondary;
+    border-color: $secondary;
   }
 }
 

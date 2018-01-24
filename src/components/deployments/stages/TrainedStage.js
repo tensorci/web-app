@@ -1,6 +1,7 @@
 import React from 'react';
 import Ajax from '../../../utils/Ajax';
 import intents from '../../../utils/Intents';
+import SpinnerBtn from '../../shared/SpinnerBtn';
 import StatusStage from './StatusStage';
 
 class PredictingStage extends StatusStage {
@@ -18,7 +19,7 @@ class PredictingStage extends StatusStage {
     }
 
     return [
-      <button className="secondary" onClick={() => { this.deployToApi(team, repo); }}>Deploy to API</button>
+      <SpinnerBtn className="secondary" onClick={() => { this.deployToApi(team, repo); }}>Deploy to API</SpinnerBtn>
     ];
   }
 }

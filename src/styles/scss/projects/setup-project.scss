@@ -81,13 +81,6 @@
     border-radius: 3px;
     box-shadow: none;
     outline: none;
-
-    &.complete {
-      color: $primary;
-      border-color: $primary;
-      background-color: #fff;
-      pointer-events: none;
-    }
   }
 
   .build-config-string pre {

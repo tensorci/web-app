@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 import Ajax from '../../utils/Ajax';
 import DatasetPreview from './DatasetPreview';
 import moment from 'moment';
-import $ from 'jquery';
+import SpinnerBtn from '../shared/SpinnerBtn';
 
 class Dataset extends Component {
 
@@ -53,7 +54,16 @@ class Dataset extends Component {
       return;
     }
 
-    return <button className="primary small" onClick={() => { this.saveDataset(info.uid); }}>Update dataset</button>;
+    return (
+      <SpinnerBtn
+        className="primary"
+        completeText="Updated"
+        minLoadingDuration={1000}
+        onClick={() => { this.saveDataset(info.uid); }}
+        ref={(r) => { this.updateDatasetBtn = r; }}>
+        Update dataset
+      </SpinnerBtn>
+    );
   }
 
   saveDataset(uid) {
@@ -73,7 +83,7 @@ class Dataset extends Component {
     Ajax.put('/api/dataset', payload)
       .then((resp) => {
         if (resp.status === 200) {
-          // success
+          this.updateDatasetBtn.complete();
         } else {
           // error
         }

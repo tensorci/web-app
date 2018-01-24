@@ -85,7 +85,7 @@ class Deployments extends Component {
       return;
     }
 
-    return <DeploymentsList team={this.state.team} repo={this.state.repo} deployments={this.state.deployments}/>;
+    return <DeploymentsList team={this.state.team} repo={this.state.repo} deployments={this.state.deployments} refreshDeployments={this.fetchDeployments}/>;
   }
 
   render() {
