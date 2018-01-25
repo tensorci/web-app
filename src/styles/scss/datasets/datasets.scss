@@ -34,8 +34,12 @@
     -webkit-justify-content: space-between;
     justify-content: space-between;
 
-    button {
-      width: 130px;
+    > button {
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 

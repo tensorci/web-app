@@ -18,8 +18,9 @@ class NoDeploymentsForProject extends Component {
     Ajax.post('/api/deployment/train', payload)
       .then((resp) => {
         if (resp.status === 200 || resp.status === 201) {
-          // TODO: this is bad UX --> ideal is to just refetch deployments & update all DeploymentsList children
-          window.location = '/' + team + '/' + repo;
+          if (this.props.refresh) {
+            this.props.refresh();
+          }
         } else {
           // error
         }

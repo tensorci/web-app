@@ -39,7 +39,7 @@ class Deployments extends Component {
       });
     } else if (this.props.repo && (this.props.repo !== this.state.repo)) {
       // Repo was changed, so just refetch deployments for that repo
-      this.fetchDeployments();
+      this.fetchDeployments(this.props.repo);
     }
   }
 
@@ -66,10 +66,10 @@ class Deployments extends Component {
       });
   }
 
-  fetchDeployments() {
+  fetchDeployments(repo) {
     const payload = {
       team: this.state.team,
-      repo: this.props.repo
+      repo: repo
     };
 
     Ajax.get('/api/deployments', payload)
@@ -77,9 +77,13 @@ class Deployments extends Component {
       .then((data) => {
         this.setState({
           deployments: data.deployments || [],
-          repo: this.props.repo
+          repo: repo
         });
       });
+  }
+
+  refresh() {
+    this.fetchDeployments(this.state.repo);
   }
 
   getDeploymentsList() {
@@ -87,7 +91,7 @@ class Deployments extends Component {
       return;
     }
 
-    return <DeploymentsList team={this.state.team} repo={this.state.repo} deployments={this.state.deployments}/>;
+    return <DeploymentsList team={this.state.team} repo={this.state.repo} deployments={this.state.deployments} refresh={this.refresh}/>;
   }
 
   render() {

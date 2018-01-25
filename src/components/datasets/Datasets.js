@@ -13,6 +13,7 @@ class Datasets extends Component {
     this.fetchReposAndDatasets = this.fetchReposAndDatasets.bind(this);
     this.fetchDatasets = this.fetchDatasets.bind(this);
     this.getDatasetsComp = this.getDatasetsComp.bind(this);
+    this.refresh = this.refresh.bind(this);
 
     this.state = {
       loading: true,
@@ -30,7 +31,7 @@ class Datasets extends Component {
   componentDidUpdate() {
     // Repo was changed, so just refetch datasets for this repo
     if (this.props.repo && (this.props.repo !== this.state.repo)) {
-      this.fetchDatasets();
+      this.fetchDatasets(this.props.repo);
     }
   }
 
@@ -53,10 +54,10 @@ class Datasets extends Component {
       });
   }
 
-  fetchDatasets() {
+  fetchDatasets(repo) {
     const payload = {
       team: this.state.team,
-      repo: this.props.repo
+      repo: repo
     };
 
     Ajax.get('/api/datasets', payload)
@@ -64,9 +65,13 @@ class Datasets extends Component {
       .then((data) => {
         this.setState({
           datasets: data.datasets || [],
-          repo: this.props.repo
+          repo: repo
         });
       });
+  }
+
+  refresh() {
+    this.fetchDatasets(this.state.repo);
   }
 
   getDatasetsComp() {
@@ -78,7 +83,7 @@ class Datasets extends Component {
       return <NoDatasets team={this.state.team} repo={this.state.repo}/>;
     }
 
-    return <ProjectDatasets team={this.state.team} repo={this.state.repo} datasets={this.state.datasets}/>;
+    return <ProjectDatasets team={this.state.team} repo={this.state.repo} datasets={this.state.datasets} refresh={this.refresh}/>;
   }
 
   render() {

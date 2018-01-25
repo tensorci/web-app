@@ -5,7 +5,7 @@ class ProjectDatasets extends Component {
 
   formatDatasets(datasets) {
     return (datasets || []).map((d, i) => {
-      return <Dataset key={i} info={d}/>;
+      return <Dataset key={i} info={d} refresh={this.props.refresh}/>;
     });
   }
 

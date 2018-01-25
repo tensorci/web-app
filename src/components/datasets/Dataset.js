@@ -3,14 +3,19 @@ import $ from 'jquery';
 import Ajax from '../../utils/Ajax';
 import DatasetPreview from './DatasetPreview';
 import moment from 'moment';
-import SpinnerBtn from '../shared/SpinnerBtn';
+import CircleSpinnerBtn from '../shared/CircleSpinnerBtn';
 
 class Dataset extends Component {
 
   constructor(props) {
     super(props);
+
     this.getStepSizes = this.getStepSizes.bind(this);
     this.getRetrainStepSize = this.getRetrainStepSize.bind(this);
+    this.getDatasetActionBtns = this.getDatasetActionBtns.bind(this);
+    this.saveDataset = this.saveDataset.bind(this);
+    this.removeDataset = this.removeDataset.bind(this);
+
     this.stepSizeNotSet = 'Never';
   }
   
@@ -49,22 +54,28 @@ class Dataset extends Component {
     }
   }
 
-  getSaveDatasetBtn(info) {
+  getDatasetActionBtns(info) {
     if (!info.has_write_access) {
       return;
     }
 
-    return (
-      <SpinnerBtn
-        className="primary"
-        completeText="Updated"
+    return [
+      <CircleSpinnerBtn
+        key={0}
+        className="cbs-secondary"
         minLoadingDuration={1000}
         completeTime={1500}
         onClick={() => { this.saveDataset(info.uid); }}
         ref={(r) => { this.updateDatasetBtn = r; }}>
-        Update dataset
-      </SpinnerBtn>
-    );
+        <i className="material-icons">save</i>
+      </CircleSpinnerBtn>,
+      <CircleSpinnerBtn
+        key={1}
+        className="cbs-remove"
+        onClick={() => { this.removeDataset(info.uid); }}>
+        <i className="material-icons">close</i>
+      </CircleSpinnerBtn>,
+    ];
   }
 
   saveDataset(uid) {
@@ -91,6 +102,19 @@ class Dataset extends Component {
       });
   }
 
+  removeDataset (uid) {
+    Ajax.delete('/api/dataset', { uid: uid })
+      .then((resp) => {
+        if (resp.status === 200) {
+          if (this.props.refresh) {
+            this.props.refresh();
+          }
+        } else {
+          // error
+        }
+      });
+  }
+
   render() {
     const info = this.props.info || {};
 
@@ -102,7 +126,7 @@ class Dataset extends Component {
             {info.name}
           </div>
           <div className="dataset-actions">
-            {this.getSaveDatasetBtn(info)}
+            {this.getDatasetActionBtns(info)}
           </div>
         </div>
         <div className="card-body">

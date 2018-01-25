@@ -17,3 +17,124 @@
   border-right: 2px solid transparent;
   animation: circle-button-spinner .6s linear infinite;
 }
+
+.cbs {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: #d6d6d9;
+  border: 1px solid transparent;
+  outline: none;
+  position: relative;
+  -webkit-transition: background 0.15s;
+  -moz-transition: background 0.15s;
+  -ms-transition: background 0.15s;
+  -o-transition: background 0.15s;
+  transition: background 0.15s;
+
+  i {
+    color: #fff;
+    margin: 0;
+    font-size: 22px;
+    text-align: center;
+    line-height: 32px;
+    opacity: 1;
+
+    &.check {
+      width: 16px;
+    }
+  }
+
+  &.cbs-primary {
+    &:hover {
+      background-color: $primary-lighter;
+      border-color: $primary-lighter;
+    }
+
+    &:active {
+      background-color: $primary-darker;
+      border-color: $primary-darker;
+    }
+
+    &.circle-button-spinner {
+      background-color: $primary;
+      border-color: $primary;
+    }
+
+    &.complete {
+      background-color: #fff;
+      pointer-events: none;
+      border-color: $primary;
+
+      i {
+        color: $primary;
+      }
+    }
+  }
+
+  &.cbs-secondary {
+    &:hover {
+      background-color: $secondary;
+      border-color: $secondary;
+      opacity: 0.9;
+    }
+
+    &:active {
+      background-color: $secondary;
+      border-color: $secondary;
+      opacity: 1;
+    }
+
+    &.circle-button-spinner {
+      background-color: $secondary;
+      border-color: $secondary;
+    }
+
+    &.complete {
+      background-color: #fff;
+      pointer-events: none;
+      border-color: $secondary;
+
+      i {
+        color: $secondary;
+      }
+    }
+  }
+
+  &.cbs-remove {
+    background-color: #fff;
+    border-color: #d6d6d9;
+
+    i {
+      color: #d6d6d9;
+    }
+
+    &:hover, &:active, &.complete {
+      border-color: $failed;
+
+      i {
+        color: $failed;
+      }
+    }
+
+    &:active {
+      opacity: 0.9;
+    }
+
+    &.circle-button-spinner {
+      &:before {
+        border-top-color: $failed;
+      }
+    }
+
+    &.complete {
+      pointer-events: none;
+    }
+  }
+
+  &.circle-button-spinner {
+    i {
+      opacity: 0;
+    }
+  }
+}
