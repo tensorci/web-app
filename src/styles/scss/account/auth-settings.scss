@@ -47,10 +47,17 @@ div.form {
       font-size: 12px;
       color: $secondary;
       cursor: pointer;
+      display: inline-block;
 
       &:hover {
         text-decoration: underline;
       }
     }
+  }
+}
+
+.account-inner {
+  button.save-auth {
+    width: 195px;
   }
 }

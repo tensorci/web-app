@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import Ajax from '../../utils/Ajax';
 import FormInput from '../shared/form/FormInput';
+import SpinnerBtn from '../shared/SpinnerBtn';
 
 class AuthSettings extends Component {
 
@@ -45,7 +46,7 @@ class AuthSettings extends Component {
     Ajax.put('/api/user/password', payload)
       .then((resp) => {
         if (resp.status === 200) {
-          // success
+          this.saveAuthBtn.complete();
         } else {
           // error
         }
@@ -77,7 +78,15 @@ class AuthSettings extends Component {
                   </div>
                 </div>
                 <div className="field">
-                  <button className="primary" onClick={this.saveBasicAuthPw}>Save Basic Auth Password</button>
+                  <SpinnerBtn
+                    className="primary save-auth"
+                    completeText="Saved"
+                    minLoadingDuration={1000}
+                    completeTime={1500}
+                    onClick={this.saveBasicAuthPw}
+                    ref={(r) => { this.saveAuthBtn = r; }}>
+                    Save Basic Auth Password
+                  </SpinnerBtn>
                 </div>
               </div>
             </div>

@@ -80,14 +80,10 @@ class SpinnerBtn extends Component {
         <div key={2} className="bounce3"></div>
       ];
     case this.status.COMPLETE:
-      if (this.props.completeText) {
-        return [
-          <i key={0} className="octicon octicon-check check"></i>,
-          <span key={1}>{this.props.completeText}</span>
-        ];
-      } else {
-        return this.props.children;
-      }
+      return [
+        <i key={0} className="octicon octicon-check check"></i>,
+        <span key={1}>{this.props.completeText || 'Complete'}</span>
+      ];
     default:
       return this.props.children;
     }
