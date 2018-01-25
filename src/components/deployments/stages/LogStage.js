@@ -9,6 +9,7 @@ class LogStage extends Component {
     this.getLogs = this.getLogs.bind(this);
     this.toggleHeight = this.toggleHeight.bind(this);
     this.getStatusClass = this.getStatusClass.bind(this);
+    this.formatLogContents = this.formatLogContents.bind(this);
 
     this.slideDuration = 250;
   }
@@ -46,6 +47,20 @@ class LogStage extends Component {
     return statusClass;
   }
 
+  formatLogContents(data, current) {
+    if (current && (!data.logs || data.logs.length === 0)) {
+      return <div className="listening-for-logs">Listening for logs...</div>;
+    }
+
+    return (
+      <div className="action-log-messages">
+        <pre className="output">
+          <span className="pre">{this.getLogs(data)}</span>
+        </pre>
+      </div>
+    );
+  }
+
   render() {
     const data = this.props.data || {};
     const current = this.props.current || false;
@@ -67,13 +82,7 @@ class LogStage extends Component {
               </div>
             </div>
             <div className="detail-wrapper" style={detailWrapperStyle} ref={(r) => { this.wrapperRef = r; }}>
-              <div className={'detail contents' + this.getStatusClass(data, current)}>
-                <div className="action-log-messages">
-                  <pre className="output">
-                    <span className="pre">{this.getLogs(data)}</span>
-                  </pre>
-                </div>
-              </div>
+              <div className={'detail contents' + this.getStatusClass(data, current)}>{this.formatLogContents(data, current)}</div>
             </div>
           </div>
         </div>

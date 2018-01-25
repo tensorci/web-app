@@ -115,6 +115,25 @@
     text-shadow: none;
     padding: 1em;
     margin-left: 5px;
+
+    @keyframes color-pulse {
+      0% { color: rgba(255, 255, 255,1); }
+      50% { color: rgba(255, 255, 255, 0.4); }
+      100% { color: rgba(255, 255, 255, 0.4); }
+    }
+
+    .listening-for-logs {
+      font-size: 13.5px;
+      background: #212121;
+      padding: 13px;
+      width: 100%;
+      color: rgba(255, 255, 255,1);
+      -webkit-animation: color-pulse 1.75s infinite ease-in-out;
+      -o-animation: color-pulse 1.75s infinite ease-in-out;
+      -ms-animation: color-pulse 1.75s infinite ease-in-out;
+      -moz-animation: color-pulse 1.75s infinite ease-in-out;
+      animation: color-pulse 1.75s infinite ease-in-out;
+    }
   }
 }
 
