@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
 import Ajax from '../../utils/Ajax';
+import CircleSpinnerBtn from '../shared/CircleSpinnerBtn';
 import Envs from './Envs';
 
 class ProjectEnvs extends Component {
 
   constructor(props) {
     super(props);
-
     this.saveTrainEnvs = this.saveTrainEnvs.bind(this);
     this.saveApiEnvs = this.saveApiEnvs.bind(this);
-    this.toggleSpinner = this.toggleSpinner.bind(this);
-
-    this.circleBtnSpinnerClass = 'circle-button-spinner';
   }
 
   componentDidMount() {
@@ -31,21 +27,16 @@ class ProjectEnvs extends Component {
 
   saveTrainEnvs() {
     if (this.trainEnvs && this.trainEnvs.isStatic() && !this.trainEnvs.isEmpty() && this.trainEnvs.formValid()) {
-      this.toggleSpinner(this.saveTrainEnvsBtn, true);
+      this.saveTrainEnvsBtn.load();
       this.trainEnvs.save();
     }
   }
 
   saveApiEnvs() {
     if (this.apiEnvs && this.apiEnvs.isStatic() && !this.apiEnvs.isEmpty() && this.apiEnvs.formValid()) {
-      this.toggleSpinner(this.saveApiEnvsBtn, true);
+      this.saveApiEnvsBtn.load();
       this.apiEnvs.save();
     }
-  }
-
-  toggleSpinner(btn, show) {
-    const $el = $(btn);
-    show ? $el.addClass(this.circleBtnSpinnerClass) : $el.removeClass(this.circleBtnSpinnerClass);
   }
 
   render() {
@@ -59,9 +50,15 @@ class ProjectEnvs extends Component {
           <div className="card">
             <div className="card-header">
               <div className="title">Training Env</div>
-              <button className="save-envs" onClick={this.saveTrainEnvs} ref={(r) => { this.saveTrainEnvsBtn = r; }}>
+              <CircleSpinnerBtn
+                className="cbs-secondary"
+                minLoadingDuration={1000}
+                completeTime={1500}
+                silentClick={true}
+                onClick={this.saveTrainEnvs}
+                ref={(r) => { this.saveTrainEnvsBtn = r; }}>
                 <i className="material-icons">save</i>
-              </button>
+              </CircleSpinnerBtn>
             </div>
             <div className="card-body">
               <p>Configure environment variables for your project when running on the TensorCI training cluster.</p>
@@ -69,16 +66,22 @@ class ProjectEnvs extends Component {
                 team={team}
                 repo={repo}
                 forCluster="train"
-                onSaved={() => { this.toggleSpinner(this.saveTrainEnvsBtn, false); }}
+                onSaved={() => { this.saveTrainEnvsBtn.complete(); }}
                 ref={(r) => { this.trainEnvs = r; }}/>
             </div>
           </div>
           <div className="card">
             <div className="card-header">
               <div className="title">API Env</div>
-              <button className="save-envs" onClick={this.saveApiEnvs} ref={(r) => { this.saveApiEnvsBtn = r; }}>
+              <CircleSpinnerBtn
+                className="cbs-secondary"
+                minLoadingDuration={1000}
+                completeTime={1500}
+                silentClick={true}
+                onClick={this.saveApiEnvs}
+                ref={(r) => { this.saveApiEnvsBtn = r; }}>
                 <i className="material-icons">save</i>
-              </button>
+              </CircleSpinnerBtn>
             </div>
             <div className="card-body">
               <p>Configure environment variables for your project when serving model predictions from your API cluster.</p>
@@ -86,7 +89,7 @@ class ProjectEnvs extends Component {
                 team={team}
                 repo={repo}
                 forCluster="api"
-                onSaved={() => { this.toggleSpinner(this.saveApiEnvsBtn, false); }}
+                onSaved={() => { this.saveApiEnvsBtn.complete(); }}
                 ref={(r) => { this.apiEnvs = r; }}/>
             </div>
           </div>

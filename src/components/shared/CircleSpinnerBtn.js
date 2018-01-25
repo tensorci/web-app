@@ -83,6 +83,14 @@ class CircleSpinnerBtn extends Component {
   }
 
   onClick() {
+    if (this.props.silentClick) {
+      if (this.state.status === this.status.STATIC && this.props.onClick) {
+        this.props.onClick();
+      }
+
+      return;
+    }
+
     if (this.state.status === this.status.STATIC) {
       this.setState({ status: this.status.LOADING });
 
@@ -90,6 +98,10 @@ class CircleSpinnerBtn extends Component {
         this.props.onClick();
       }
     }
+  }
+
+  load() {
+    this.setState({ status: this.status.LOADING });
   }
 
   complete() {
