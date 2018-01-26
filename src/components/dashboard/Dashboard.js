@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DashContent from './DashContent';
 import Header from '../shared/Header';
 import Session from '../../utils/Session';
+import SetBasicAuthPwModal from '../shared/modals/SetBasicAuthPwModal';
 import SideNav from '../shared/SideNav';
 
 class Dashboard extends Component {
@@ -27,6 +28,14 @@ class Dashboard extends Component {
     }
   }
 
+  componentDidMount() {
+    if (Session.isFirstLogin()) {
+      setTimeout(() => {
+        this.basicAuthPwModal.show();
+      }, 1000);
+    }
+  }
+
   render() {
     return (
       <div id="dashboard">
@@ -40,6 +49,9 @@ class Dashboard extends Component {
             uid={this.state.uid}
             meta={this.state.meta}/>
         </div>
+        <SetBasicAuthPwModal ref={(r) => { this.basicAuthPwModal = r; }}>
+          Thanks for joining TensorCI! You should go ahead and set your basic auth password so that you can log in via the command line as well.
+        </SetBasicAuthPwModal>
       </div>
     );
   }

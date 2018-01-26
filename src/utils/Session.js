@@ -30,6 +30,10 @@ class Sess {
     return this.getFromStorage('teams');
   }
 
+  loginInfo() {
+    return this.getFromStorage('loginInfo');
+  }
+
   username() {
     return (this.user() || {}).username;
   }
@@ -94,6 +98,10 @@ class Sess {
     this.destroy();
     this.deleteFromStorage('user');
     this.deleteFromStorage('teams');
+  }
+
+  isFirstLogin() {
+    return (this.loginInfo() || {}).firstLogin || false;
   }
 }
 
