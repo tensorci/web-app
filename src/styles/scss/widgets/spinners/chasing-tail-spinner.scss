@@ -1,7 +1,7 @@
 $chasing-tail-count: 10;
 $chasing-tail-time: 1.3; //in seconds
 $chasing-tail-size: 55;
-$chasing-tail-color: #c6c6c9;
+$chasing-tail-color: $primary;
 
 .spin-holder {
   position: absolute;
