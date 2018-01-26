@@ -1,0 +1,33 @@
+$banner-slide-duration: 350;
+
+#banner {
+  height: 100px;
+  bottom: -100px;
+  width: 100%;
+  position: absolute;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font-size: 14px;
+  -webkit-transition: bottom $banner-slide-duration + ms;
+  -moz-transition: bottom $banner-slide-duration + ms;
+  -ms-transition: bottom $banner-slide-duration + ms;
+  -o-transition: bottom $banner-slide-duration + ms;
+  transition: bottom $banner-slide-duration + ms;
+
+  &.show {
+    bottom: 0;
+  }
+
+  .close-banner {
+    position: absolute;
+    right: 30px;
+    width: 20px;
+    height: 20px;
+    top: calc((100px - 20px) / 2);
+    font-size: 20px;
+    cursor: pointer;
+    color: #fff;
+    opacity: 0.8;
+  }
+}
