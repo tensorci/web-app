@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Ajax from '../../utils/Ajax';
 import DashContent from './DashContent';
 import Header from '../shared/Header';
 import Session from '../../utils/Session';
@@ -32,6 +33,10 @@ class Dashboard extends Component {
     if (Session.isFirstLogin()) {
       setTimeout(() => {
         this.basicAuthPwModal.show();
+
+        Ajax.put('/api/user', {
+          seen_basic_auth_prompt: true
+        });
       }, 1000);
     }
   }

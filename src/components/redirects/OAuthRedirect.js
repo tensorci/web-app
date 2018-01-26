@@ -43,7 +43,7 @@ class OAuthRedirect extends Component {
               Session.setToStorage('teams', data.teams);
 
               // set any other important login info about the user
-              Session.setToStorage('loginInfo', data.loginInfo);
+              Session.setToStorage('loginInfo', data.login_info);
 
               // wait another hot sec
               setTimeout(() => {

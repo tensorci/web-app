@@ -18,6 +18,7 @@ class SetBasicAuthPwModal extends Modal {
   }
 
   onPosClick() {
+    this.hide();
     History.push('/account/auth');
   }
 }

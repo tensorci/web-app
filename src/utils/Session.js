@@ -101,7 +101,7 @@ class Sess {
   }
 
   isFirstLogin() {
-    return (this.loginInfo() || {}).firstLogin || false;
+    return (this.loginInfo() || {}).first_login || false;
   }
 }
 
