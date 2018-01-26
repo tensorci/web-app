@@ -103,6 +103,10 @@ class Sess {
   isFirstLogin() {
     return (this.loginInfo() || {}).first_login || false;
   }
+
+  seenBasicAuthPrompt() {
+    return (this.loginInfo() || {}).seen_basic_auth_prompt;
+  }
 }
 
 function getInstance() {

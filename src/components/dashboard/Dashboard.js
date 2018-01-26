@@ -30,10 +30,18 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    if (Session.isFirstLogin()) {
+    // If this is the user's first login and he hasn't seen the basic auth login prompt yet, show it.
+    if (Session.isFirstLogin() && !Session.seenBasicAuthPrompt()) {
       setTimeout(() => {
+        // Show the modal
         this.basicAuthPwModal.show();
 
+        // Register that the prompt has been seen on the FE.
+        var loginInfo = Session.loginInfo();
+        loginInfo.seen_basic_auth_prompt = true;
+        Session.setToStorage('loginInfo', loginInfo);
+
+        // Register that the prompt has been seen on the BE.
         Ajax.put('/api/user', {
           seen_basic_auth_prompt: true
         });
