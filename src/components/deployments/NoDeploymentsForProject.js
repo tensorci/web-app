@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
+import banner from '../../utils/Banner';
 import SpinnerBtn from '../shared/SpinnerBtn';
 
 class NoDeploymentsForProject extends Component {
@@ -15,7 +16,12 @@ class NoDeploymentsForProject extends Component {
       with_log_stream: false
     };
 
-    Ajax.post('/api/deployment/train', payload, (data) => {
+    Ajax.post('/api/deployment/train', payload, (data, failed) => {
+      if (failed) {
+        banner.error('Failed to start training deployment.');
+        return;
+      }
+
       if (this.props.refresh) {
         this.props.refresh();
       }

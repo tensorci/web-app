@@ -93,7 +93,12 @@ class Dataset extends Component {
       retrainStepSize: stepSize
     };
 
-    Ajax.put('/api/dataset', payload, () => {
+    Ajax.put('/api/dataset', payload, (data, failed) => {
+      if (failed) {
+        banner.error('Failed to update dataset.');
+        return;
+      }
+
       this.updateDatasetBtn.complete();
     });
   }

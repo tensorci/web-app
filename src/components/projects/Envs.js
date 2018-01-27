@@ -45,7 +45,12 @@ class Envs extends Form {
       envs: envs
     };
 
-    Ajax.put('/api/envs', payload, (data) => {
+    Ajax.put('/api/envs', payload, (data, failed) => {
+      if (failed) {
+        banner.error('Failed to save environment variables.');
+        return;
+      }
+
       setTimeout(() => {
         this.setState({
           status: this.status.STATIC,

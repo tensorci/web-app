@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
+import banner from '../../utils/Banner';
 
 class ProjectCreds extends Component {
 
@@ -39,7 +40,12 @@ class ProjectCreds extends Component {
       repo: this.props.repo
     };
 
-    Ajax.put('/api/repo/secret', payload, (data) => {
+    Ajax.put('/api/repo/secret', payload, (data, failed) => {
+      if (failed) {
+        banner.error('Failed to regenerate secret.');
+        return;
+      }
+
       this.setState({
         clientSecret: data.client_secret,
         showSecret: true

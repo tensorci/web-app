@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
+import banner from '../../utils/Banner';
 import History from '../../utils/History';
 import Link from '../../utils/Link';
 import SpinnerBtn from '../shared/SpinnerBtn';
@@ -30,7 +31,12 @@ reload_model: module1.module2:function`;
   }
 
   launchProject() {
-    Ajax.post('/api/repo/register', { git_url: this.gitUrl() }, () => {
+    Ajax.post('/api/repo/register', { git_url: this.gitUrl() }, (data, failed) => {
+      if (failed) {
+        banner.error('Failed to launch project.');
+        return;
+      }
+
       this.launchBtn.complete();
     });
   }
@@ -41,7 +47,12 @@ reload_model: module1.module2:function`;
       with_log_stream: false
     };
 
-    Ajax.post('/api/deployment/train', payload, (data) => {
+    Ajax.post('/api/deployment/train', payload, (data, failed) => {
+      if (failed) {
+        banner.error('Failed to start training deployment.');
+        return;
+      }
+
       // redirect to deployments page
       History.push('/' + this.props.team + '/' + this.props.repo);
     });

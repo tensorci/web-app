@@ -1,5 +1,6 @@
 import React from 'react';
 import Ajax from '../../../utils/Ajax';
+import banner from '../../../utils/Banner';
 import intents from '../../../utils/Intents';
 import SpinnerBtn from '../../shared/SpinnerBtn';
 import StatusStage from './StatusStage';
@@ -7,8 +8,14 @@ import StatusStage from './StatusStage';
 class PredictingStage extends StatusStage {
 
   deployToApi(team, repo) {
-    Ajax.post('/api/deployment/api', {
+    const payload = {
       git_url: 'https://github.com/' + team + '/' + repo + '.git'
+    };
+
+    Ajax.post('/api/deployment/api', payload, (data, failed) => {
+      if (failed) {
+        banner.error('Failed to deploy to API.');
+      }
     });
   }
 

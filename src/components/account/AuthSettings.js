@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import Ajax from '../../utils/Ajax';
+import banner from '../../utils/Banner';
 import FormInput from '../shared/form/FormInput';
 import SpinnerBtn from '../shared/SpinnerBtn';
 
@@ -41,7 +42,12 @@ class AuthSettings extends Component {
   saveBasicAuthPw() {
     const payload = { password: this.basicAuthPwInput.serialize() };
 
-    Ajax.put('/api/user/password', payload, () => {
+    Ajax.put('/api/user/password', payload, (data, failed) => {
+      if (failed) {
+        banner.error('Error saving password.');
+        return;
+      }
+
       this.saveAuthBtn.complete();
     });
   }
