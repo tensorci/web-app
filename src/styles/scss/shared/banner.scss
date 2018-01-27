@@ -6,9 +6,10 @@ $banner-slide-duration: 350;
   width: 100%;
   position: absolute;
   display: none;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.85);
   color: #fff;
-  font-size: 14px;
+  padding: 0 30px;
+  z-index: 9999;
   -webkit-transition: bottom $banner-slide-duration + ms;
   -moz-transition: bottom $banner-slide-duration + ms;
   -ms-transition: bottom $banner-slide-duration + ms;
@@ -17,6 +18,22 @@ $banner-slide-duration: 350;
 
   &.show {
     bottom: 0;
+  }
+
+  &.error {
+    background-color: $primary-darker;
+  }
+
+  &.success {
+    background-color: $secondary;
+  }
+
+  .banner-msg {
+    font-size: 15px;
+    width: 100%;
+    text-align: center;
+    line-height: 20px;
+    margin-top: calc((100px - 20px) / 2);
   }
 
   .close-banner {

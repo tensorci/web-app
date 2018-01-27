@@ -4,9 +4,6 @@ import DashLoadingSpinner from '../widgets/spinners/DashLoadingSpinner';
 import DeploymentsList from './DeploymentsList';
 import ProjectAside from '../shared/ProjectAside';
 
-// testing banner
-import banner from '../../utils/Banner';
-
 class Deployments extends Component {
 
   constructor(props) {
@@ -27,10 +24,6 @@ class Deployments extends Component {
 
   componentDidMount() {
     this.fetchReposAndDeployments();
-
-    setTimeout(() => {
-      banner.neutral('Hey this is a message!');
-    }, 2000);
   }
 
   componentDidUpdate() {

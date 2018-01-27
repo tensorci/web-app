@@ -88,17 +88,17 @@ class Banner {
 
   error(msg) {
     this.updateMessage(msg);
-    this.show();
+    this.show(this.msgTypes.ERROR);
   }
 
   neutral(msg) {
     this.updateMessage(msg);
-    this.show();
+    this.show(this.msgTypes.NEUTRAL);
   }
 
   success(msg) {
     this.updateMessage(msg);
-    this.show();
+    this.show(this.msgTypes.SUCCESS);
   }
 }
 
