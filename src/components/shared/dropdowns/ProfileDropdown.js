@@ -29,14 +29,12 @@ class ProfileDropdown extends Dropdown {
     e.stopPropagation();
     e.preventDefault();
 
-    Ajax.get('/api/provider_user/logout_url')
-      .then((resp) => resp.json())
-      .then((data) => {
-        if (data.url) {
-          Session.logout();
-          window.location = data.url;
-        }
-      });
+    Ajax.get('/api/provider_user/logout_url', null, (data) => {
+      if (data.url) {
+        Session.logout();
+        window.location = data.url;
+      }
+    });
   }
 
   getButtonContents() {

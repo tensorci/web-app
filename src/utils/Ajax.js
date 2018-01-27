@@ -1,18 +1,16 @@
 /*
-  Wrapper around whatwg-fetch for making ajax requests
+Wrapper around whatwg-fetch for making ajax requests
 
-  Usage example (no usage difference between get/post/put/delete):
-    import Ajax from '../rel/path/to/Ajax';
+Usage example (no usage difference between get/post/put/delete):
 
-    Ajax.get('/api/users', { company: 'My Company' })
-      .then((resp) => resp.json()) // unpack json response data
-      .then((data) => {
-        console.log(data);
-      });
- */
+import Ajax from '../rel/path/to/Ajax';
+
+Ajax.get('/api/users', { company: 'My Company' }, (data, failed) => {
+  console.log(response_json_data);
+});
+*/
 
 import $ from 'jquery';
-import banner from './Banner';
 import Session from './Session';
 
 var Ajax;
@@ -28,56 +26,67 @@ class AjaxClass {
     this.jsonRequst = this.jsonRequst.bind(this);
     this.defaultHeaders = this.defaultHeaders.bind(this);
     this.requestSucceeded = this.requestSucceeded.bind(this);
+    this.handleResponse = this.handleResponse.bind(this);
   }
 
-  get(url, params, errMsg) {
-    return this.urlEncoded(url, params, 'GET', errMsg);
+  get(url, params, cb) {
+    return this.urlEncoded(url, params, 'GET', cb);
   }
 
-  post(url, params, errMsg) {
-    return this.jsonRequst(url, params, 'POST', errMsg);
+  post(url, params, cb) {
+    return this.jsonRequst(url, params, 'POST', cb);
   }
 
-  put(url, params, errMsg) {
-    return this.jsonRequst(url, params, 'PUT', errMsg);
+  put(url, params, cb) {
+    return this.jsonRequst(url, params, 'PUT', cb);
   }
 
-  delete(url, params, errMsg) {
-    return this.urlEncoded(url, params, 'DELETE', errMsg);
+  delete(url, params, cb) {
+    return this.urlEncoded(url, params, 'DELETE', cb);
   }
 
-  urlEncoded(url, params, method, errMsg) {
+  urlEncoded(url, params, method, cb) {
     if (params) {
       url += ('?' + $.param(params));
     }
 
-    return fetch(url, {
+    fetch(url, {
       method: method,
       headers: this.defaultHeaders()
     }).then((resp) => {
-      if (this.requestSucceeded(resp)) {
-        return resp.json();
-      } else if (errMsg) {
-        banner.error(errMsg);
-      }
+      this.handleResponse(resp, cb);
     });
   }
 
-  jsonRequst(url, params, method, errMsg) {
+  jsonRequst(url, params, method, cb) {
     var headers = this.defaultHeaders();
     headers['Content-Type'] = 'application/json';
 
-    return fetch(url, {
+    fetch(url, {
       method: method,
       headers: headers,
       body: JSON.stringify(params || {})
     }).then((resp) => {
-      if (this.requestSucceeded(resp)) {
-        return resp.json();
-      } else if (errMsg) {
-        banner.error(errMsg);
-      }
+      this.handleResponse(resp, cb);
     });
+  }
+
+  handleResponse(resp, cb) {
+    if (!cb) {
+      return;
+    }
+
+    const succeeded = this.requestSucceeded(resp);
+
+    if (succeeded) {
+      resp.json().then((data) => {
+        cb(data);
+      });
+    } else {
+      const data = null;
+      const failed = true;
+      cb(data, failed);
+    }
   }
 
   defaultHeaders() {

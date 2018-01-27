@@ -20,14 +20,12 @@ class TeamRepoSearch extends Component {
   }
 
   componentDidMount() {
-    Ajax.get('/api/repos/available', { team: this.props.team })
-      .then((resp) => resp.json())
-      .then((data) => {
-        this.setState({
-          projects: data.repos,
-          loading: false
-        });
+    Ajax.get('/api/repos/available', { team: this.props.team }, (data) => {
+      this.setState({
+        projects: data.repos,
+        loading: false
       });
+    });
   }
 
   searchUpdated(term) {

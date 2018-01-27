@@ -17,12 +17,10 @@ class ProjectEnvs extends Component {
       repo: this.props.repo
     };
 
-    Ajax.get('/api/envs', payload)
-      .then((resp) => resp.json())
-      .then((data) => {
-        this.trainEnvs.setState({ values: data.train_envs, loading: false });
-        this.apiEnvs.setState({ values: data.api_envs, loading: false });
-      });
+    Ajax.get('/api/envs', payload, (data) => {
+      this.trainEnvs.setState({ values: data.train_envs, loading: false });
+      this.apiEnvs.setState({ values: data.api_envs, loading: false });
+    });
   }
 
   saveTrainEnvs() {

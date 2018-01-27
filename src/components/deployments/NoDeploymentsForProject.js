@@ -15,16 +15,11 @@ class NoDeploymentsForProject extends Component {
       with_log_stream: false
     };
 
-    Ajax.post('/api/deployment/train', payload)
-      .then((resp) => {
-        if (resp.status === 200 || resp.status === 201) {
-          if (this.props.refresh) {
-            this.props.refresh();
-          }
-        } else {
-          // error
-        }
-      });
+    Ajax.post('/api/deployment/train', payload, (data) => {
+      if (this.props.refresh) {
+        this.props.refresh();
+      }
+    });
   }
 
   render() {

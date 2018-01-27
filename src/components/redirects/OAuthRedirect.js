@@ -36,21 +36,19 @@ class OAuthRedirect extends Component {
         // wait a hot sec to ensure Session is up to date
         setTimeout(() => {
           // Get teams for the user
-          Ajax.get('/api/provider_user/storage_info')
-            .then((resp) => resp.json())
-            .then((data) => {
-              // set teams to local storage if they exist
-              Session.setToStorage('teams', data.teams);
+          Ajax.get('/api/provider_user/storage_info', null, (data) => {
+            // set teams to local storage if they exist
+            Session.setToStorage('teams', data.teams);
 
-              // set any other important login info about the user
-              Session.setToStorage('loginInfo', data.login_info);
+            // set any other important login info about the user
+            Session.setToStorage('loginInfo', data.login_info);
 
-              // wait another hot sec
-              setTimeout(() => {
-                // redirect to username team
-                window.location = '/' + username;
-              }, 200);
-            });
+            // wait another hot sec
+            setTimeout(() => {
+              // redirect to username team
+              window.location = '/' + username;
+            }, 200);
+          });
         }, 200);
       }
     }

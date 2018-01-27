@@ -28,24 +28,22 @@ class Deployment extends Component {
   }
 
   componentDidMount() {
-    Ajax.get('/api/deployment', { uid: this.props.uid })
-      .then((resp) => resp.json())
-      .then((data) => {
-        this.setState({
-          loading: false,
-          status: data.readable_status,
-          intent: data.intent,
-          failed: data.failed,
-          succeeded: data.succeeded,
-          date: data.date,
-          triggeredBy: data.triggered_by,
-          commit: data.commit || {},
-          currentStage: data.current_stage,
-          stages: data.stages || {}
-        });
-
-        this.listenForStageUpdates();
+    Ajax.get('/api/deployment', { uid: this.props.uid }, (data) => {
+      this.setState({
+        loading: false,
+        status: data.readable_status,
+        intent: data.intent,
+        failed: data.failed,
+        succeeded: data.succeeded,
+        date: data.date,
+        triggeredBy: data.triggered_by,
+        commit: data.commit || {},
+        currentStage: data.current_stage,
+        stages: data.stages || {}
       });
+
+      this.listenForStageUpdates();
+    });
   }
 
   listenForStageUpdates() {

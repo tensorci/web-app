@@ -21,14 +21,12 @@ class ProjectCreds extends Component {
       repo: this.props.repo
     };
 
-    Ajax.get('/api/repo/creds', payload)
-      .then((resp) => resp.json())
-      .then((data) => {
-        this.setState({
-          clientId: data.client_id,
-          clientSecret: data.client_secret
-        });
+    Ajax.get('/api/repo/creds', payload, (data) => {
+      this.setState({
+        clientId: data.client_id,
+        clientSecret: data.client_secret
       });
+    });
   }
 
   toggleSecretVisibility() {
@@ -41,14 +39,12 @@ class ProjectCreds extends Component {
       repo: this.props.repo
     };
 
-    Ajax.put('/api/repo/secret', payload)
-      .then((resp) => resp.json())
-      .then((data) => {
-        this.setState({
-          clientSecret: data.client_secret,
-          showSecret: true
-        });
+    Ajax.put('/api/repo/secret', payload, (data) => {
+      this.setState({
+        clientSecret: data.client_secret,
+        showSecret: true
       });
+    });
   }
 
   render() {

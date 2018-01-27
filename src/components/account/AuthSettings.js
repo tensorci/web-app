@@ -15,12 +15,10 @@ class AuthSettings extends Component {
   }
 
   componentDidMount() {
-    Ajax.get('/api/user/password')
-      .then((resp) => resp.json())
-      .then((data) => {
-        this.basicAuthPwInput.setValue(data.pw);
-        $(this.readablePw).html(data.pw);
-      });
+    Ajax.get('/api/user/password', null, (data) => {
+      this.basicAuthPwInput.setValue(data.pw);
+      $(this.readablePw).html(data.pw);
+    });
   }
 
   onBasicAuthPwKeyUp(pw) {
@@ -43,14 +41,9 @@ class AuthSettings extends Component {
   saveBasicAuthPw() {
     const payload = { password: this.basicAuthPwInput.serialize() };
 
-    Ajax.put('/api/user/password', payload)
-      .then((resp) => {
-        if (resp.status === 200) {
-          this.saveAuthBtn.complete();
-        } else {
-          // error
-        }
-      });
+    Ajax.put('/api/user/password', payload, () => {
+      this.saveAuthBtn.complete();
+    });
   }
 
   render() {

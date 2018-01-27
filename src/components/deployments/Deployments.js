@@ -54,16 +54,14 @@ class Deployments extends Component {
       with_deployments: true
     };
 
-    Ajax.get('/api/repos', payload)
-      .then((resp) => resp.json())
-      .then((data) => {
-        this.setState({
-          projects: data.repos || [],
-          deployments: data.deployments || [],
-          repo: data.repo,
-          loading: false
-        });
+    Ajax.get('/api/repos', payload, (data) => {
+      this.setState({
+        projects: data.repos || [],
+        deployments: data.deployments || [],
+        repo: data.repo,
+        loading: false
       });
+    });
   }
 
   fetchDeployments(repo) {
@@ -72,14 +70,12 @@ class Deployments extends Component {
       repo: repo
     };
 
-    Ajax.get('/api/deployments', payload)
-      .then((resp) => resp.json())
-      .then((data) => {
-        this.setState({
-          deployments: data.deployments || [],
-          repo: repo
-        });
+    Ajax.get('/api/deployments', payload, (data) => {
+      this.setState({
+        deployments: data.deployments || [],
+        repo: repo
       });
+    });
   }
 
   refresh() {

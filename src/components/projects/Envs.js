@@ -1,5 +1,6 @@
 import React from 'react';
 import Ajax from '../../utils/Ajax';
+import banner from '../../utils/Banner';
 import DataLoadingSpinner from '../widgets/spinners/DataLoadingSpinner';
 import Env from './Env';
 import Form from '../shared/form/Form';
@@ -44,20 +45,18 @@ class Envs extends Form {
       envs: envs
     };
 
-    Ajax.put('/api/envs', payload)
-      .then((resp) => resp.json())
-      .then((data) => {
-        setTimeout(() => {
-          this.setState({
-            status: this.status.STATIC,
-            values: data.envs
-          });
+    Ajax.put('/api/envs', payload, (data) => {
+      setTimeout(() => {
+        this.setState({
+          status: this.status.STATIC,
+          values: data.envs
+        });
 
-          if (this.props.onSaved) {
-            this.props.onSaved();
-          }
-        }, 250);
-      });
+        if (this.props.onSaved) {
+          this.props.onSaved();
+        }
+      }, 250);
+    });
   }
 
   getEnvs() {
@@ -99,14 +98,17 @@ class Envs extends Form {
 
     this.setState({ status: this.status.SENDING });
 
-    Ajax.delete('/api/env', { uid: uid })
-      .then((resp) => resp.json())
-      .then((data) => {
-        this.setState({
-          status: this.status.STATIC,
-          values: data.envs
-        });
+    Ajax.delete('/api/env', { uid: uid }, (data, failed) => {
+      if (failed) {
+        banner.error('Failed to delete environment variable.');
+        return;
+      }
+
+      this.setState({
+        status: this.status.STATIC,
+        values: data.envs
       });
+    });
   }
 
   addEnvInput() {

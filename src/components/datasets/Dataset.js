@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import Ajax from '../../utils/Ajax';
+import banner from '../../utils/Banner';
 import DatasetPreview from './DatasetPreview';
 import moment from 'moment';
 import CircleSpinnerBtn from '../shared/CircleSpinnerBtn';
@@ -92,27 +93,22 @@ class Dataset extends Component {
       retrainStepSize: stepSize
     };
 
-    Ajax.put('/api/dataset', payload)
-      .then((resp) => {
-        if (resp.status === 200) {
-          this.updateDatasetBtn.complete();
-        } else {
-          // error
-        }
-      });
+    Ajax.put('/api/dataset', payload, () => {
+      this.updateDatasetBtn.complete();
+    });
   }
 
   removeDataset (uid) {
-    Ajax.delete('/api/dataset', { uid: uid })
-      .then((resp) => {
-        if (resp.status === 200) {
-          if (this.props.refresh) {
-            this.props.refresh();
-          }
-        } else {
-          // error
-        }
-      });
+    Ajax.delete('/api/dataset', { uid: uid }, (data, failed) => {
+      if (failed) {
+        banner.error('Failed to delete dataset.');
+        return;
+      }
+
+      if (this.props.refresh) {
+        this.props.refresh();
+      }
+    });
   }
 
   render() {

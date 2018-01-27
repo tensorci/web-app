@@ -19,14 +19,12 @@ class Projects extends Component {
   }
 
   componentDidMount() {
-    Ajax.get('/api/repos', { team: this.state.team })
-      .then((resp) => resp.json())
-      .then((data) => {
-        this.setState({
-          projects: data.repos || [],
-          loading: false
-        });
+    Ajax.get('/api/repos', { team: this.state.team }, (data) => {
+      this.setState({
+        projects: data.repos || [],
+        loading: false
       });
+    });
   }
 
   getProjectComp() {

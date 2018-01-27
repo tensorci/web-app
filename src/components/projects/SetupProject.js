@@ -30,14 +30,9 @@ reload_model: module1.module2:function`;
   }
 
   launchProject() {
-    Ajax.post('/api/repo/register', { git_url: this.gitUrl() })
-      .then((resp) => {
-        if (resp.status === 201) {
-          this.launchBtn.complete();
-        } else {
-          // error
-        }
-      });
+    Ajax.post('/api/repo/register', { git_url: this.gitUrl() }, () => {
+      this.launchBtn.complete();
+    });
   }
 
   startTraining() {
@@ -46,15 +41,10 @@ reload_model: module1.module2:function`;
       with_log_stream: false
     };
 
-    Ajax.post('/api/deployment/train', payload)
-      .then((resp) => {
-        if (resp.status === 200 || resp.status === 201) {
-          // redirect to deployments page
-          History.push('/' + this.props.team + '/' + this.props.repo);
-        } else {
-          // error
-        }
-      });
+    Ajax.post('/api/deployment/train', payload, (data) => {
+      // redirect to deployments page
+      History.push('/' + this.props.team + '/' + this.props.repo);
+    });
   }
 
   render() {

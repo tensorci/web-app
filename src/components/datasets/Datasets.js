@@ -42,16 +42,14 @@ class Datasets extends Component {
       with_datasets: true
     };
 
-    Ajax.get('/api/repos', payload)
-      .then((resp) => resp.json())
-      .then((data) => {
-        this.setState({
-          projects: data.repos || [],
-          datasets: data.datasets || [],
-          repo: data.repo,
-          loading: false
-        });
+    Ajax.get('/api/repos', payload, (data) => {
+      this.setState({
+        projects: data.repos || [],
+        datasets: data.datasets || [],
+        repo: data.repo,
+        loading: false
       });
+    });
   }
 
   fetchDatasets(repo) {
@@ -60,14 +58,12 @@ class Datasets extends Component {
       repo: repo
     };
 
-    Ajax.get('/api/datasets', payload)
-      .then((resp) => resp.json())
-      .then((data) => {
-        this.setState({
-          datasets: data.datasets || [],
-          repo: repo
-        });
+    Ajax.get('/api/datasets', payload, (data) => {
+      this.setState({
+        datasets: data.datasets || [],
+        repo: repo
       });
+    });
   }
 
   refresh() {
