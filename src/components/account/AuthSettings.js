@@ -45,6 +45,7 @@ class AuthSettings extends Component {
     Ajax.put('/api/user/password', payload, (data, failed) => {
       if (failed) {
         banner.error('Error saving password.');
+        this.saveAuthBtn.static();
         return;
       }
 

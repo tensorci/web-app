@@ -104,6 +104,8 @@ class CircleSpinnerBtn extends Component {
   }
 
   static() {
+    this.loadingLocked = false;
+    this.completeScheduled = false;
     this.setState({ status: this.status.STATIC });
   }
 

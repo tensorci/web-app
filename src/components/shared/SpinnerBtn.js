@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+// TODO: Create an AbstractSpinnerBtn class which this and CircleSpinnerBtn inherit from.
+
 class SpinnerBtn extends Component {
 
   constructor(props) {
@@ -8,6 +10,9 @@ class SpinnerBtn extends Component {
     this.formatClasses = this.formatClasses.bind(this);
     this.formatContents = this.formatContents.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.static = this.static.bind(this);
+    this.load = this.load.bind(this);
+    this.complete = this.complete.bind(this);
 
     this.defaultCompleteTime = 1000; // ms
     this.loadingLocked = false;
@@ -97,6 +102,16 @@ class SpinnerBtn extends Component {
         this.props.onClick();
       }
     }
+  }
+
+  static() {
+    this.loadingLocked = false;
+    this.completeScheduled = false;
+    this.setState({ status: this.status.STATIC });
+  }
+
+  load() {
+    this.setState({ status: this.status.LOADING });
   }
 
   complete() {

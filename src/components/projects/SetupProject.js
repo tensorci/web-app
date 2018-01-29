@@ -34,6 +34,7 @@ reload_model: module1.module2:function`;
     Ajax.post('/api/repo/register', { git_url: this.gitUrl() }, (data, failed) => {
       if (failed) {
         banner.error('Failed to launch project.');
+        this.launchBtn.static();
         return;
       }
 
@@ -50,6 +51,7 @@ reload_model: module1.module2:function`;
     Ajax.post('/api/deployment/train', payload, (data, failed) => {
       if (failed) {
         banner.error('Failed to start training deployment.');
+        this.startTrainingBtn.static();
         return;
       }
 
@@ -159,7 +161,7 @@ reload_model: module1.module2:function`;
                               <p>Start training! You can use either the CLI or the dashboard to kick off a new training build.</p>
                             </td>
                             <td>
-                              <SpinnerBtn className="checklist-btn secondary" onClick={this.startTraining}>Start training</SpinnerBtn>
+                              <SpinnerBtn className="checklist-btn secondary" onClick={this.startTraining} ref={(r) => { this.startTrainingBtn = r; }}>Start training</SpinnerBtn>
                             </td>
                           </tr>
                         </tbody>

@@ -65,6 +65,7 @@ class ProjectEnvs extends Component {
                 repo={repo}
                 forCluster="train"
                 onSaved={() => { this.saveTrainEnvsBtn.complete(); }}
+                onError={() => { this.saveTrainEnvsBtn.static(); }}
                 ref={(r) => { this.trainEnvs = r; }}/>
             </div>
           </div>
@@ -88,6 +89,7 @@ class ProjectEnvs extends Component {
                 repo={repo}
                 forCluster="api"
                 onSaved={() => { this.saveApiEnvsBtn.complete(); }}
+                onError={() => { this.saveApiEnvsBtn.static(); }}
                 ref={(r) => { this.apiEnvs = r; }}/>
             </div>
           </div>

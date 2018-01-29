@@ -19,6 +19,7 @@ class NoDeploymentsForProject extends Component {
     Ajax.post('/api/deployment/train', payload, (data, failed) => {
       if (failed) {
         banner.error('Failed to start training deployment.');
+        this.startTrainingBtn.static();
         return;
       }
 
@@ -47,7 +48,7 @@ class NoDeploymentsForProject extends Component {
             </div>
             <div className="secondary-msg">Let's fix that by deploying to the TensorCI training cluster.</div>
             <div className="action-btn-center-container">
-              <SpinnerBtn className="primary start-training" onClick={() => { this.startTraining(team, repo);} }>Start training</SpinnerBtn>
+              <SpinnerBtn className="primary start-training" onClick={() => { this.startTraining(team, repo);} } ref={(r) => { this.startTrainingBtn = r; }}>Start training</SpinnerBtn>
             </div>
           </div>
         </div>

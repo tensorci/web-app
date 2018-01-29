@@ -15,6 +15,7 @@ class PredictingStage extends StatusStage {
     Ajax.post('/api/deployment/api', payload, (data, failed) => {
       if (failed) {
         banner.error('Failed to deploy to API.');
+        this.deployBtn.static();
       }
     });
   }
@@ -26,7 +27,12 @@ class PredictingStage extends StatusStage {
     }
 
     return [
-      <SpinnerBtn className="secondary" onClick={() => { this.deployToApi(team, repo); }}>Deploy to API</SpinnerBtn>
+      <SpinnerBtn
+        className="secondary"
+        onClick={() => { this.deployToApi(team, repo); }}
+        ref={(r) => { this.deployBtn = r; }}>
+        Deploy to API
+      </SpinnerBtn>
     ];
   }
 }
