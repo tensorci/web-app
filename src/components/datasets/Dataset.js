@@ -44,14 +44,14 @@ class Dataset extends Component {
       const defaultVal = retrainStepSize ? retrainStepSize.toString() : this.stepSizeNotSet;
 
       return (
-        <select name="select-retrain-ss" className="select-retrain-ss" ref={(ref) => { this.stepSizeSelect = ref; }} defaultValue={defaultVal}>
+        <select name="select-retrain-ss" className="select-retrain-ss" ref={(ref) => { this.stepSizeSelect = ref; }} defaultValue={defaultVal} key={Math.random().toString()}>
           {this.getStepSizes().map((size, i) => {
             return <option value={size.toString()} key={i}>{size}</option>;
           })}
         </select>
       );
     } else {
-      return <span>{retrainStepSize || this.stepSizeNotSet}</span>;
+      return <span key={Math.random().toString()}>{retrainStepSize || this.stepSizeNotSet}</span>;
     }
   }
 
@@ -62,7 +62,7 @@ class Dataset extends Component {
 
     return [
       <CircleSpinnerBtn
-        key={0}
+        key={Math.random().toString()}
         className="cbs-secondary"
         minLoadingDuration={1000}
         completeTime={1500}
@@ -71,9 +71,10 @@ class Dataset extends Component {
         <i className="material-icons">save</i>
       </CircleSpinnerBtn>,
       <CircleSpinnerBtn
-        key={1}
+        key={Math.random().toString()}
         className="cbs-remove"
-        onClick={() => { this.removeDataset(info.uid); }}>
+        onClick={() => { this.removeDataset(info.uid); }}
+        ref={(r) => { this.removeDatasetBtn = r; }}>
         <i className="material-icons">close</i>
       </CircleSpinnerBtn>,
     ];
@@ -96,6 +97,7 @@ class Dataset extends Component {
     Ajax.put('/api/dataset', payload, (data, failed) => {
       if (failed) {
         banner.error('Failed to update dataset.');
+        this.updateDatasetBtn.static();
         return;
       }
 
@@ -107,6 +109,7 @@ class Dataset extends Component {
     Ajax.delete('/api/dataset', { uid: uid }, (data, failed) => {
       if (failed) {
         banner.error('Failed to delete dataset.');
+        this.removeDatasetBtn.static();
         return;
       }
 
@@ -150,7 +153,7 @@ class Dataset extends Component {
             </tbody>
           </table>
           <div className="preview-container">
-            <DatasetPreview preview={info.preview}/>
+            <DatasetPreview key={Math.random().toString()} preview={info.preview}/>
           </div>
         </div>
       </div>
