@@ -73,7 +73,7 @@ class ProjectCreds extends Component {
                     <label>Client ID</label>
                     <div className="field">
                       <input className="cred" type="text" value={this.state.clientId} autoComplete="off" spellCheck="false" ref={(r) => { this.clientId = r; }}/>
-                      <button className="copy-to-clipboard" onClick={() => { Helper.copyTextInput(this.clientId); }}>
+                      <button className="copy-to-clipboard" title="Copy to Clipboard" onClick={() => { Helper.copyTextInput(this.clientId); }}>
                         <i className="fa fa-clipboard"></i>
                       </button>
                     </div>
@@ -84,7 +84,7 @@ class ProjectCreds extends Component {
                     <label>Client Secret</label>
                     <div className="field">
                       <input className="cred" type={this.state.showSecret ? 'text' : 'password'} value={this.state.clientSecret} autoComplete="off" spellCheck="false" ref={(r) => { this.clientSecret = r; }}/>
-                      <button className="copy-to-clipboard" onClick={() => { Helper.copyPasswordInput($(this.clientSecret).val()); }}>
+                      <button className="copy-to-clipboard" title="Copy to Clipboard" onClick={() => { Helper.copyPasswordInput($(this.clientSecret).val()); }}>
                         <i className="fa fa-clipboard"></i>
                       </button>
                       <button className="cred-action-btn" onClick={this.toggleSecretVisibility}>{this.state.showSecret ? 'Hide' : 'Show'}</button>
