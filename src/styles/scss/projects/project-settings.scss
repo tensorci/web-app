@@ -34,6 +34,14 @@
       border-radius: 3px;
       border: none;
       outline: none;
+
+      &::selection {
+        background: none;
+      }
+
+      &::-moz-selection {
+        background: none;
+      }
     }
 
     .cred-action-btn {
@@ -50,8 +58,31 @@
       }
     }
 
-    input.cred + .cred-action-btn {
-      margin-left: 15px;
+    .copy-to-clipboard {
+      color: #b0b0b2;
+      font-size: 16px;
+      text-align: center;
+      background: none;
+      border: none;
+      outline: none;
+      position: relative;
+      margin-right: 4px;
+      margin-left: 12px;
+      top: 2px;
+      -webkit-transition: color 0.15s;
+      -moz-transition: color 0.15s;
+      -ms-transition: color 0.15s;
+      -o-transition: color 0.15s;
+      transition: color 0.15s;
+
+      &:hover {
+        color: $secondary;
+      }
+
+      &:active {
+        color: $secondary;
+        opacity: 0.8;
+      }
     }
 
     &.webhooks {

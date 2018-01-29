@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 import Ajax from '../../utils/Ajax';
 import banner from '../../utils/Banner';
+import Helper from '../../utils/Helper';
 
 class ProjectCreds extends Component {
 
@@ -70,7 +72,10 @@ class ProjectCreds extends Component {
                   <div className="field-wrapper">
                     <label>Client ID</label>
                     <div className="field">
-                      <input className="cred" type="text" value={this.state.clientId} autoComplete="off"/>
+                      <input className="cred" type="text" value={this.state.clientId} autoComplete="off" spellCheck="false" ref={(r) => { this.clientId = r; }}/>
+                      <button className="copy-to-clipboard" onClick={() => { Helper.copyTextInput(this.clientId); }}>
+                        <i className="fa fa-clipboard"></i>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -78,7 +83,10 @@ class ProjectCreds extends Component {
                   <div className="field-wrapper">
                     <label>Client Secret</label>
                     <div className="field">
-                      <input className="cred" type={this.state.showSecret ? 'text' : 'password'} value={this.state.clientSecret} autoComplete="off"/>
+                      <input className="cred" type={this.state.showSecret ? 'text' : 'password'} value={this.state.clientSecret} autoComplete="off" spellCheck="false" ref={(r) => { this.clientSecret = r; }}/>
+                      <button className="copy-to-clipboard" onClick={() => { Helper.copyPasswordInput($(this.clientSecret).val()); }}>
+                        <i className="fa fa-clipboard"></i>
+                      </button>
                       <button className="cred-action-btn" onClick={this.toggleSecretVisibility}>{this.state.showSecret ? 'Hide' : 'Show'}</button>
                       <button className="cred-action-btn" onClick={this.regenSecret}>Regenerate</button>
                     </div>

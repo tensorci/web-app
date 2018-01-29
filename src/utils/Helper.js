@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 var Helper;
 
 class H {
@@ -12,6 +14,26 @@ class H {
     }
 
     return params;
+  }
+
+  copyTextInput(el) {
+    el.select();
+    document.execCommand('copy');
+  }
+
+  copyPasswordInput(value) {
+    const $ghost = $('<input>').attr({
+      type: 'text',
+      value: value,
+      class: 'ghost'
+    });
+
+    $(document.body).append($ghost);
+
+    $ghost.get(0).select();
+    document.execCommand('copy');
+
+    $ghost.remove();
   }
 }
 
