@@ -20,6 +20,10 @@
     top: 1px;
   }
 
+  .card:not(:last-child) {
+    margin-bottom: 15px;
+  }
+
   .dataset-actions {
     display: -webkit-box;
     display: box;
