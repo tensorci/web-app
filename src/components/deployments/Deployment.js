@@ -4,6 +4,7 @@ import DashLoadingSpinner from '../widgets/spinners/DashLoadingSpinner';
 import DeploymentStages from './DeploymentStages';
 import DeploymentStatusBadge from './DeploymentStatusBadge';
 import pubnub from '../../utils/PubSub';
+import stages from '../../utils/Stages';
 import timeago from 'timeago.js';
 
 class Deployment extends Component {
@@ -42,11 +43,18 @@ class Deployment extends Component {
         stages: data.stages || {}
       });
 
-      this.listenForStageUpdates();
+      // subscribe to Pubnub updates if this deployment hasn't failed and isn't completely done.
+      if (!data.failed && data.current_stage !== stages.PREDICTING) {
+        this.listenForStageUpdates();
+      }
     });
   }
 
   listenForStageUpdates() {
+    const subscription = {
+      channels: [this.props.uid]
+    };
+
     pubnub.addListener({ message: (m) => {
       const data = m.message;
 
@@ -58,11 +66,14 @@ class Deployment extends Component {
         currentStage: data.current_stage,
         stages: data.stages
       });
+
+      // If build just failed or completely done, stop listening.
+      if (data.failed || data.current_stage === stages.PREDICTING) {
+        pubnub.unsubscribe(subscription);
+      }
     }});
 
-    pubnub.subscribe({
-      channels: [this.props.uid]
-    });
+    pubnub.subscribe(subscription);
   }
 
   render() {
