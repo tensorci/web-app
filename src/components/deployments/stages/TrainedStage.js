@@ -9,7 +9,8 @@ class PredictingStage extends StatusStage {
 
   deployToApi(team, repo) {
     const payload = {
-      git_url: 'https://github.com/' + team + '/' + repo + '.git'
+      git_url: 'https://github.com/' + team + '/' + repo + '.git',
+      with_log_stream: false
     };
 
     Ajax.post('/api/deployment/api', payload, (data, failed) => {
