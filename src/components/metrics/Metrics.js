@@ -104,7 +104,7 @@ class Metrics extends Component {
 
     return (
       <div className="metrics">
-        <ScatterPlot data={data} xScale={xScale} yScale={yScale}/>
+        <ScatterPlot data={data} xScale={xScale} yScale={yScale} title="Training loss" xAxisTitle="Iterations" yAxisTitle="Loss"/>
       </div>
     );
   }

@@ -1,3 +1,40 @@
 .metrics {
   width: 50%;
 }
+
+.scatter-plot {
+  position: relative;
+}
+
+.chart-title,
+.chart-axis-title,
+.chart-legend {
+  position: absolute;
+}
+
+.chart-axis-title {
+  font-size: 11px;
+  color: #212121;
+  display: inline-block;
+
+  &.x-axis {
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  &.y-axis {
+    height: 11px;
+    line-height: 11px;
+    bottom: calc((100% - 11px) / 2);
+    left: -20px;
+  }
+}
+
+.chart-title {
+  width: 100%;
+  text-align: center;
+  top: -20px;
+  left: 0;
+}
