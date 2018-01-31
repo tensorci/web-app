@@ -32,7 +32,10 @@ class ProfileDropdown extends Dropdown {
     Ajax.get('/api/provider_user/logout_url', null, (data) => {
       if (data.url) {
         Session.logout();
-        window.location = data.url;
+
+        setTimeout(() => {
+          window.location = data.url;
+        }, 50);
       }
     });
   }
