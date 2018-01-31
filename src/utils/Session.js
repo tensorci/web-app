@@ -107,6 +107,12 @@ class Sess {
   seenBasicAuthPrompt() {
     return (this.loginInfo() || {}).seen_basic_auth_prompt;
   }
+
+  hasIncompleteLocalStorage() {
+    return (Object.keys(this.user() || {}).length === 0) ||
+      (Object.keys(this.teams() || {}).length === 0) ||
+      (Object.keys(this.loginInfo() || {}).length === 0);
+  }
 }
 
 function getInstance() {
