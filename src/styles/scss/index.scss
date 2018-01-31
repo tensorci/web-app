@@ -30,6 +30,12 @@
 @import 'datasets/no-datasets';
 @import 'datasets/dataset-preview';
 
+// Predictions
+@import 'predictions/predictions';
+
+// Metrics
+@import 'metrics/metrics';
+
 // Shared
 @import 'shared/header';
 @import 'shared/dropdown';

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import Metrics from '../metrics/Metrics';
 import ProjectAside from '../shared/ProjectAside';
+
 
 class Predictions extends Component {
 
@@ -15,6 +17,7 @@ class Predictions extends Component {
       <div id="predictions">
         <div className="main-display">
           <div className="main-body">
+            <Metrics/>
           </div>
         </div>
       </div>
