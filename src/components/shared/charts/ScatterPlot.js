@@ -20,6 +20,12 @@ class ScatterPlot extends PureComponent {
     yScale1: this.props.yScale
   };
 
+  constructor(props) {
+    super(props);
+    this.updates = 0;
+    this.duration = 700;
+  }
+
   componentWillReceiveProps(next) {
     this.setState(() => ({
       xScale0: this.props.xScale,
@@ -30,7 +36,8 @@ class ScatterPlot extends PureComponent {
   }
 
   render() {
-    const { data, duration } = this.props;
+    this.updates++;
+    const { data } = this.props;
     const { xScale0, xScale1, yScale0, yScale1 } = this.state;
 
     return (
@@ -46,19 +53,19 @@ class ScatterPlot extends PureComponent {
           enter={({ val }) => ({
             opacity: [1],
             transform: [`translate(0,${DIMS[1] - yScale1(val)})`],
-            timing: { duration, ease: easeExp },
+            timing: { duration: this.duration, ease: easeExp },
           })}
 
           update={({ val }) => ({
             opacity: [1],
             transform: [`translate(0,${DIMS[1] - yScale1(val)})`],
-            timing: { duration, ease: easeExp },
+            timing: { duration: this.duration, ease: easeExp },
           })}
 
           leave={({ val }) => ({
             opacity: [1e-6],
             transform: [`translate(0,${DIMS[1] - yScale1(val)})`],
-            timing: { duration, ease: easeExp },
+            timing: { duration: this.duration, ease: easeExp },
           })}
         >
           {(nodes) => (
@@ -70,8 +77,8 @@ class ScatterPlot extends PureComponent {
                     y1={0}
                     x2={DIMS[0]}
                     y2={0}
-                    stroke={'#333'}
-                    opacity={0.2}
+                    stroke={'#e6e6e9'}
+                    opacity={1}
                   />
                   <text
                     x={-15}
@@ -96,19 +103,19 @@ class ScatterPlot extends PureComponent {
           enter={({ val }) => ({
             opacity: [1],
             transform: [`translate(${xScale1(val)},0)`],
-            timing: { duration, ease: easeExp },
+            timing: { duration: this.duration, ease: easeExp },
           })}
 
           update={({ val }) => ({
             opacity: [1],
             transform: [`translate(${xScale1(val)},0)`],
-            timing: { duration, ease: easeExp },
+            timing: { duration: this.duration, ease: easeExp },
           })}
 
           leave={({ val }) => ({
             opacity: [1e-6],
             transform: [`translate(${xScale1(val)},0)`],
-            timing: { duration, ease: easeExp },
+            timing: { duration: this.duration, ease: easeExp },
           })}
         >
           {(nodes) => (
@@ -134,7 +141,7 @@ class ScatterPlot extends PureComponent {
           start={(node) => ({
             node: {
               opacity: 1e-6,
-              transform: `translate(${node.x},${DIMS[1]})`,
+              transform: this.updates === 1 ? `translate(${node.x},${DIMS[1]})` : `translate(${node.x},${DIMS[1] - node.y})`,
             },
             circle: {
               r: 1e-6,
@@ -142,14 +149,20 @@ class ScatterPlot extends PureComponent {
             }
           })}
 
-          enter={(node) => ({
-            node: {
-              opacity: [1e-6, 1],
-              transform: [`translate(${node.x},${DIMS[1]})`, `translate(${node.x},${DIMS[1] - node.y})`],
-            },
-            circle: { r: [3] },
-            timing: { duration, ease: easePoly }
-          })}
+          enter={(node) => {
+            const index = parseInt(node.name.split('-').pop());
+
+            return {
+              node: {
+                opacity: [1e-6, 1],
+                transform: this.updates === 1 ?
+                  [`translate(${node.x},${DIMS[1]})`, `translate(${node.x},${DIMS[1] - node.y})`] :
+                  [`translate(${node.x},${DIMS[1] - node.y})`],
+              },
+              circle: { r: [3] },
+              timing: { duration: this.duration, delay: this.updates === 1 ? (index * 50) : 0, ease: easePoly }
+            };
+          }}
 
           update={(node) => ({
             node: {
@@ -157,7 +170,7 @@ class ScatterPlot extends PureComponent {
               transform: [`translate(${node.x},${DIMS[1] - node.y})`],
             },
             circle: { r: [3] },
-            timing: { duration, ease: easePoly }
+            timing: { duration: this.duration, ease: easePoly }
           })}
 
           leave={(node) => ({
@@ -165,7 +178,7 @@ class ScatterPlot extends PureComponent {
               opacity: [1e-6],
               transform: [`translate(${node.x},${DIMS[1]})`],
             },
-            timing: { duration, ease: easePoly },
+            timing: { duration: this.duration, ease: easePoly },
           })}
         >
           {(nodes) => (
