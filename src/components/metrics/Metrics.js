@@ -15,9 +15,12 @@ class Metrics extends Component {
     this.fetchDeployments = this.fetchDeployments.bind(this);
     this.fetchGraphs = this.fetchGraphs.bind(this);
     this.addPubnubListener = this.addPubnubListener.bind(this);
+    this.formatChannel = this.formatChannel.bind(this);
     this.listenForGraphUpdates = this.listenForGraphUpdates.bind(this);
     this.unListenForGraphUpdates = this.unListenForGraphUpdates.bind(this);
     this.getMainComp = this.getMainComp.bind(this);
+
+    this.channels = [];
 
     this.state = {
       loading: true,
@@ -125,15 +128,19 @@ class Metrics extends Component {
     });
   }
 
+  formatChannel(c){
+    return c + ':metrics';
+  }
+
   listenForGraphUpdates(channels) {
     pubnub.subscribe({
-      channels: channels
+      channels: channels.map((c) => { return this.formatChannel(c); })
     });
   }
 
   unListenForGraphUpdates(channels) {
     pubnub.unsubscribe({
-      channels: channels
+      channels: channels.map((c) => { return this.formatChannel(c); })
     });
   }
 
