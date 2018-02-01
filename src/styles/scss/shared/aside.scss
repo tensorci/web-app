@@ -223,6 +223,12 @@
     &:first-child {
       border-top: none;
     }
+
+    &.open {
+      .right-arr {
+        transform: rotateZ(90deg);
+      }
+    }
   }
 
   .project-heading {
@@ -298,4 +304,108 @@
   -webkit-flex: 1 0 1px;
   flex: 1 0 1px;
   overflow-y: auto;
+  padding: 0;
+  list-style: none;
+}
+
+
+.nested-project-deployment-item-container {
+  position: relative;
+  border-top: 1px solid #dcdcdc;
+
+  &:first-child {
+    border-top: none;
+  }
+
+  &:last-child {
+    border-bottom: 1px solid #dcdcdc;
+  }
+
+  &:hover {
+    background: #fff;
+
+    .branch {
+      text-decoration: underline;
+    }
+  }
+
+  &.selected {
+    background: #fff;
+  }
+}
+
+.nested-project-deployment {
+  display: -webkit-box;
+  display: box;
+  display: -webkit-flex;
+  display: flex;
+  padding: 10px;
+}
+
+.sm-deployment-status,
+.sm-deployment-info {
+  display: inline-block;
+}
+
+.sm-deployment-status {
+  margin-right: 10px;
+
+  .sm-badge {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    line-height: 18px;
+
+    &.succeeded {
+      color: $success;
+    }
+
+    &.failed {
+      color: $failed;
+    }
+
+    &.running {
+      color: $running;
+    }
+  }
+}
+
+.sm-deployment-info {
+  width: calc(100% - 28px);
+
+  * {
+    font-size: 12px;
+  }
+
+  .lead-info {
+    width: 100%;
+    float: left;
+
+    .branch {
+      display: inline-block;
+      float: left;
+      color: #333;
+    }
+
+    .timeago {
+      display: inline-block;
+      float: right;
+      color: #898989;
+    }
+  }
+
+  .extra-info {
+    width: 100%;
+    float: left;
+    color: #898989;
+    display: block;
+    padding-top: 4px;
+
+    .commit-msg {
+      width: 100%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
 }

@@ -16,6 +16,11 @@ class SideNav extends Component {
         icon: 'storage'
       },
       {
+        name: 'Metrics',
+        slug: 'metrics',
+        icon: 'fa-bar-chart'
+      },
+      {
         name: 'Predictions',
         slug: 'predictions',
         icon: 'prediction',

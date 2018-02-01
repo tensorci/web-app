@@ -55,10 +55,12 @@ class Deployments extends Component {
     };
 
     Ajax.get('/api/repos', payload, (data) => {
+      const repo = data.repo || this.state.repo;
+
       this.setState({
         projects: data.repos || [],
         deployments: data.deployments || [],
-        repo: data.repo,
+        repo: repo,
         loading: false
       });
     });
