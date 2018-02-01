@@ -19,6 +19,7 @@ class Metrics extends Component {
     this.listenForGraphUpdates = this.listenForGraphUpdates.bind(this);
     this.unListenForGraphUpdates = this.unListenForGraphUpdates.bind(this);
     this.getMainComp = this.getMainComp.bind(this);
+    this.addOrRemoveGraphListeners = this.addOrRemoveGraphListeners.bind(this);
 
     this.channels = [];
 
@@ -84,42 +85,7 @@ class Metrics extends Component {
       const repo = data.repo || this.state.repo;
       const newGraphs = data.graphs || [];
 
-      // create current graph uids map
-      var currGraphUids = {};
-      this.state.graphs.forEach((g) => {
-        currGraphUids[g.uid] = true;
-      });
-
-      var newGraphUids = {};
-      newGraphs.forEach((g) => {
-        newGraphUids[g.uid] = true;
-      });
-
-      var removeUids = [];
-      for (var uid in currGraphUids) {
-        // if current graph uid not in new graph uids map...
-        if (!newGraphUids[uid]) {
-          // register this as a graph uid to remove.
-          removeUids.push(uid);
-        }
-      }
-
-      var addUids = [];
-      for (var uid in newGraphUids) {
-        // if current graph uid not in new graph uids map...
-        if (!currGraphUids[uid]) {
-          // register this as a graph uid to remove.
-          addUids.push(uid);
-        }
-      }
-
-      if (addUids.length > 0) {
-        this.listenForGraphUpdates(addUids);
-      }
-
-      if (removeUids.length > 0) {
-        this.unListenForGraphUpdates(removeUids);
-      }
+      this.addOrRemoveGraphListeners(newGraphs);
 
       this.setState({
         projects: data.repos || [],
@@ -128,6 +94,47 @@ class Metrics extends Component {
         loading: false
       });
     });
+  }
+
+  addOrRemoveGraphListeners(graphs) {
+    const newGraphs = graphs || [];
+
+    // create current graph uids map
+    var currGraphUids = {};
+    this.state.graphs.forEach((g) => {
+      currGraphUids[g.uid] = true;
+    });
+
+    var newGraphUids = {};
+    newGraphs.forEach((g) => {
+      newGraphUids[g.uid] = true;
+    });
+
+    var removeUids = [];
+    for (var uid in currGraphUids) {
+      // if current graph uid not in new graph uids map...
+      if (!newGraphUids[uid]) {
+        // register this as a graph uid to remove.
+        removeUids.push(uid);
+      }
+    }
+
+    var addUids = [];
+    for (var uid in newGraphUids) {
+      // if current graph uid not in new graph uids map...
+      if (!currGraphUids[uid]) {
+        // register this as a graph uid to remove.
+        addUids.push(uid);
+      }
+    }
+
+    if (addUids.length > 0) {
+      this.listenForGraphUpdates(addUids);
+    }
+
+    if (removeUids.length > 0) {
+      this.unListenForGraphUpdates(removeUids);
+    }
   }
 
   formatChannel(c){
@@ -178,17 +185,15 @@ class Metrics extends Component {
   }
 
   fetchGraphs(uid) {
-    const payload = {
-      deployment_uid: uid
-    };
+    Ajax.get('/api/graphs', { deployment_uid: uid }, (data) => {
+      const newGraphs = data.graphs || [];
 
-    Ajax.get('/api/graphs', payload, (data) => {
+      this.addOrRemoveGraphListeners(newGraphs);
+
       this.setState({
-        graphs: data.graphs || [],
+        graphs: newGraphs,
         uid: uid
       });
-
-
     });
   }
 
