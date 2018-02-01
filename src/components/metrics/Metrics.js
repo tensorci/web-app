@@ -37,6 +37,8 @@ class Metrics extends Component {
     this.fetchAsideContent();
   }
 
+  // TODO: Unsubscribe from all Pubnub channels on componentDidUnmount
+
   componentDidUpdate() {
     if (this.state.loading) {
       // data needs to be fetched
