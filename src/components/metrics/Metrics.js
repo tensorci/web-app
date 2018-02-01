@@ -43,7 +43,9 @@ class Metrics extends Component {
     } else if (this.props.repo && (this.props.repo !== this.state.repo)) {
       // Repo was changed, so just refetch deployments for that repo
       this.fetchDeployments(this.props.repo);
-    } else if (this.props.uid && (this.props.uid !== this.state.uid)) {
+    } else if (this.props.uid !== this.state.uid) {
+      // TODO: Re-figure out why the above clause (else if (this.props.repo)) needs to
+      // check for this.props.repo and the directly above (this.props.uid) doesn't need to be checked for...
       // Deployment was changed, so just refetch graphs for this deployment
       this.fetchGraphs(this.props.uid);
     }
@@ -118,7 +120,7 @@ class Metrics extends Component {
 
   getMainComp() {
     if (!this.state.graphs || this.state.graphs.length === 0) {
-      return <NoMetrics/>;
+      return <NoMetrics team={this.state.team} repo={this.state.repo} pleaseSelect={!this.state.uid}/>;
     }
 
     return this.state.graphs.map((graph, i) => {

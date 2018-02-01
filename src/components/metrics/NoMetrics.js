@@ -5,6 +5,7 @@ class NoMetrics extends Component {
   render() {
     const team = this.props.team;
     const repo = this.props.repo;
+    const pleaseSelect = this.props.pleaseSelect;
 
     return (
       <div className="card">
@@ -20,7 +21,7 @@ class NoMetrics extends Component {
               <i className="fa fa-bar-chart"></i>
             </div>
             <div className="primary-msg">
-              <span className="project-name">{repo}</span> has no metrics for this deployment.
+              {pleaseSelect ? <span>Please select a deployment from the side menu.</span> : <span><span className="repo-name">{repo}</span> has no metrics for this deployment.</span>}
             </div>
           </div>
         </div>

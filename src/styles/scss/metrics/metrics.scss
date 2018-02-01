@@ -16,6 +16,10 @@
   .aside-left-menu {
     width: 300px;
   }
+
+  .card:not(:last-child) {
+    margin-bottom: 15px;
+  }
 }
 
 .scatter-plot {
@@ -86,7 +90,7 @@
 
 .no-graphs {
   text-align: center;
-  padding: 15px;
+  padding: 30px 15px;
 
   .icon-container {
     width: 60px;
