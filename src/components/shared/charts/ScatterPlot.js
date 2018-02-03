@@ -21,20 +21,20 @@ class ScatterPlot extends PureComponent {
       yScale0: this.props.yScale,
       yScale1: this.props.yScale,
       legend: this.props.legend,
+      data: this.props.data,
       xAxisTitle: this.props.xAxisTitle,
       yAxisTitle: this.props.yAxisTitle
     };
   }
 
   componentWillReceiveProps(next) {
-    console.log(next);
-
     this.setState(() => ({
       xScale0: this.props.xScale,
       xScale1: next.xScale,
       yScale0: this.props.yScale,
       yScale1: next.yScale,
-      legend: next.legend
+      legend: next.legend,
+      data: next.data
     }));
   }
 
@@ -71,9 +71,7 @@ class ScatterPlot extends PureComponent {
 
   render() {
     this.updates++;
-    const { data } = this.props;
-    const legend = this.props.legend;
-    const { xScale0, xScale1, yScale0, yScale1 } = this.state;
+    const { xScale0, xScale1, yScale0, yScale1, data, legend } = this.state;
 
     return (
       <div className="scatter-plot">
