@@ -49,12 +49,12 @@ class ScatterPlot extends PureComponent {
     return titles;
   }
 
-  getLegend() {
-    if (!this.state.legend) {
+  getLegend(legend) {
+    if (!legend) {
       return;
     }
 
-    const legendInfo = this.state.legend.map((series, i) => {
+    const legendInfo = legend.map((series, i) => {
       return (
         <div className="legend-series">
           <span>{series.name}</span>
@@ -74,7 +74,7 @@ class ScatterPlot extends PureComponent {
     return (
       <div className="scatter-plot">
         {this.getAxesTitles()}
-        {this.getLegend()}
+        {this.getLegend(data.legend)}
         <div className="chart-surface-container">
           <ChartSurface view={this.props.viewSize} trbl={this.props.margins}>
             <TickGroup

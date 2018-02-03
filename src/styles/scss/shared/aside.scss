@@ -365,7 +365,18 @@
     }
 
     &.running {
-      color: $running;
+      line-height: 10px;
+
+      i {
+        background: #66d3e4;
+        border-radius: 50%;
+        height: 16px;
+        width: 16px;
+        color: #fff;
+        font-size: 6px;
+        line-height: 16px;
+        text-align: center;
+      }
     }
   }
 }
