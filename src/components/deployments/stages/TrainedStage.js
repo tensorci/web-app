@@ -21,9 +21,9 @@ class PredictingStage extends StatusStage {
     });
   }
 
-  getActionBtns(data, isCurrentStage, team, repo, intent) {
+  getActionBtns(data, current, team, repo, uid, intent) {
     // only show the "Deploy to API" button if deployment is currently static sitting in the Trained state.
-    if (!isCurrentStage || intent !== intents.TRAIN) {
+    if (!current || intent !== intents.TRAIN) {
       return;
     }
 

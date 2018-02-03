@@ -54,25 +54,21 @@
           font-size: 18px;
           font-family: Avenir-Next-Regular;
         }
+      }
+    }
 
-        .command {
-          line-height: 4em;
+    .right-side {
+      display: inline-block;
+      float: right;
+      margin-right: 15px;
 
-          .right-side {
-            display: inline-block;
-            float: right;
-            margin-right: 15px;
-
-            button, a.button {
-              height: 36px;
-              font-size: 12px;
-              text-transform: uppercase;
-              width: 140px;
-              float: right;
-              margin-top: 10px;
-            }
-          }
-        }
+      button, a.button {
+        height: 36px;
+        font-size: 12px;
+        text-transform: uppercase;
+        width: 140px;
+        float: right;
+        margin-top: 10px;
       }
     }
 
@@ -100,6 +96,10 @@
       height: inherit;
       overflow: hidden;
       line-height: 3em;
+
+      &.with-buttons {
+        line-height: 4em;
+      }
     }
   }
 

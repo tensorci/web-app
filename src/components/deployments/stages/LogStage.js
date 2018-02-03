@@ -61,9 +61,18 @@ class LogStage extends Component {
     );
   }
 
+  getActionBtns(data, isCurrentStage, team, repo, uid, intent) {}
+
   render() {
     const data = this.props.data || {};
     const current = this.props.current || false;
+    const team = this.props.team;
+    const repo = this.props.repo;
+    const uid = this.props.uid;
+    const intent = this.props.intent;
+
+    const actionButtons = this.getActionBtns(data, current, team, repo, uid, intent);
+    const actionButtonsExist = actionButtons && actionButtons.length > 0;
 
     const detailWrapperStyle = {
       height: (current && !this.actionHeaderRef) || (this.actionHeaderRef && $(this.actionHeaderRef).hasClass('open')) ? 'auto' : 0
@@ -77,8 +86,9 @@ class LogStage extends Component {
               <div className="button contents">
                 <i className="fa fa-chevron-right right-arrow"></i>
               </div>
-              <div className="command contents">
+              <div className={'command contents' + actionButtonsExist ? ' with-buttons' : ''}>
                 <span className="stage-name">{data.name}</span>
+                <div className="right-side">{actionButtons}</div>
               </div>
             </div>
             <div className="detail-wrapper" style={detailWrapperStyle} ref={(r) => { this.wrapperRef = r; }}>

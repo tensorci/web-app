@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import LogStage from './stages/LogStage';
 import stages from '../../utils/Stages';
-import TrainedStage from './stages/TrainedStage';
 import PredictingStage from './stages/PredictingStage';
+import TrainedStage from './stages/TrainedStage';
+import TrainingStage from './stages/TrainingStage';
 
 class DeploymentStages extends Component {
 
@@ -22,28 +23,28 @@ class DeploymentStages extends Component {
     ];
   }
 
-  compForStage(stageSlug, stage, isCurrentStage, team, repo, intent, i) {
+  compForStage(stageSlug, stage, isCurrentStage, team, repo, uid, intent, i) {
     switch (stageSlug) {
     case stages.BUILDING_FOR_TRAIN:
-      return <LogStage data={stage} current={isCurrentStage} key={i}/>;
+      return <LogStage data={stage} current={isCurrentStage} team={team} repo={repo} uid={uid} intent={intent} key={i}/>;
     case stages.TRAINING_SCHEDULED:
-      return <LogStage data={stage} current={isCurrentStage} key={i}/>;
+      return <LogStage data={stage} current={isCurrentStage} team={team} repo={repo} uid={uid} intent={intent} key={i}/>;
     case stages.TRAINING:
-      return <LogStage data={stage} current={isCurrentStage} key={i}/>;
+      return <TrainingStage data={stage} current={isCurrentStage} team={team} repo={repo} uid={uid} intent={intent} key={i}/>;
     case stages.DONE_TRAINING:
-      return <TrainedStage data={stage} current={isCurrentStage} team={team} repo={repo} intent={intent} key={i}/>;
+      return <TrainedStage data={stage} current={isCurrentStage} team={team} repo={repo} uid={uid} intent={intent} key={i}/>;
     case stages.BUILDING_FOR_API:
-      return <LogStage data={stage} current={isCurrentStage} key={i}/>;
+      return <LogStage data={stage} current={isCurrentStage} team={team} repo={repo} uid={uid} intent={intent} key={i}/>;
     case stages.PREDICTING_SCHEDULED:
-      return <LogStage data={stage} current={isCurrentStage} key={i}/>;
+      return <LogStage data={stage} current={isCurrentStage} team={team} repo={repo} uid={uid} intent={intent} key={i}/>;
     case stages.PREDICTING:
-      return <PredictingStage data={stage} current={isCurrentStage} team={team} repo={repo} key={i}/>;
+      return <PredictingStage data={stage} current={isCurrentStage} team={team} repo={repo} uid={uid} intent={intent} key={i}/>;
     default:
       return null;
     }
   }
 
-  formatStages(stages, currentStage, team, repo, intent) {
+  formatStages(stages, currentStage, team, repo, uid, intent) {
     var stage, comp;
     var stageComps = [];
 
@@ -51,7 +52,7 @@ class DeploymentStages extends Component {
       stage = stages[stageSlug];
 
       if (stage && stage.show) {
-        comp = this.compForStage(stageSlug, stage, stageSlug === currentStage, team, repo, intent, i);
+        comp = this.compForStage(stageSlug, stage, stageSlug === currentStage, team, repo, uid, intent, i);
 
         if (comp) {
           stageComps.push(comp);
@@ -65,13 +66,14 @@ class DeploymentStages extends Component {
   render() {
     const team = this.props.team;
     const repo = this.props.repo;
+    const uid = this.props.uid;
     const stages = this.props.stages;
     const currentStage = this.props.currentStage;
     const intent = this.props.intent;
 
     return (
       <div className="card col-sm-12 deployment-stages">
-        <div className="build-steps">{this.formatStages(stages, currentStage, team, repo, intent)}</div>
+        <div className="build-steps">{this.formatStages(stages, currentStage, team, repo, uid, intent)}</div>
       </div>
     );
   }

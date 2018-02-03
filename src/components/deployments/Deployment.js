@@ -79,6 +79,7 @@ class Deployment extends Component {
   render() {
     const team = this.props.team;
     const repo = this.props.repo;
+    const uid = this.props.uid;
     const commit = this.state.commit;
 
     if (this.state.loading) {
@@ -127,7 +128,7 @@ class Deployment extends Component {
                 </div>
               </div>
             </div>
-            <DeploymentStages stages={this.state.stages} currentStage={this.state.currentStage} intent={this.state.intent} team={team} repo={repo}/>
+            <DeploymentStages stages={this.state.stages} currentStage={this.state.currentStage} intent={this.state.intent} team={team} repo={repo} uid={uid}/>
           </div>
         </div>
       </div>
