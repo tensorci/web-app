@@ -126,9 +126,7 @@ class Metrics extends Component {
           deploymentUid={this.state.uid}
           projects={this.state.projects}/>
         <div className="main-display">
-          <div className="main-body">
-            <Graphs graphs={this.state.graphs} team={this.state.team} repo={this.state.repo} pleaseSelect={!this.state.uid} ref={(r) => { this.graphs = r; }}/>
-          </div>
+          <Graphs graphs={this.state.graphs} team={this.state.team} repo={this.state.repo} pleaseSelect={!this.state.uid} ref={(r) => { this.graphs = r; }}/>
         </div>
       </div>
     );
