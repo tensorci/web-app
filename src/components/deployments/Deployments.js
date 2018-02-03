@@ -12,6 +12,7 @@ class Deployments extends Component {
     this.fetchReposAndDeployments = this.fetchReposAndDeployments.bind(this);
     this.fetchDeployments = this.fetchDeployments.bind(this);
     this.getDeploymentsList = this.getDeploymentsList.bind(this);
+    this.refresh = this.refresh.bind(this);
 
     this.state = {
       loading: true,
