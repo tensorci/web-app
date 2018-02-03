@@ -10,8 +10,8 @@ class Metrics extends Component {
     super(props);
 
     this.fetchAsideContent = this.fetchAsideContent.bind(this);
-    this.fetchDeployments = this.fetchDeployments.bind(this);
-    this.fetchGraphs = this.fetchGraphs.bind(this);
+    // this.fetchDeployments = this.fetchDeployments.bind(this);
+    // this.fetchGraphs = this.fetchGraphs.bind(this);
 
     this.channels = [];
 

@@ -9,8 +9,20 @@ class Graphs extends Component {
     super(props);
 
     this.formatGraphs = this.formatGraphs.bind(this);
+    this.addPubnubListener = this.addPubnubListener.bind(this);
+
+    this.state = {
+      graphs: this.props.graphs || [],
+      team: this.props.team,
+      repo: this.props.repo,
+      pleaseSelect: this.props.pleaseSelect
+    };
 
     // TODO: Unsubscribe from all Pubnub channels on componentDidUnmount
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState(() => (props));
   }
 
   componentDidMount() {
@@ -24,16 +36,16 @@ class Graphs extends Component {
     }});
   }
 
-  formatGraphs(graphs, team, repo, pleaseSelect) {
-    if (!graphs || graphs.length === 0) {
-      return <NoMetrics team={team} repo={repo} pleaseSelect={pleaseSelect}/>;
+  formatGraphs() {
+    if (!this.state.graphs || this.state.graphs.length === 0) {
+      return <NoMetrics team={this.state.team} repo={this.state.repo} pleaseSelect={this.state.pleaseSelect}/>;
     }
 
-    const graphUids = graphs.map((g) => { return g.uid; });
+    const graphUids = this.state.graphs.map((g) => { return g.uid; });
 
     pubnub.subscribe({ channels: graphUids });
 
-    return graphs.map((graph, i) => {
+    return this.state.graphs.map((graph, i) => {
       return <Graph key={i} {...graph}/>;
     });
   }
@@ -80,14 +92,9 @@ class Graphs extends Component {
   // }
 
   render() {
-    const graphs = this.props.graphs || [];
-    const team = this.props.team;
-    const repo = this.props.repo;
-    const pleaseSelect = this.props.pleaseSelect;
-
     return (
       <div className="main-body">
-        {this.formatGraphs(graphs, team, repo, pleaseSelect)}
+        {this.formatGraphs()}
       </div>
     );
   }
