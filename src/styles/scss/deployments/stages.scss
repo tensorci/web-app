@@ -82,6 +82,10 @@
       margin-left: 10px;
       height: 30px;
       width: 30px;
+
+      &.log-stage.with-action-btns {
+        padding-top: 18px;
+      }
     }
 
     .right-arrow, .down-arrow {
