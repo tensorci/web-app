@@ -28,7 +28,7 @@ class StatusStage extends Component {
               <div className="button contents">
                 <i className="material-icons">check_circle</i>
               </div>
-              <div className={'command contents' + actionButtonsExist ? ' with-buttons' : ''}>
+              <div className={'command contents' + (actionButtonsExist ? ' with-buttons' : '')}>
                 <span className="stage-name">{data.name}</span>
                 <div className="right-side">{actionButtons}</div>
               </div>

@@ -86,7 +86,7 @@ class LogStage extends Component {
               <div className="button contents">
                 <i className="fa fa-chevron-right right-arrow"></i>
               </div>
-              <div className={'command contents' + actionButtonsExist ? ' with-buttons' : ''}>
+              <div className={'command contents' + (actionButtonsExist ? ' with-buttons' : '')}>
                 <span className="stage-name">{data.name}</span>
                 <div className="right-side">{actionButtons}</div>
               </div>
