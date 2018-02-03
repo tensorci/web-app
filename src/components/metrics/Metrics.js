@@ -43,7 +43,7 @@ class Metrics extends Component {
 
     if (repoChanged) {
       this.fetchAsideContent(nextProps.repo, nextProps.uid);
-    } else if (deploymentChanged) {
+    } else if (nextProps.uid && deploymentChanged) {
       this.fetchGraphs(nextProps.uid);
     }
   }
