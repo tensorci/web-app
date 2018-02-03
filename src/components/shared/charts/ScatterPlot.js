@@ -72,7 +72,7 @@ class ScatterPlot extends PureComponent {
   render() {
     this.updates++;
 
-    console.log('render plot');
+    console.log('render plot', yScale0, yScale1);
 
     const { xScale0, xScale1, yScale0, yScale1, data, legend } = this.state;
 
