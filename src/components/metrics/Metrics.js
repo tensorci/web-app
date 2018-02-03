@@ -29,6 +29,7 @@ class Metrics extends Component {
   }
 
   componentDidMount() {
+    this.addPubnubListener();
     this.fetchAsideContent(this.state.repo, this.state.uid);
   }
 
@@ -57,7 +58,7 @@ class Metrics extends Component {
       // deployment uid went from existing to now being blank
       else {
         // just set state with an empty graphs array and remove the deployment uid
-        this.addOrRemoveGraphListeners([]);
+        this.addOrRemoveGraphListeners(this.state.graphs, []);
 
         this.setState({
           graphs: [],
@@ -90,7 +91,7 @@ class Metrics extends Component {
       const fetchedUid = data.uid || uid;
       const graphs = data.graphs || [];
 
-      this.addOrRemoveGraphListeners(graphs);
+      this.addOrRemoveGraphListeners(this.state.graphs, graphs);
 
       this.setState({
         projects: data.repos || [],
@@ -102,12 +103,13 @@ class Metrics extends Component {
     });
   }
 
-  addOrRemoveGraphListeners(graphs) {
-    const newGraphs = graphs || [];
+  addOrRemoveGraphListeners(currGraphs, newGraphs) {
+    var currGraphs = currGraphs || [];
+    var newGraphs = newGraphs || [];
 
     // create current graph uids map
     var currGraphUids = {};
-    this.state.graphs.forEach((g) => {
+    currGraphs.forEach((g) => {
       currGraphUids[g.uid] = true;
     });
 
@@ -178,7 +180,7 @@ class Metrics extends Component {
     Ajax.get('/api/graphs', { deployment_uid: uid }, (data) => {
       const graphs = data.graphs || [];
 
-      this.addOrRemoveGraphListeners(graphs);
+      this.addOrRemoveGraphListeners(this.state.graphs, graphs);
 
       this.setState({
         graphs: graphs,
