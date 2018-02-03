@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
 import DashLoadingSpinner from '../widgets/spinners/DashLoadingSpinner';
-import Graphs from './Graphs';
+import Graph from './Graph';
+import NoMetrics from './NoMetrics';
 import ProjectAside from '../shared/ProjectAside';
+import pubnub from '../../utils/PubSub';
+
 
 class Metrics extends Component {
 
@@ -11,13 +14,13 @@ class Metrics extends Component {
 
     this.fetchAsideContent = this.fetchAsideContent.bind(this);
     // this.fetchDeployments = this.fetchDeployments.bind(this);
-    // this.fetchGraphs = this.fetchGraphs.bind(this);
-
-    this.channels = [];
+    this.fetchGraphs = this.fetchGraphs.bind(this);
+    this.addOrRemoveGraphListeners = this.addOrRemoveGraphListeners.bind(this);
+    this.addPubnubListener = this.addPubnubListener.bind(this);
 
     this.state = {
       loading: true,
-      projects: [], // deployments nested inside
+      projects: [], // deployments nested inside,
       graphs: [],
       team: this.props.team,
       repo: this.props.repo,
@@ -26,48 +29,101 @@ class Metrics extends Component {
   }
 
   componentDidMount() {
-    this.fetchAsideContent();
+    this.fetchAsideContent(this.state.repo, this.state.uid);
   }
 
-  componentDidUpdate() {
-    // // Entire page data needs to be fetched
-    // if (this.state.loading) {
-    //   this.fetchAsideContent();
-    // }
-    // // Repo has changed, so fetch deployments for that repo
-    // else if (this.props.repo && (this.props.repo !== this.state.repo)) {
-    //   this.fetchDeployments(this.props.repo);
-    // }
-    // // Deployment has changed, so fetch graphs for deployment
-    // else if (this.props.uid && (this.props.uid !== this.state.uid)) {
-    //   this.fetchGraphs(this.props.uid);
-    // }
+  componentWillReceiveProps(nextProps) {
+    // ignore this on first render
+    if (this.state.loading) {
+      return;
+    }
+
+    const repoChanged = nextProps.repo !== this.state.repo;
+    const deploymentChanged = repoChanged || (nextProps.uid !== this.state.uid);
+
+    if (repoChanged) {
+      this.fetchAsideContent(nextProps.repo, nextProps.uid);
+    } else if (deploymentChanged) {
+      this.fetchGraphs(nextProps.uid);
+    }
   }
 
-  fetchAsideContent() {
+  addPubnubListener() {
+    pubnub.addListener({ message: (m) => {
+      const data = m.message;
+      this.setState({ graphs: data.graphs || [] });
+    }});
+  }
+
+  fetchAsideContent(repo, uid) {
     if (!this.state.team) {
       return;
     }
 
     const payload = {
       team: this.state.team,
-      repo: this.state.repo,
-      deployment_uid: this.state.uid
+      repo: repo,
+      deployment_uid: uid
     };
 
     Ajax.get('/api/metrics', payload, (data) => {
-      const repo = data.repo || this.state.repo;
-      const newGraphs = data.graphs || [];
+      const fetchedRepo = data.repo || repo;
+      const fetchedUid = data.uid || uid;
+      const graphs = data.graphs || [];
+
+      this.addOrRemoveGraphListeners(graphs);
 
       this.setState({
         projects: data.repos || [],
-        graphs: newGraphs,
-        repo: repo,
+        graphs: graphs,
+        repo: fetchedRepo,
+        uid: fetchedUid,
         loading: false
       });
     });
   }
-  //
+
+  addOrRemoveGraphListeners(graphs) {
+    const newGraphs = graphs || [];
+
+    // create current graph uids map
+    var currGraphUids = {};
+    this.state.graphs.forEach((g) => {
+      currGraphUids[g.uid] = true;
+    });
+
+    var newGraphUids = {};
+    newGraphs.forEach((g) => {
+      newGraphUids[g.uid] = true;
+    });
+
+    var removeUids = [];
+    for (var uid in currGraphUids) {
+      // if current graph uid not in new graph uids map...
+      if (!newGraphUids[uid]) {
+        // register this as a graph uid to remove.
+        removeUids.push(uid);
+      }
+    }
+
+    var addUids = [];
+    for (var uid in newGraphUids) {
+      // if current graph uid not in new graph uids map...
+      if (!currGraphUids[uid]) {
+        // register this as a graph uid to remove.
+        addUids.push(uid);
+      }
+    }
+
+    if (addUids.length > 0) {
+      pubnub.subscribe({ channels: addUids });
+    }
+
+    if (removeUids.length > 0) {
+      pubnub.unsubscribe({ channels: removeUids });
+    }
+  }
+
   // fetchDeployments(repo) {
   //   const payload = {
   //     team: this.state.team,
@@ -99,18 +155,28 @@ class Metrics extends Component {
   //   });
   // }
   //
-  // fetchGraphs(uid) {
-  //   Ajax.get('/api/graphs', { deployment_uid: uid }, (data) => {
-  //     const newGraphs = data.graphs || [];
-  //
-  //     this.addOrRemoveGraphListeners(newGraphs);
-  //
-  //     this.setState({
-  //       graphs: newGraphs,
-  //       uid: uid
-  //     });
-  //   });
-  // }
+  fetchGraphs(uid) {
+    Ajax.get('/api/graphs', { deployment_uid: uid }, (data) => {
+      const graphs = data.graphs || [];
+
+      this.addOrRemoveGraphListeners(graphs);
+
+      this.setState({
+        graphs: graphs,
+        uid: uid
+      });
+    });
+  }
+
+  getMainComp() {
+    if (!this.state.graphs || this.state.graphs.length === 0) {
+      return <NoMetrics team={this.state.team} repo={this.state.repo} pleaseSelect={!this.state.uid}/>;
+    }
+
+    return this.state.graphs.map((graph, i) => {
+      return <Graph key={i} {...graph}/>;
+    });
+  }
 
   render() {
     if (this.state.loading) {
@@ -126,7 +192,7 @@ class Metrics extends Component {
           deploymentUid={this.state.uid}
           projects={this.state.projects}/>
         <div className="main-display">
-          <Graphs graphs={this.state.graphs} team={this.state.team} repo={this.state.repo} pleaseSelect={!this.state.uid} ref={(r) => { this.graphs = r; }}/>
+          <div className="main-body">{this.getMainComp()}</div>
         </div>
       </div>
     );
