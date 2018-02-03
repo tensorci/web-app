@@ -186,7 +186,7 @@ class ScatterPlot extends PureComponent {
 
               enter={(node) => {
                 const index = parseInt(node.name.split('-').pop());
-
+                
                 return {
                   node: {
                     opacity: [1e-6, 1],

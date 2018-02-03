@@ -26,7 +26,7 @@ class Graph extends Component {
         dataPoint = dataPoints[j];
 
         dataPoint.color = group.color;
-        dataPoint.name = `${group.name}-index-${j}`;
+        dataPoint.name = `${group.name.replace(' ', '-')}-index-${j}`;
 
         allData.push(dataPoint);
       }
