@@ -22,6 +22,13 @@ class Graphs extends Component {
   }
 
   componentWillReceiveProps(props) {
+    const graphs = props.graphs || [];
+
+    if (graphs.length > 0) {
+      const graphUids = graphs.map((g) => { return g.uid; });
+      pubnub.subscribe({ channels: graphUids });
+    }
+
     this.setState(() => (props));
   }
 
@@ -37,13 +44,11 @@ class Graphs extends Component {
   }
 
   formatGraphs() {
+    console.log('heard format graphs', this.state.graphs);
+
     if (!this.state.graphs || this.state.graphs.length === 0) {
       return <NoMetrics team={this.state.team} repo={this.state.repo} pleaseSelect={this.state.pleaseSelect}/>;
     }
-
-    const graphUids = this.state.graphs.map((g) => { return g.uid; });
-
-    pubnub.subscribe({ channels: graphUids });
 
     return this.state.graphs.map((graph, i) => {
       return <Graph key={i} {...graph}/>;
