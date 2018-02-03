@@ -27,6 +27,8 @@ class ScatterPlot extends PureComponent {
   }
 
   componentWillReceiveProps(next) {
+    console.log(next);
+
     this.setState(() => ({
       xScale0: this.props.xScale,
       xScale1: next.xScale,
