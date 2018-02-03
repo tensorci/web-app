@@ -83,7 +83,7 @@ class ScatterPlot extends PureComponent {
         <div className="chart-surface-container">
           <ChartSurface view={this.props.viewSize} trbl={this.props.margins}>
             <TickGroup
-              scale={this.props.yScale}
+              scale={yScale1}
 
               start={({ val }) => ({
                 opacity: 1e-6,
