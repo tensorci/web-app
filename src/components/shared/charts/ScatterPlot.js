@@ -21,7 +21,6 @@ class ScatterPlot extends PureComponent {
       yScale0: this.props.yScale,
       yScale1: this.props.yScale,
       legend: this.props.legend,
-      data: this.props.data,
       xAxisTitle: this.props.xAxisTitle,
       yAxisTitle: this.props.yAxisTitle
     };
@@ -33,8 +32,7 @@ class ScatterPlot extends PureComponent {
       xScale1: next.xScale,
       yScale0: this.props.yScale,
       yScale1: next.yScale,
-      legend: next.legend,
-      data: next.data
+      legend: next.legend
     }));
   }
 
@@ -72,9 +70,13 @@ class ScatterPlot extends PureComponent {
   render() {
     this.updates++;
 
-    console.log('render plot', yScale0, yScale1);
 
-    const { xScale0, xScale1, yScale0, yScale1, data, legend } = this.state;
+
+
+
+    const { data } = this.props;
+    const legend = this.props.legend;
+    const { xScale0, xScale1, yScale0, yScale1 } = this.state;
 
     return (
       <div className="scatter-plot">
@@ -83,7 +85,7 @@ class ScatterPlot extends PureComponent {
         <div className="chart-surface-container">
           <ChartSurface view={this.props.viewSize} trbl={this.props.margins}>
             <TickGroup
-              scale={yScale1}
+              scale={this.props.yScale}
 
               start={({ val }) => ({
                 opacity: 1e-6,
