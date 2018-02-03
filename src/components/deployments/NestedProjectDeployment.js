@@ -22,7 +22,7 @@ class NestedProjectDeployment extends Component {
       iconClasses.push('fa-check-circle');
     } else {
       badgeClasses.push('running');
-      iconClasses.push('fa-dot-circle');
+      iconClasses.push('fa-circle');
     }
 
     return (

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
 import DashLoadingSpinner from '../widgets/spinners/DashLoadingSpinner';
-import Graph from './Graph';
+import Graphs from './Graphs';
 import NoMetrics from './NoMetrics';
 import ProjectAside from '../shared/ProjectAside';
 import pubnub from '../../utils/PubSub';
@@ -38,24 +38,16 @@ class Metrics extends Component {
   // TODO: Unsubscribe from all Pubnub channels on componentDidUnmount
 
   componentDidUpdate() {
+    // Entire page data needs to be fetched
     if (this.state.loading) {
-      // data needs to be fetched
       this.fetchAsideContent();
-    } else if (this.props.team !== this.state.team) {
-      // Team was changed, so put new team and repo into state and refetch by setting loading to true.
-      this.setState({
-        loading: true,
-        team: this.props.team,
-        repo: this.props.repo,
-        uid: this.props.uid
-      });
-    } else if (this.props.repo && (this.props.repo !== this.state.repo)) {
-      // Repo was changed, so just refetch deployments for that repo
+    }
+    // Repo has changed, so fetch deployments for that repo
+    else if (this.props.repo && (this.props.repo !== this.state.repo)) {
       this.fetchDeployments(this.props.repo);
-    } else if (this.props.uid !== this.state.uid) {
-      // TODO: Re-figure out why the above clause (else if (this.props.repo)) needs to
-      // check for this.props.repo and the directly above (this.props.uid) doesn't need to be checked for...
-      // Deployment was changed, so just refetch graphs for this deployment
+    }
+    // Deployment has changed, so fetch graphs for deployment
+    else if (this.props.uid && (this.props.uid !== this.state.uid)) {
       this.fetchGraphs(this.props.uid);
     }
   }
@@ -63,7 +55,10 @@ class Metrics extends Component {
   addPubnubListener() {
     pubnub.addListener({ message: (m) => {
       const data = m.message;
-      this.setState({ graphs: data.graphs || [] });
+
+      if (this.graphs) {
+        this.graphs.setState({ graphs: data.graphs || [] });
+      }
     }});
   }
 
@@ -180,12 +175,10 @@ class Metrics extends Component {
 
   getMainComp() {
     if (!this.state.graphs || this.state.graphs.length === 0) {
-      return <NoMetrics team={this.state.team} repo={this.state.repo} pleaseSelect={!this.state.uid}/>;
+      return <div className="main-body"><NoMetrics team={this.state.team} repo={this.state.repo} pleaseSelect={!this.state.uid}/></div>;
     }
 
-    return this.state.graphs.map((graph, i) => {
-      return <Graph key={i} {...graph}/>;
-    });
+    return <Graphs graphs={this.state.graphs} ref={(r) => { this.graphs = r; }}/>;
   }
 
   render() {
@@ -201,9 +194,7 @@ class Metrics extends Component {
           repo={this.state.repo}
           deploymentUid={this.state.uid}
           projects={this.state.projects}/>
-        <div className="main-display">
-          <div className="main-body">{this.getMainComp()}</div>
-        </div>
+        <div className="main-display">{this.getMainComp()}</div>
       </div>
     );
   }
