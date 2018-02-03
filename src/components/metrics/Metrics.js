@@ -41,10 +41,29 @@ class Metrics extends Component {
     const repoChanged = nextProps.repo !== this.state.repo;
     const deploymentChanged = repoChanged || (nextProps.uid !== this.state.uid);
 
+    // repo changed (which means deployment changed too by default)
     if (repoChanged) {
+      // refetch entire page content
       this.fetchAsideContent(nextProps.repo, nextProps.uid);
-    } else if (nextProps.uid && deploymentChanged) {
-      this.fetchGraphs(nextProps.uid);
+    }
+
+    // repo stayed the same, but deployment changed
+    else if (deploymentChanged) {
+      // deployment uid changed and wasn't just removed
+      if (nextProps.uid) {
+        // fetch graphs for new deployment uid
+        this.fetchGraphs(nextProps.uid);
+      }
+      // deployment uid went from existing to now being blank
+      else {
+        // just set state with an empty graphs array and remove the deployment uid
+        this.addOrRemoveGraphListeners([]);
+
+        this.setState({
+          graphs: [],
+          uid: null
+        });
+      }
     }
   }
 
