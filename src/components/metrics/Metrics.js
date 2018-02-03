@@ -17,6 +17,10 @@ class Metrics extends Component {
     this.fetchGraphs = this.fetchGraphs.bind(this);
     this.addOrRemoveGraphListeners = this.addOrRemoveGraphListeners.bind(this);
     this.addPubnubListener = this.addPubnubListener.bind(this);
+    this.subscribeToChannels = this.subscribeToChannels.bind(this);
+    this.unsubscribeFromChannels = this.unsubscribeFromChannels.bind(this);
+
+    this.channelSubscriptions = {};
 
     this.state = {
       loading: true,
@@ -31,6 +35,16 @@ class Metrics extends Component {
   componentDidMount() {
     this.addPubnubListener();
     this.fetchAsideContent(this.state.repo, this.state.uid);
+  }
+
+  componentWillUnmount() {
+    const channels = Object.keys(this.channelSubscriptions);
+
+    if (channels.length > 0) {
+      pubnub.unsubscribe({
+        channels: channels
+      });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -137,12 +151,30 @@ class Metrics extends Component {
     }
 
     if (addUids.length > 0) {
-      pubnub.subscribe({ channels: addUids });
+      this.subscribeToChannels(addUids);
     }
 
     if (removeUids.length > 0) {
-      pubnub.unsubscribe({ channels: removeUids });
+      this.unsubscribeFromChannels(removeUids);
     }
+  }
+
+  subscribeToChannels(channels) {
+    channels.forEach((c) => {
+      this.channelSubscriptions[c] = true;
+    });
+
+    pubnub.subscribe({ channels: channels });
+  }
+
+  unsubscribeFromChannels(channels) {
+    channels.forEach((c) => {
+      if (this.channelSubscriptions[c]) {
+        delete this.channelSubscriptions[c];
+      }
+    });
+
+    pubnub.unsubscribe({ channels: channels });
   }
 
   // fetchDeployments(repo) {

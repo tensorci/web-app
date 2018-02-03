@@ -50,6 +50,12 @@ class Deployment extends Component {
     });
   }
 
+  componentWillUnmount() {
+    pubnub.unsubscribe({
+      channels: [this.props.uid]
+    });
+  }
+
   listenForStageUpdates() {
     const subscription = {
       channels: [this.props.uid]
