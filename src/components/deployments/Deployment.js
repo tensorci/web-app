@@ -58,7 +58,7 @@ class Deployment extends Component {
   }
 
   listenForStageUpdates() {
-    this.websocket = io('/socket.io/' + this.props.uid);
+    this.websocket = io('/' + this.props.uid, { path: '/socket.io' });
 
     this.websocket.on('message', (data) => {
       this.setState({

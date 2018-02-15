@@ -117,7 +117,7 @@ class Metrics extends Component {
 
     var ws;
     newGraphs.forEach((g) => {
-      ws = io('/socket.io/' + g.uid);
+      ws = io('/' + g.uid, { path: '/socket.io' });
 
       ws.on('message', (data) => {
         this.setState({ graphs: data.graphs || [] });
