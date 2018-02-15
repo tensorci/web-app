@@ -1,6 +1,5 @@
 {
   "root": "build/",
-  "https_only": true,
   "routes": {
     "/favicon.ico": "/favicon.ico",
     "/fonts/*": "/fonts/",
@@ -20,7 +19,10 @@
   },
   "proxies": {
     "/api/": {
-      "origin": "https://api.tensorci.com/api"
+      "origin": "http://localhost:5000/api"
+    },
+    "/socket.io/": {
+      "origin": "http://localhost:5000/socket.io"
     }
   }
 }

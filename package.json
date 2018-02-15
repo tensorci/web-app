@@ -16,6 +16,7 @@
     "react-toggle-button": "^2.2.0",
     "resonance": "^0.9.5",
     "rodal": "^1.2.10",
+    "socket.io-client": "^2.0.4",
     "timeago.js": "^3.0.2",
     "universal-cookie": "^2.1.0",
     "whatwg-fetch": "2.0.3"

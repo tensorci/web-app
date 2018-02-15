@@ -3,7 +3,7 @@ import Ajax from '../../utils/Ajax';
 import DashLoadingSpinner from '../widgets/spinners/DashLoadingSpinner';
 import DeploymentStages from './DeploymentStages';
 import DeploymentStatusBadge from './DeploymentStatusBadge';
-import pubnub from '../../utils/PubSub';
+import io from 'socket.io-client';
 import stages from '../../utils/Stages';
 import timeago from 'timeago.js';
 
@@ -13,6 +13,7 @@ class Deployment extends Component {
     super(props);
 
     this.listenForStageUpdates = this.listenForStageUpdates.bind(this);
+    this.websocket = null;
 
     this.state = {
       loading: true,
@@ -43,7 +44,7 @@ class Deployment extends Component {
         stages: data.stages || {}
       });
 
-      // subscribe to Pubnub updates if this deployment hasn't failed and isn't completely done.
+      // subscribe to websocket updates if this deployment hasn't failed and isn't completely done.
       if (!data.failed && data.current_stage !== stages.PREDICTING) {
         this.listenForStageUpdates();
       }
@@ -51,19 +52,15 @@ class Deployment extends Component {
   }
 
   componentWillUnmount() {
-    pubnub.unsubscribe({
-      channels: [this.props.uid]
-    });
+    if (this.websocket) {
+      this.websocket.close();
+    }
   }
 
   listenForStageUpdates() {
-    const subscription = {
-      channels: [this.props.uid]
-    };
+    this.websocket = io('/socket.io/' + this.props.uid);
 
-    pubnub.addListener({ message: (m) => {
-      const data = m.message;
-
+    this.websocket.on('message', (data) => {
       this.setState({
         status: data.readable_status,
         intent: data.intent,
@@ -75,11 +72,9 @@ class Deployment extends Component {
 
       // If build just failed or completely done, stop listening.
       if (data.failed || data.current_stage === stages.PREDICTING) {
-        pubnub.unsubscribe(subscription);
+        this.websocket.close();
       }
-    }});
-
-    pubnub.subscribe(subscription);
+    });
   }
 
   render() {
