@@ -212,8 +212,8 @@ button.primary {
   }
 
   &.spinner-btn.complete {
-    color: $primary;
-    border-color: $primary;
+    color: $primary !important;
+    border-color: $primary !important;
   }
 }
 
@@ -229,8 +229,8 @@ button.secondary {
   }
 
   &.spinner-btn.complete {
-    color: $secondary;
-    border-color: $secondary;
+    color: $secondary !important;
+    border-color: $secondary !important;
   }
 }
 
