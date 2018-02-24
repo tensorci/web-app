@@ -23,7 +23,6 @@
     }
   },
   "proxies": {
-    // Proxy for API request
     "/api/": {
       "origin": "https://api.tensorci.com/api"
     }

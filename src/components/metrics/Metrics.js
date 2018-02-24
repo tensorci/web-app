@@ -4,7 +4,7 @@ import DashLoadingSpinner from '../widgets/spinners/DashLoadingSpinner';
 import Graph from './Graph';
 import NoMetrics from './NoMetrics';
 import ProjectAside from '../shared/ProjectAside';
-import io from 'socket.io-client';
+import pubnub from '../../utils/PubSub';
 
 class Metrics extends Component {
 
@@ -14,10 +14,12 @@ class Metrics extends Component {
     this.fetchAsideContent = this.fetchAsideContent.bind(this);
     // this.fetchDeployments = this.fetchDeployments.bind(this);
     this.fetchGraphs = this.fetchGraphs.bind(this);
-    this.closeAllWebSockets = this.closeAllWebSockets.bind(this);
-    this.updateGraphListeners = this.updateGraphListeners.bind(this);
+    this.addOrRemoveGraphListeners = this.addOrRemoveGraphListeners.bind(this);
+    this.addPubnubListener = this.addPubnubListener.bind(this);
+    this.subscribeToChannels = this.subscribeToChannels.bind(this);
+    this.unsubscribeFromChannels = this.unsubscribeFromChannels.bind(this);
 
-    this.websockets = [];
+    this.channelSubscriptions = {};
 
     this.state = {
       loading: true,
@@ -30,11 +32,18 @@ class Metrics extends Component {
   }
 
   componentDidMount() {
+    this.addPubnubListener();
     this.fetchAsideContent(this.state.repo, this.state.uid);
   }
 
   componentWillUnmount() {
-    this.closeAllWebSockets();
+    const channels = Object.keys(this.channelSubscriptions);
+
+    if (channels.length > 0) {
+      pubnub.unsubscribe({
+        channels: channels
+      });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -61,7 +70,8 @@ class Metrics extends Component {
       }
       // deployment uid went from existing to now being blank
       else {
-        this.closeAllWebSockets();
+        // just set state with an empty graphs array and remove the deployment uid
+        this.addOrRemoveGraphListeners(this.state.graphs, []);
 
         this.setState({
           graphs: [],
@@ -69,6 +79,13 @@ class Metrics extends Component {
         });
       }
     }
+  }
+
+  addPubnubListener() {
+    pubnub.addListener({ message: (m) => {
+      const data = m.message;
+      this.setState({ graphs: data.graphs || [] });
+    }});
   }
 
   fetchAsideContent(repo, uid) {
@@ -87,7 +104,7 @@ class Metrics extends Component {
       const fetchedUid = data.uid || uid;
       const graphs = data.graphs || [];
 
-      this.updateGraphListeners(graphs);
+      this.addOrRemoveGraphListeners(this.state.graphs, graphs);
 
       this.setState({
         projects: data.repos || [],
@@ -99,32 +116,64 @@ class Metrics extends Component {
     });
   }
 
-  closeAllWebSockets() {
-    // Close all existing websockets.
-    this.websockets.forEach((ws) => {
-      if (ws) {
-        ws.close();
+  addOrRemoveGraphListeners(currGraphs, newGraphs) {
+    var currGraphs = currGraphs || [];
+    var newGraphs = newGraphs || [];
+
+    // create current graph uids map
+    var currGraphUids = {};
+    currGraphs.forEach((g) => {
+      currGraphUids[g.uid] = true;
+    });
+
+    var newGraphUids = {};
+    newGraphs.forEach((g) => {
+      newGraphUids[g.uid] = true;
+    });
+
+    var removeUids = [];
+    for (var uid in currGraphUids) {
+      // if current graph uid not in new graph uids map...
+      if (!newGraphUids[uid]) {
+        // register this as a graph uid to remove.
+        removeUids.push(uid);
+      }
+    }
+
+    var addUids = [];
+    for (var uid in newGraphUids) {
+      // if current graph uid not in new graph uids map...
+      if (!currGraphUids[uid]) {
+        // register this as a graph uid to remove.
+        addUids.push(uid);
+      }
+    }
+
+    if (addUids.length > 0) {
+      this.subscribeToChannels(addUids);
+    }
+
+    if (removeUids.length > 0) {
+      this.unsubscribeFromChannels(removeUids);
+    }
+  }
+
+  subscribeToChannels(channels) {
+    channels.forEach((c) => {
+      this.channelSubscriptions[c] = true;
+    });
+
+    pubnub.subscribe({ channels: channels });
+  }
+
+  unsubscribeFromChannels(channels) {
+    channels.forEach((c) => {
+      if (this.channelSubscriptions[c]) {
+        delete this.channelSubscriptions[c];
       }
     });
 
-    this.websockets = [];
-  }
-
-  updateGraphListeners(newGraphs) {
-    newGraphs = newGraphs || [];
-
-    this.closeAllWebSockets();
-
-    var ws;
-    newGraphs.forEach((g) => {
-      ws = io('/' + g.uid, { path: '/socket.io' });
-
-      ws.on('message', (data) => {
-        this.setState({ graphs: data.graphs || [] });
-      });
-
-      this.websockets.push(ws);
-    });
+    pubnub.unsubscribe({ channels: channels });
   }
 
   // fetchDeployments(repo) {
@@ -162,7 +211,7 @@ class Metrics extends Component {
     Ajax.get('/api/graphs', { deployment_uid: uid }, (data) => {
       const graphs = data.graphs || [];
 
-      this.updateGraphListeners(graphs);
+      this.addOrRemoveGraphListeners(this.state.graphs, graphs);
 
       this.setState({
         graphs: graphs,
