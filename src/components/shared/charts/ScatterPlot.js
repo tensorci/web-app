@@ -136,6 +136,7 @@ class ScatterPlot extends PureComponent {
             </TickGroup>
             <TickGroup
               scale={this.props.xScale}
+              tickCount={8}
 
               start={({ val }) => ({
                 opacity: 1e-6,
