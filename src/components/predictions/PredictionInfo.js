@@ -11,13 +11,7 @@ class PredictionInfo extends Component {
   render() {
     const team = this.props.team;
     const repo = this.props.repo;
-    // const prediction = this.props.prediction;
-
-    const prediction = {
-      pred_count: 23
-    };
-
-    // timeago().format(prediction.last_updated * 1000)
+    const prediction = this.props.prediction;
 
     if (prediction === null) {
       return <NoPredictionsForProject team={team} repo={repo}/>;
@@ -35,7 +29,7 @@ class PredictionInfo extends Component {
           </div>
           <div className="card insights-metadata middle">
             <div className="insight-name">Last Updated</div>
-            <div className="insight datetime">{'3 days ago'}</div>
+            <div className="insight datetime">{timeago().format(prediction.last_updated * 1000)}</div>
           </div>
           <div className="card insights-metadata">
             <div className="insight-name">Prediction Count</div>
@@ -50,6 +44,7 @@ class PredictionInfo extends Component {
           </div>
           <div className="card-body">
             <div className="prediction-info">
+              Fetch prediction
             </div>
           </div>
         </div>
