@@ -29,6 +29,7 @@ class DemoRedirect extends Component {
     }
 
     Ajax.get('/api/demo/authenticate', { token: token }, (data) => {
+      Session.create(data.token);
       Session.setToStorage('user', data.user);
       Session.setToStorage('teams', data.teams);
       Session.setToStorage('loginInfo', data.login_info);

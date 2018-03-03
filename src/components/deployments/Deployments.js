@@ -56,6 +56,7 @@ class Deployments extends Component {
     };
 
     Ajax.get('/api/repos', payload, (data) => {
+      data = data || {};
       const repo = data.repo || this.state.repo;
 
       this.setState({
