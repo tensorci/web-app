@@ -49,8 +49,10 @@ class Dashboard extends Component {
         });
       }, 1000);
     } else if (Session.isDemo()) {
-      this.demoModal.show();
-      Session.deleteFromStorage('isDemo');
+      setTimeout(() => {
+        this.demoModal.show();
+        Session.deleteFromStorage('isDemo');
+      }, 1000);
     }
   }
 
