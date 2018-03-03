@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import Dashboard from './components/dashboard/Dashboard';
+import DemoRedirect from './components/redirects/DemoRedirect';
 import OAuthRedirect from './components/redirects/OAuthRedirect';
 import History from './utils/History';
 import pathToRegexp from 'path-to-regexp';
@@ -22,6 +23,11 @@ class Main extends Component {
       {
         path: '/oauth_redirect',
         comp: OAuthRedirect,
+        exact: true
+      },
+      {
+        path: '/demo',
+        comp: DemoRedirect,
         exact: true
       },
       {
