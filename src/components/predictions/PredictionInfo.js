@@ -44,7 +44,10 @@ class PredictionInfo extends Component {
           </div>
           <div className="card-body">
             <div className="prediction-info">
-              Fetch prediction
+              Fetch a live API prediction from your trained model.
+            </div>
+            <div className="coming-soon">
+              Coming soon.
             </div>
           </div>
         </div>
