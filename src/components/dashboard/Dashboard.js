@@ -73,7 +73,7 @@ class Dashboard extends Component {
           Thanks for joining TensorCI! You should go ahead and set your basic auth password so that you can log in via the command line as well.
         </SetBasicAuthPwModal>
         <DemoModal ref={(r) => { this.demoModal = r; }}>
-          Thanks for checking out TensorCI, LatticeAI's internal CI tool for building and deploying machine learning models to customers. Use the side tabs to browse the latest model deployments, their predictions, and much more.
+          Thanks for checking out TensorCI, LatticeAI's internal continuous integration tool for building and deploying machine learning models. Use the side tabs on your left to browse the latest model deployments, their predictions, and much more.
         </DemoModal>
         <BannerComp/>
       </div>
