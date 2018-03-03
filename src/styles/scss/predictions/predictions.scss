@@ -12,4 +12,80 @@
   .main-display {
     padding-top: 37px;
   }
+
+  .insights-metadata-header {
+    display: -webkit-box;
+    display: box;
+    display: -webkit-flex;
+    display: flex;
+    padding: 0;
+    padding-bottom: 15px;
+  }
+
+  .insights-metadata-header,
+  .insights-metadata {
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex: 1 0 1px;
+    flex: 1 0 1px;
+    //margin-right: 15px;
+  }
+
+  .insights-metadata {
+    padding: 15px;
+  }
+
+  .middle {
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+
+  .insight-name {
+    font-size: 11px;
+    padding-bottom: 10px;
+    font-family: Avenir-Next-Medium;
+    text-transform: uppercase;
+    color: #666;
+    line-height: 1.5;
+    display: block;
+  }
+
+  .insight {
+    font-size: 20px;
+    display: block;
+    height: 30px;
+
+    .fa-check-circle {
+      font-size: 30px;
+      display: inline-block;
+      position: relative;
+      top: -1px;
+      float: left;
+      color: #42c88a;
+      margin-right: 7px;
+    }
+
+    span {
+      display: inline-block;
+      float: left;
+    }
+  }
+
+  .pred-count {
+    color: $primary;
+  }
+
+  i.bk-image-icon {
+    display: inline-block;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    width: 60px;
+    height: 60px;
+    opacity: 0.4;
+
+    &.prediction {
+      background-image: url(https://s3-us-west-1.amazonaws.com/jarvisdev/prediction-gray.svg);
+    }
+  }
 }
