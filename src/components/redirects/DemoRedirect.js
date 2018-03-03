@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
+import DashLoadingSpinner from '../widgets/spinners/DashLoadingSpinner';
 import Helper from '../../utils/Helper';
 import Session from '../../utils/Session';
 
@@ -41,7 +42,9 @@ class DemoRedirect extends Component {
 
   render() {
     return (
-      <div></div>
+      <div>
+        <DashLoadingSpinner/>
+      </div>
     );
   }
 }
