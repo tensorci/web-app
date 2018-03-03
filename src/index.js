@@ -19,7 +19,7 @@ function mountToRoot() {
 }
 
 // if not authed and not trying to become authed, then redirect to marketing site
-if (!Session.authed() && !document.location.pathname.startsWith('/oauth_redirect')) {
+if (!Session.authed() && !document.location.pathname.startsWith('/oauth_redirect') && !document.location.pathname.startsWith('/demo')) {
   // TODO: get this from env var
   window.location = 'https://www.tensorci.com';
 } else if (Session.authed() && Session.hasIncompleteLocalStorage()) {
