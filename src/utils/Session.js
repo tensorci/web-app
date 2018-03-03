@@ -113,6 +113,10 @@ class Sess {
       (Object.keys(this.teams() || {}).length === 0) ||
       (Object.keys(this.loginInfo() || {}).length === 0);
   }
+
+  isDemo() {
+    return !!this.getFromStorage('isDemo');
+  }
 }
 
 function getInstance() {

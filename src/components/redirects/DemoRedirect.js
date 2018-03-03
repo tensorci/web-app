@@ -32,7 +32,7 @@ class DemoRedirect extends Component {
       Session.setToStorage('user', data.user);
       Session.setToStorage('teams', data.teams);
       Session.setToStorage('loginInfo', data.login_info);
-      Session.setToStorage('on_demo', true);
+      Session.setToStorage('isDemo', true);
 
       setTimeout(() => {
         window.location = '/latticeai/lattice_data_imputation';

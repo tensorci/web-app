@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Ajax from '../../utils/Ajax';
 import BannerComp from '../shared/BannerComp';
 import DashContent from './DashContent';
+import DemoModal from '../shared/modals/DemoModal';
 import Header from '../shared/Header';
 import Session from '../../utils/Session';
 import SetBasicAuthPwModal from '../shared/modals/SetBasicAuthPwModal';
@@ -47,6 +48,9 @@ class Dashboard extends Component {
           seen_basic_auth_prompt: true
         });
       }, 1000);
+    } else if (Session.isDemo()) {
+      this.demoModal.show();
+      Session.deleteFromStorage('isDemo');
     }
   }
 
@@ -66,6 +70,9 @@ class Dashboard extends Component {
         <SetBasicAuthPwModal ref={(r) => { this.basicAuthPwModal = r; }}>
           Thanks for joining TensorCI! You should go ahead and set your basic auth password so that you can log in via the command line as well.
         </SetBasicAuthPwModal>
+        <DemoModal ref={(r) => { this.demoModal = r; }}>
+          [INSERT DEMO TEXT]
+        </DemoModal>
         <BannerComp/>
       </div>
     );
