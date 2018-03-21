@@ -12,7 +12,7 @@ class SetupProject extends Component {
 
     this.yaml = `# Python TensorCI configuration file
 #
-# Check https://www.tensorci.com/docs for more details
+# Check http://docs.tensorci.com/en/latest/getting_started.html#id1 for more details
 #
 model: path/to/model/file
 prepro_data: module1.module2:function

@@ -24,7 +24,7 @@ class NoDatasets extends Component {
             </div>
             <div className="secondary-msg">Learn how to add one with the TensorCI CLI.</div>
             <div className="action-btn-center-container">
-              <a href="https://www.tensorci.com/docs" className="button primary small" rel="noopener noreferrer" target="_blank">View Docs</a>
+              <a href="http://docs.tensorci.com/en/latest/datasets.html" className="button primary small" rel="noopener noreferrer" target="_blank">View Docs</a>
             </div>
           </div>
         </div>

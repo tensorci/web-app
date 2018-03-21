@@ -10,7 +10,7 @@ class SupportDropdown extends Dropdown {
       {
         'heading': 'Docs',
         'desc': 'Read about building, testing, and deploying your software on TensorCI.',
-        'href': 'https://www.tensorci.com/docs',
+        'href': 'http://docs.tensorci.com',
       },
       {
         'heading': 'Support',
