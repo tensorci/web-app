@@ -1,4 +1,4 @@
-# Flask React Front-end
+# TensorCI Web App
 
 ## Requirements
 
